@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Collected";
+}
+
+<h2>Collected Blood</h2>
+@using BBMS.Models
+@model IEnumerable<Collected_Blood>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Name</th>
+        <th>Blood Type</th>
+        <th>National Id</th>
+        <th>Reasons</th>
+        <th></th>
+    </tr>
+    <tr>
+        @{ 
+            foreach(var x in Model)
+            {
+                <td>@x.Donor.First_Name &nbsp; @x.Donor.Last_Name</td>
+                <td>@x.Blood_Type.Type_Name</td>
+                <td>@x.Donor.National_ID</td>
+                <td>@x.Reason</td>
+                <td>
+                    <a href="#">Enter Virus</a>
+                </td>             
+            }
+        }
+    </tr>
+</table>

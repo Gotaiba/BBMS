@@ -64,6 +64,10 @@ namespace BBMS.Controllers
             ViewBag.Blood_Type_No = new SelectList(db.Blood_Type, "Blood_Type_Id", "Type_Name", c.Blood_Type_No);    
             return View();
         }
+        public ActionResult Collected()
+        {
+            return View(db.Collected_Blood.ToList());
+        }
         [NonAction]
         public void updateIsDonate(int di_Id)
         {
