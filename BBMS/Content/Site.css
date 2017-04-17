@@ -1,0 +1,31 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.navbar{
+    margin-bottom:0px !important;
+    min-height:30px !important;
+}
+.navbar-header{
+    margin-top:5px !important;
+}
+
+.alert{
+    margin: 0px auto !important;
+text-align: center !important;
+padding: 15px !important;
+width: 500px !important;
+}

@@ -1,0 +1,145 @@
+﻿@model BBMS.Models.Donor_Information
+
+@{
+    ViewBag.Title = "QuestionForm";
+}
+
+<h2>QuestionForm</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Donor_Information</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" value="1" name="Donor_No" />
+        <input type="hidden" value="2" name="User_No" />
+        <div class="alert alert-success" id="alertok" role="alert">Eligible <span class="glyphicon glyphicon-thumbs-up"></span></div>
+        <div class="alert alert-warning hide" id="alertErr" role="alert">Not Eligible <span class="glyphicon glyphicon-thumbs-down"></span></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Surgery,"Did you have Surgery in the Last 2 Years?", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                <div class="checkbox">
+            
+                    @Html.CheckBox("Surgery", htmlAttributes: new { @class="group" })
+                    @Html.ValidationMessageFor(model => model.Surgery, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Blood_pressure,"Do you suffer form Blood Pressure?", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">  
+                <div class="checkbox">
+                  
+                    @Html.CheckBox("Blood_pressure", htmlAttributes: new { @class = "group" })
+                    @Html.ValidationMessageFor(model => model.Blood_pressure, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Blood_Diabetes, "Do you suffer form Blood Diabetes?", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                <div class="checkbox">
+                    @Html.CheckBox("Blood_Diabetes", htmlAttributes: new { @class = "group" })
+                    @Html.ValidationMessageFor(model => model.Blood_Diabetes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Heart_Disease, "Do you suffer form Heart Disease?", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                <div class="checkbox">
+                    @Html.CheckBox("Heart_Disease", htmlAttributes: new { @class = "group" })
+                    @Html.ValidationMessageFor(model => model.Heart_Disease, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Medicine,"Do you take any kind of Medicine at the moment?", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                <div class="checkbox">
+                    @Html.CheckBox("Medicine")
+                    @Html.ValidationMessageFor(model => model.Medicine, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Smoker,"Did you Somke or Smoked within two Hours?", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                <div class="checkbox">
+                    @Html.CheckBox("Smoker")
+                    @Html.ValidationMessageFor(model => model.Smoker, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Other_Problems, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                <div class="checkbox">
+                    @Html.CheckBox("Other_Problems",htmlAttributes:new { id="otherProp"})
+                    @Html.ValidationMessageFor(model => model.Other_Problems, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Other_Problems_Text, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                @Html.TextAreaFor(model => model.Other_Problems_Text, new { htmlAttributes = new { @class = "form-control" }, rows = "5",cols="50" })
+                @Html.ValidationMessageFor(model => model.Other_Problems_Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })kg.
+                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-7">
+                <input type="submit" value="Create" id="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".group").on("change", function () {
+            if ($(".group").is(':checked'))
+            {
+                $("#alertok").addClass("hide");
+                $("#alertok").removeClass("show");         
+                $("#alertErr").removeClass("hide");
+                $("#alertErr").addClass("show");
+            }
+            else {         
+                $("#alertok").removeClass("hide");
+                $("#alertok").addClass("show");
+                $("#alertErr").addClass("hide");
+                $("#alertErr").removeClass("show");
+            }
+            
+        });
+    });
+</script>
