@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e1a054c88b4b4cfa98b8cca251d5f8fc" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="BBMSdbModel.Blood_Stock" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Blood_Type" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Collected_Blood" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Donor_Information" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Donor" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Incoming_Blood" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Outgoing_Blood" Width="1.5" PointX="11.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Patient_Relation" Width="1.5" PointX="1.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Patient" Width="1.5" PointX="9" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.sysdiagram" Width="1.5" PointX="8.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.User_Type" Width="1.5" PointX="1.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.User" Width="1.5" PointX="1.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Virus" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="BBMSdbModel.FK_Blood_Stock_Blood_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Blood_Stock_Collected_Blood" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Collected_Blood_Blood_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Collected_Blood_Donors" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Collected_Blood_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Incoming_Blood_Collected_Blood" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Outgoing_Blood_Collected_Blood" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Viruses_Collected_Blood" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Donor_Information_Donors" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Donor_Information_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Donors_Patient_Relation" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Donors_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Outgoing_Blood_Patients" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Users_User_Type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
