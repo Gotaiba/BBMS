@@ -29,14 +29,14 @@ namespace BBMS.Controllers
         }
         [HttpPost]
         public ActionResult Create(Donor d)
-        {
-            if (d.Donate_Type == "P ")
-            {
-                ModelState.AddModelError("Patient_Name", "Please Enter Patient Name");
-                ModelState.AddModelError("Patient_Relation_No", "Select Patient Relation");
-            }
+        {          
             if (ModelState.IsValid)
                 {
+                    if (d.Donate_Type == "P ")
+                    {
+                        ModelState.AddModelError("Patient_Name", "Please Enter Patient Name");
+                        ModelState.AddModelError("Patient_Relation_No", "Select Patient Relation");
+                    }
                     var chkid = (from q in db.Donors.ToList() where q.National_ID == d.National_ID select q);
                     if (chkid.Count() == 0)
                     {

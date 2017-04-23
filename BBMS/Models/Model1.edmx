@@ -69,6 +69,7 @@
           <Property Name="Patient_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Patient_Relation_No" Type="int" />
           <Property Name="User_No" Type="int" Nullable="false" />
+          <Property Name="CanDonate" Type="tinyint" />
         </EntityType>
         <EntityType Name="Incoming_Blood">
           <Key>
@@ -464,6 +465,7 @@
           <NavigationProperty Name="Donor_Information" Relationship="Self.FK_Donor_Information_Donors" FromRole="Donors" ToRole="Donor_Information" />
           <NavigationProperty Name="Patient_Relation" Relationship="Self.FK_Donors_Patient_Relation" FromRole="Donors" ToRole="Patient_Relation" />
           <NavigationProperty Name="User" Relationship="Self.FK_Donors_Users" FromRole="Donors" ToRole="Users" />
+          <Property Name="CanDonate" Type="Byte" />
         </EntityType>
         <EntityType Name="Incoming_Blood">
           <Key>
@@ -845,6 +847,7 @@
           <EntitySetMapping Name="Donors">
             <EntityTypeMapping TypeName="BBMSdbModel.Donor">
               <MappingFragment StoreEntitySet="Donors">
+                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
                 <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />

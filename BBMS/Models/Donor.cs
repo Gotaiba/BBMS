@@ -34,6 +34,7 @@ namespace BBMS.Models
         public string Patient_Name { get; set; }
         public Nullable<int> Patient_Relation_No { get; set; }
         public int User_No { get; set; }
+        public Nullable<byte> CanDonate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Collected_Blood> Collected_Blood { get; set; }

@@ -12,8 +12,8 @@ namespace BBMS.Controllers
         // GET: Doctor
         BBMSdbEntities db = new BBMSdbEntities();
         public ActionResult Index()
-        {        
-            return View();
+        {                   
+            return View(db.Donors.Where(x=> x.CanDonate==1).ToList());
         }
         [HttpPost]
         public ActionResult Index(string NationalId)

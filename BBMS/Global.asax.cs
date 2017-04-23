@@ -15,18 +15,18 @@ namespace BBMS
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 
-        protected void Application_AuthenticateRequest(object sender, EventArgs e)
-        {
-            if (Request.IsAuthenticated)
-            {
-                string[] roles = null;
+        //protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        //{
+        //    if (Request.IsAuthenticated)
+        //    {
+        //        string[] roles = null;
 
         
                
 
-                Context.User = new System.Security.Principal.GenericPrincipal(User.Identity, roles);
-            }
+        //        Context.User = new System.Security.Principal.GenericPrincipal(User.Identity, roles);
+        //    }
 
-        }
+        //}
     }
 }

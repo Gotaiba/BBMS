@@ -27,9 +27,6 @@ namespace BBMS.Controllers
                 {
                     Session["aut"] = u.FirstOrDefault().Authority;
                     Session["UserId"] = u.FirstOrDefault().Id;
-
-
-                    FormsAuthentication.RedirectFromLoginPage(teamMember.Email, rememberMe);
                     foreach (var c in u)
                     {
                         switch (c.Authority)
