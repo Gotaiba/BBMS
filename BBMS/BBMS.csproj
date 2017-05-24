@@ -143,9 +143,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\DonorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -237,6 +237,7 @@
     <Content Include="Views\Doctor\CollectBlood.cshtml" />
     <Content Include="Views\Doctor\Collected.cshtml" />
     <Content Include="Views\Doctor\Virus.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

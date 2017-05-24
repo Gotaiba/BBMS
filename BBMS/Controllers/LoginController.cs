@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BBMS.Models;
 using System.Web.Security;
+using System.Net;
 
 namespace BBMS.Controllers
 {
@@ -17,35 +18,42 @@ namespace BBMS.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(string Password, string Username)
+        public ActionResult Index(string Password, string Username,string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                List<User> all = db.Users.ToList();
-                var u = (from q in all where q.Username.Equals(Username) && q.Password.Equals(Password) select q);
+                var u = db.Users.Where(r => r.Username == Username && r.Password == Password).ToList();
                 if (u.Count() > 0)
                 {
-                    Session["aut"] = u.FirstOrDefault().Authority;
+                    //Session["aut"] = u.FirstOrDefault().Authority;
                     Session["UserId"] = u.FirstOrDefault().Id;
-                    foreach (var c in u)
-                    {
-                        switch (c.Authority)
-                        {
-                            case 1:
-                                return RedirectToAction("../User/Index");
-                            case 2:
-                                return RedirectToAction("../Doctor/Index");
-                            default:
-                                return RedirectToAction("../Donor/AllDonors");
-                        }
-                    }
+                    //foreach (var c in u)
+                    //{
+                    //    switch (c.Authority)
+                    //    {
+                    //        case 1:
+                    //            return RedirectToAction("../User/Index");
+                    //        case 2:
+                    //            return RedirectToAction("../Doctor/Index");
+                    //        default:
+                    //            return RedirectToAction("../Donor/AllDonors");
+                    //    }
+                    //}
+                    FormsAuthentication.RedirectFromLoginPage(u.FirstOrDefault().Username, true,returnUrl);
                 }
                 else
                 {
                     ViewBag.data = "Invalid Username or Password";
                 }
             }
-            return View();
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
+
         }
     }
 }

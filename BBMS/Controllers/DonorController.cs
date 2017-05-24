@@ -7,6 +7,7 @@ using BBMS.Models;
 
 namespace BBMS.Controllers
 {
+    [Authorize(Roles = "Admin,Nurse,Receptionist")]
     public class DonorController : Controller
     {
         // GET: Donor

@@ -11,34 +11,45 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                @Html.ActionLink("BBMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 <ul class="nav navbar-nav">
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Donor <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/Donor/AllDonors">Donors List</a></li>
-                            <li class="divider" role="separator"></li>
-                            <li><a href="/Donor/Create">Add New</a></li>
-                            <li><a href="/Donor/Edit">Edit Donor</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/Doctor/Index">applicable Donor</a>
-                    </li>
-                    <li>
-                        <a href="/Doctor/TodayDonor">Today's Donor</a>
-                    </li>
-                    <li>
-                        <a href="/Doctor/Collected">Collected Blood</a>
-                    </li>
-                </ul>
-                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                    @if (User.IsInRole("Admin") || User.IsInRole("Receptionist") || User.IsInRole("Nurse"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Donor <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Donor/AllDonors">Donors List</a></li>
+                                <li class="divider" role="separator"></li>
+                                <li><a href="/Donor/Create">Add New</a></li>
+                                <li><a href="/Donor/Edit">Edit Donor</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+                    {
+                        <li>
+                            <a href="/Doctor/Index">applicable Donor</a>
+                        </li>
+                        <li>
+                            <a href="/Doctor/TodayDonor">Today's Donor</a>
+                        </li>
+                        <li>
+                            <a href="/Doctor/Collected">Collected Blood</a>
+                        </li>
+                    }                   
+               </ul>              
             </div>
+            @if (User.Identity.Name != "")
+            {
+                <p class="navbar-text navbar-right">Welcome @User.Identity.Name &nbsp; @Html.ActionLink("Logout", "LogOut", "Login")</p>            
+            }
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>

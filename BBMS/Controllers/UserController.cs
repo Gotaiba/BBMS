@@ -4,9 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BBMS.Models;
+using System.Web.Security;
+using System.Security.Principal;
 
 namespace BBMS.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class UserController : Controller
     {
         // GET: User
@@ -55,7 +58,7 @@ namespace BBMS.Controllers
         public ActionResult Edit(int Id)
         {
             User u = db.Users.Find(Id);
-            ViewBag.User_Type_No = new SelectList(db.User_Type, "Id", "User_Type_Name", u.User_Type_No);
+            ViewBag.User_Type_No = new SelectList(db.User_Type, "Id", "User_Type_Name", u.User_Type_No);                       
             return View(u);
         }
 
@@ -64,10 +67,19 @@ namespace BBMS.Controllers
         public ActionResult Edit(int Id, User u)
         {
             try
-            {
+            {               
                 db.Entry(u).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if(u.Username==User.Identity.Name)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
+                    return RedirectToAction("Index", "Login");
+                }                           
+                
             }
             catch
             {
