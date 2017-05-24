@@ -28,9 +28,9 @@
           <Property Name="ColIection_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Donor_No" Type="int" Nullable="false" />
           <Property Name="Blood_Type_No" Type="int" Nullable="false" />
-          <Property Name="Blood_Status_No" Type="int" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="bit" Nullable="false" />
           <Property Name="Reason" Type="nvarchar(max)" />
-          <Property Name="Hemo" Type="int" />
+          <Property Name="Hemo" Type="int" Nullable="false" />
           <Property Name="User_No" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Donor_Information">
@@ -65,7 +65,7 @@
           <Property Name="Telephone" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="National_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="Donate_Type" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Patient_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Patient_Relation_No" Type="int" />
           <Property Name="User_No" Type="int" Nullable="false" />
@@ -77,7 +77,9 @@
           </Key>
           <Property Name="Incoming_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Collection_No" Type="int" Nullable="false" />
+          <Property Name="ExpirationDate" Type="date" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="User_No" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Outgoing_Blood">
           <Key>
@@ -411,9 +413,9 @@
           <Property Name="ColIection_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Donor_No" Type="Int32" Nullable="false" />
           <Property Name="Blood_Type_No" Type="Int32" Nullable="false" />
-          <Property Name="Blood_Status_No" Type="Int32" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
           <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Hemo" Type="Int32" />
+          <Property Name="Hemo" Type="Int32" Nullable="false" />
           <Property Name="User_No" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Blood_Stock" Relationship="Self.FK_Blood_Stock_Collected_Blood" FromRole="Collected_Blood" ToRole="Blood_Stock" />
           <NavigationProperty Name="Blood_Type" Relationship="Self.FK_Collected_Blood_Blood_Type" FromRole="Collected_Blood" ToRole="Blood_Type" />
@@ -457,7 +459,7 @@
           <Property Name="Telephone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Donate_Type" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Patient_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Patient_Relation_No" Type="Int32" />
           <Property Name="User_No" Type="Int32" Nullable="false" />
@@ -475,6 +477,8 @@
           <Property Name="Collection_No" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Incoming_Blood_Collected_Blood" FromRole="Incoming_Blood" ToRole="Collected_Blood" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="User_No" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Outgoing_Blood">
           <Key>
@@ -814,10 +818,10 @@
           <EntitySetMapping Name="Collected_Blood">
             <EntityTypeMapping TypeName="BBMSdbModel.Collected_Blood">
               <MappingFragment StoreEntitySet="Collected_Blood">
+                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
                 <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
                 <ScalarProperty Name="Donor_No" ColumnName="Donor_No" />
                 <ScalarProperty Name="Blood_Type_No" ColumnName="Blood_Type_No" />
-                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="Hemo" ColumnName="Hemo" />
                 <ScalarProperty Name="User_No" ColumnName="User_No" />
@@ -867,6 +871,8 @@
           <EntitySetMapping Name="Incoming_Blood">
             <EntityTypeMapping TypeName="BBMSdbModel.Incoming_Blood">
               <MappingFragment StoreEntitySet="Incoming_Blood">
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
                 <ScalarProperty Name="Incoming_Id" ColumnName="Incoming_Id" />
                 <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

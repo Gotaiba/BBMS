@@ -236,6 +236,7 @@
     <Content Include="Views\Doctor\TodayDonor.cshtml" />
     <Content Include="Views\Doctor\CollectBlood.cshtml" />
     <Content Include="Views\Doctor\Collected.cshtml" />
+    <Content Include="Views\Doctor\Virus.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

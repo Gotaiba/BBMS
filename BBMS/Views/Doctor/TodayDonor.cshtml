@@ -15,18 +15,32 @@
         <th>Donating Type</th>       
         <th></th>
     </tr>
-    <tr>
-        @{ 
-            foreach(var x in Model)
+
+    @{
+        if (Model.Count() > 0)
+        {
+            foreach (var x in Model)
             {
-                <td>@x.Donor.First_Name</td>
-                <td>@x.Donor.Last_Name</td>
-                <td>@x.Donor.National_ID</td>
-                <td>@x.Donor.Donate_Type</td>
-                <td>
-                    <a href="/Doctor/CollectBlood/@Model.FirstOrDefault().Donor_No">Enter Blood Details</a>
-                </td>               
+                <tr>
+                    <td>@x.Donor.First_Name</td>
+                    <td>@x.Donor.Last_Name</td>
+                    <td>@x.Donor.National_ID</td>
+                    <td>@x.Donor.Donate_Type</td>
+                    <td>
+                        @Html.ActionLink("Enter Blood Info", "CollectBlood", new { id = x.Donor_No })
+                    </td>
+                </tr>
             }
         }
-    </tr>
+        else
+        {
+            <tr>
+                <td colspan="4">
+                    <div class="alert alert-info">--No Records Available--+</div>
+                </td>
+            </tr>
+        }
+
+    }
+
 </table>

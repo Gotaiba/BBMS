@@ -26,9 +26,9 @@ namespace BBMS.Models
         public int ColIection_Id { get; set; }
         public int Donor_No { get; set; }
         public int Blood_Type_No { get; set; }
-        public int Blood_Status_No { get; set; }
+        public bool Blood_Status_No { get; set; }
         public string Reason { get; set; }
-        public Nullable<int> Hemo { get; set; }
+        public int Hemo { get; set; }
         public int User_No { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

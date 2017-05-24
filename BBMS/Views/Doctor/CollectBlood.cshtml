@@ -19,7 +19,7 @@
         <input type="hidden" value="@ViewBag.donorNo" name="Donor_No" />
         <input type="hidden" value="2" name="User_No" />
         <div class="form-group">
-            @Html.LabelFor(model => model.Blood_Type_No, "Blood_Type_No", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Blood_Type_No, "Blood Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Blood_Type_No", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Blood_Type_No, "", new { @class = "text-danger" })
@@ -27,9 +27,16 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Blood_Status_No, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Blood_Status_No,"Status", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Blood_Status_No, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Blood_Status_No,true)
+                    Complete
+                </div>
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Blood_Status_No,false)
+                    Not Complete
+                </div>
                 @Html.ValidationMessageFor(model => model.Blood_Status_No, "", new { @class = "text-danger" })
             </div>
         </div>

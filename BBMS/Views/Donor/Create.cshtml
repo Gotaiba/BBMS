@@ -100,11 +100,11 @@
             @Html.LabelFor(model => model.Donate_Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="radio-inline">                    
-                    @Html.RadioButtonFor(model => model.Donate_Type, 'V', new {id="patient_false" })                   
+                    @Html.RadioButtonFor(model => model.Donate_Type, "V", new {id="patient_false" })                   
                     Volunter
                 </div>
                 <div class="radio-inline">
-                    @Html.RadioButtonFor(model => model.Donate_Type, 'P', new {id="patient_true" })                  
+                    @Html.RadioButtonFor(model => model.Donate_Type, "P", new {id="patient_true" })                  
                     For Patient
                 </div>
                 @Html.ValidationMessageFor(model => model.Donate_Type, "", new { @class = "text-danger" })
@@ -126,7 +126,7 @@
                 </div>
             </div>
         </div> 
-        <input type="hidden" value="@Session["UserId"]" name="User_No" />
+        <input type="hidden" value="2" name="User_No" />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

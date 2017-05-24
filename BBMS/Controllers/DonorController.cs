@@ -17,40 +17,43 @@ namespace BBMS.Controllers
         }
         public ActionResult Create()
         {
-            if (Session["UserId"] != null)
-            {
+            //if (Session["UserId"] != null)
+           // {
                 ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name");
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Login");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Login");
+            //}
         }
         [HttpPost]
         public ActionResult Create(Donor d)
-        {          
+        {
             if (ModelState.IsValid)
+            {
+                if (d.Donate_Type == "P")
                 {
-                    if (d.Donate_Type == "P ")
-                    {
-                        ModelState.AddModelError("Patient_Name", "Please Enter Patient Name");
-                        ModelState.AddModelError("Patient_Relation_No", "Select Patient Relation");
-                    }
+                    ModelState.AddModelError("Patient Name", "Please Enter Patient Name");
+                    ModelState.AddModelError("Patient_Relation_No", "Select Patient Relation");
+                }
+                else
+                {
                     var chkid = (from q in db.Donors.ToList() where q.National_ID == d.National_ID select q);
                     if (chkid.Count() == 0)
                     {
-                            db.Donors.Add(d);
-                            db.SaveChanges();
-                            return RedirectToAction("AllDonors");
+                        db.Donors.Add(d);
+                        db.SaveChanges();
+                        return RedirectToAction("AllDonors");
                     }
                     else
                     {
                         ViewBag.data = "The National Id Provided is Existed";
                     }
                 }
-                ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name", d.Patient_Relation_No);
-                return View();
+            }
+            ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name", d.Patient_Relation_No);
+            return View();
            
         }
         public ActionResult Details(int? id)     

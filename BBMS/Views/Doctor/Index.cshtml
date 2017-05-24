@@ -37,7 +37,7 @@
                         <td>@item.Donate_Type               
                         </td>
                         <td>
-                            <a href="#">Donate</a>
+                            @Html.ActionLink("Donate", "QuestionForm",new {Donor_No=item.Donar_Id })
                         </td>
                     </tr>
                 }

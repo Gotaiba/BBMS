@@ -15,18 +15,30 @@
         <th>Reasons</th>
         <th></th>
     </tr>
-    <tr>`
-        @{ 
-            foreach(var x in Model)
+        @{
+            if (Model.Count() > 0)
             {
-                <td>@x.Donor.First_Name &nbsp; @x.Donor.Last_Name</td>
-                <td>@x.Blood_Type.Type_Name</td>
-                <td>@x.Donor.National_ID</td>
-                <td>@x.Reason</td>
-                <td>
-                    <a href="#">Enter Virus</a>
-                </td>             
+                foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@x.Donor.First_Name &nbsp; @x.Donor.Last_Name</td>
+                        <td>@x.Blood_Type.Type_Name</td>
+                        <td>@x.Donor.National_ID</td>
+                        <td>@x.Reason</td>
+                        <td>
+                            @Html.ActionLink("Enter Virus","Virus",new { ColId=x.ColIection_Id })
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">
+                        <div class="alert alert-info">--No Records Available--+</div>
+                    </td>
+                </tr>
             }
         }
-    </tr>
+   
 </table>
