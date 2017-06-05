@@ -19,7 +19,7 @@ namespace BBMS
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
-        {
+        { 
             if (Request.IsAuthenticated)
             {
                 string Ident = User.Identity.Name.ToString();

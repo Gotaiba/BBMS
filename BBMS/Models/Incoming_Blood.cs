@@ -19,6 +19,7 @@ namespace BBMS.Models
         public System.DateTime Date { get; set; }
         public System.DateTime ExpirationDate { get; set; }
         public int User_No { get; set; }
+        public bool IsUsed { get; set; }
     
         public virtual Collected_Blood Collected_Blood { get; set; }
     }

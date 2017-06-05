@@ -70,15 +70,8 @@ namespace BBMS.Controllers
             {               
                 db.Entry(u).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                if(u.Username==User.Identity.Name)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
-                    return RedirectToAction("Index", "Login");
-                }                           
+                FormsAuthentication.SetAuthCookie(u.Username, true);
+                return RedirectToAction("Index");                                        
                 
             }
             catch

@@ -13,6 +13,11 @@ namespace BBMS.Controllers
         // GET: Donor
         BBMSdbEntities db = new BBMSdbEntities();
         public ActionResult AllDonors()
+        {           
+            DateTime d = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            return View(db.Donor_Information.Where(x => x.Date == d && x.IsDonate == 0).ToList());
+        }
+        public ActionResult EditDonor()
         {
             return View(db.Donors.ToList());
         }
@@ -43,9 +48,10 @@ namespace BBMS.Controllers
                     var chkid = (from q in db.Donors.ToList() where q.National_ID == d.National_ID select q);
                     if (chkid.Count() == 0)
                     {
+                        d.Date = DateTime.Now;
                         db.Donors.Add(d);
                         db.SaveChanges();
-                        return RedirectToAction("AllDonors");
+                        return RedirectToAction("EditDonor");
                     }
                     else
                     {
@@ -86,10 +92,12 @@ namespace BBMS.Controllers
         [HttpPost]
         public ActionResult Index(string NatId)
         {
+            Donor d = db.Donors.Find(NatId);           
             var chkId = from q in db.Donors.ToList() where q.National_ID == NatId select q;
             if (chkId.Count() > 0)
             {               
                 ViewBag.data = "This Donor is Already Registered";
+                
                 return View(chkId);
             }
             else
@@ -97,6 +105,20 @@ namespace BBMS.Controllers
                 ViewBag.data = "No record for this Id, Please Register first";
                 return View();
             }
+        }  
+        [AllowAnonymous]
+        public JsonResult SearchNId(string NatId)
+        {
+            var data = db.Donors.Where(x => x.National_ID.Contains(NatId)).Select(x => new
+            {
+                x.Donar_Id,
+                x.National_ID,
+                x.First_Name,
+                x.Last_Name,
+                x.Donate_Type,
+                x.Patient_Name
+            }).ToList();
+            return Json(data,JsonRequestBehavior.AllowGet);
         }
         public ActionResult Delete(int? id)
         {

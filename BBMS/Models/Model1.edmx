@@ -68,6 +68,7 @@
           <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Patient_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Patient_Relation_No" Type="int" />
+          <Property Name="Date" Type="date" />
           <Property Name="User_No" Type="int" Nullable="false" />
           <Property Name="CanDonate" Type="tinyint" />
         </EntityType>
@@ -79,6 +80,7 @@
           <Property Name="Collection_No" Type="int" Nullable="false" />
           <Property Name="ExpirationDate" Type="date" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
           <Property Name="User_No" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Outgoing_Blood">
@@ -468,6 +470,7 @@
           <NavigationProperty Name="Patient_Relation" Relationship="Self.FK_Donors_Patient_Relation" FromRole="Donors" ToRole="Patient_Relation" />
           <NavigationProperty Name="User" Relationship="Self.FK_Donors_Users" FromRole="Donors" ToRole="Users" />
           <Property Name="CanDonate" Type="Byte" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Incoming_Blood">
           <Key>
@@ -479,6 +482,7 @@
           <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Incoming_Blood_Collected_Blood" FromRole="Incoming_Blood" ToRole="Collected_Blood" />
           <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="User_No" Type="Int32" Nullable="false" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Outgoing_Blood">
           <Key>
@@ -851,6 +855,7 @@
           <EntitySetMapping Name="Donors">
             <EntityTypeMapping TypeName="BBMSdbModel.Donor">
               <MappingFragment StoreEntitySet="Donors">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
                 <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
@@ -871,6 +876,7 @@
           <EntitySetMapping Name="Incoming_Blood">
             <EntityTypeMapping TypeName="BBMSdbModel.Incoming_Blood">
               <MappingFragment StoreEntitySet="Incoming_Blood">
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
                 <ScalarProperty Name="User_No" ColumnName="User_No" />
                 <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
                 <ScalarProperty Name="Incoming_Id" ColumnName="Incoming_Id" />

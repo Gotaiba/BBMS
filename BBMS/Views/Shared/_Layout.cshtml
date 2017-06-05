@@ -25,23 +25,24 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Donor <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/Donor/AllDonors">Donors List</a></li>
+                                <li>@Html.ActionLink("Search Donor", "Index", "Donor")</li>
+                                <li>@Html.ActionLink("Donor List", "AllDonors", "Donor")</li>
                                 <li class="divider" role="separator"></li>
-                                <li><a href="/Donor/Create">Add New</a></li>
-                                <li><a href="/Donor/Edit">Edit Donor</a></li>
+                                <li>@Html.ActionLink("Add Donor", "Create", "Donor")</li>
+                                <li>@Html.ActionLink("Edit Donor", "EditDonor", "Donor")</li>
                             </ul>
                         </li>
                     }
                     @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
                     {
                         <li>
-                            <a href="/Doctor/Index">applicable Donor</a>
+                            @Html.ActionLink("Applicable Donor", "Index", "Doctor")
                         </li>
                         <li>
-                            <a href="/Doctor/TodayDonor">Today's Donor</a>
+                            @Html.ActionLink("Today's Donor", "TodayDonor", "Doctor")                    
                         </li>
                         <li>
-                            <a href="/Doctor/Collected">Collected Blood</a>
+                            @Html.ActionLink("Collected Blood", "Collected", "Doctor")                           
                         </li>
                     }                   
                </ul>              
@@ -68,5 +69,6 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </body>
 </html>

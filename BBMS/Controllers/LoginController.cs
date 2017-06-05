@@ -18,7 +18,7 @@ namespace BBMS.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(string Password, string Username,string returnUrl)
+        public ActionResult Index(string Password, string Username,string ReturnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -26,7 +26,7 @@ namespace BBMS.Controllers
                 if (u.Count() > 0)
                 {
                     //Session["aut"] = u.FirstOrDefault().Authority;
-                    Session["UserId"] = u.FirstOrDefault().Id;
+                    //Session["UserId"] = u.FirstOrDefault().Id;
                     //foreach (var c in u)
                     //{
                     //    switch (c.Authority)
@@ -39,7 +39,7 @@ namespace BBMS.Controllers
                     //            return RedirectToAction("../Donor/AllDonors");
                     //    }
                     //}
-                    FormsAuthentication.RedirectFromLoginPage(u.FirstOrDefault().Username, true,returnUrl);
+                    FormsAuthentication.RedirectFromLoginPage(u.FirstOrDefault().Username, true,ReturnUrl);
                 }
                 else
                 {
@@ -50,7 +50,7 @@ namespace BBMS.Controllers
         }
         public ActionResult LogOut()
         {
-            FormsAuthentication.SignOut();
+            FormsAuthentication.SignOut();          
             Session.Abandon();
             return RedirectToAction("Index", "Login");
 

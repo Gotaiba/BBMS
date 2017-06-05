@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BBMS.Models.Donor>
+
+@{
+    ViewBag.Title = "Edit Donor";
+}
+
+<h2>Donors List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Last_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.National_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Donate_Type)
+        </th>
+        <th></th>
+    </tr>
+    @{
+        if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.First_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Last_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.National_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Donate_Type)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Donar_Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Donar_Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Donar_Id })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">
+                    <center>
+                        <div class="alert-info" style="padding:15px">
+                            --- No Donor in the List ---
+                        </div>
+                    </center>
+                </td>
+            </tr>
+        }
+    }
+
+</table>

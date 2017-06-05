@@ -1,13 +1,21 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    /*AjaxOptions opt = new AjaxOptions
+    {
+        LoadingElementId = "loadingIcon",
+        OnSuccess = "GetData",
+        Url = Url.Action("SearchNId")
+    };*/
 }
 @using BBMS.Models
+@using BBMS.Resources
 @model IEnumerable<Donor>
 <h2>Index</h2>
 
 @using (Html.BeginForm())
-{<div class="form-horizontal">
+{
+    <div class="form-horizontal">
         <h4>Home</h4>
     @{
             if(ViewBag.data==null)
@@ -21,18 +29,34 @@
          }       
         <hr />
         <div class="form-group text-center">
-            <label class="control-label col-lg-offset-3 col-md-2">Natioanl Id:</label>
+            <label class="control-label col-lg-offset-3 col-md-2">@BBMS_String.NationalId:</label>
             <div class="col-lg-7 text-center">
-                <input type="text" class="form-control" name="NatId" placeholder="Enter Natioanl Id..." />
+                <div id="loadingIcon" style="color: red; background-color: yellow; fontsize: larger; display: none;">
+                    Loading ....
+                </div>
+                <input type="text" class="form-control" name="NatId" id="NatId" placeholder=@BBMS_String.EnterNationalId />
             </div>
         </div>
         <div class="form-group">
             <div class="col-lg-offset-5 col-lg-7">
-                <input type="submit" value="Search" class="btn btn-primary btn-block" />
+                <input type="button" onclick="GetData();" value=@BBMS_String.Search id="btnGet" class="btn btn-primary btn-block" />               
             </div>
         </div>
     </div>
      }
+<table class="table table-bordered">
+    <tr>
+        <th>@BBMS_String.FirstName</th>
+        <th>@BBMS_String.LastName</th>
+        <th>@BBMS_String.NationalId</th>
+        <th>@BBMS_String.DonateType</th>
+        <th>@BBMS_String.PatientName</th>
+    </tr>
+    <tbody id="searchResult">
+
+    </tbody>
+</table>
+@*Don
         @{
             if(Model!=null)
             {
@@ -78,4 +102,29 @@
                 }
                 <a href="/Donor/Details/@Model.FirstOrDefault().Donar_Id" class="btn btn-primary">Donate Again</a>
            }
-    } 
+    } *@
+<script type="text/javascript">
+    function GetData()
+    {
+        var output = $("#searchResult");
+        output.empty();
+
+        var natid = document.getElementById("NatId").value;
+
+        $.getJSON("@Url.Action("SearchNId", "Donor")", { NatId : natid }, function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                output.append("<tr>"
+                    + "<td>" + item.First_Name + "</td>"
+                    + "<td>" + item.Last_Name + "</td>"
+                    + "<td>" + item.National_ID + "</td>"
+                    + "<td>" + item.Donate_Type + "</td>"
+                    + "<td>" + item.Patient_Name + "</td></tr>"
+                    );
+            }
+        });
+
+
+        
+    }
+</script>
