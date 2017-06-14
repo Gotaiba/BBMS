@@ -21,12 +21,33 @@ namespace BBMS.Controllers
         {
             return View(db.Donors.ToList());
         }
-        public ActionResult Create()
-        {
+        [AllowAnonymous]
+        public ActionResult Create(int? id)
+        {          
             //if (Session["UserId"] != null)
-           // {
-                ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name");
-                return View();
+            // {
+            if (id>0)
+            {
+                Donor d = db.Donors.Find(id);
+                DateTime firstDonation = (DateTime)d.Date;
+                int monthsApart = 12 * (DateTime.Now.Year - firstDonation.Year) + DateTime.Now.Month - firstDonation.Month;            
+                if (monthsApart>6)
+                {
+                    d.CanDonate = 1;
+                    d.Date = DateTime.Now;
+                    db.Entry(d).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["msg"] = "Donated Successdfully";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["msg"] = "This Donor Have Donate Less than 6 Month";
+                    return RedirectToAction("Index");
+                }
+            }
+            ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name");
+            return View();
             //}
             //else
             //{
@@ -85,8 +106,8 @@ namespace BBMS.Controllers
             ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name", obj.Patient_Relation_No);
             return View();
         }
-        public ActionResult Index()
-        {            
+        public ActionResult Index()        
+        {           
             return View();
         }
         [HttpPost]

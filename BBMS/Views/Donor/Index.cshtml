@@ -18,8 +18,19 @@
     <div class="form-horizontal">
         <h4>Home</h4>
     @{
-            if(ViewBag.data==null)
+        if (TempData["msg"] != null)
+        {
+            if (TempData["msg"].ToString().Contains("This"))
             {
+                <div class="alert alert-warning show">@TempData["msg"].ToString()</div>
+            }
+            else
+            {
+                <div class="alert alert-success show">@TempData["msg"].ToString()</div>
+            }
+        }
+        if (ViewBag.data == null)
+        {
                 <div class="alert alert-info hide">@ViewBag.data</div>
             }
             else
@@ -51,6 +62,7 @@
         <th>@BBMS_String.NationalId</th>
         <th>@BBMS_String.DonateType</th>
         <th>@BBMS_String.PatientName</th>
+        <th></th>
     </tr>
     <tbody id="searchResult">
 
@@ -106,10 +118,11 @@
 <script type="text/javascript">
     function GetData()
     {
+        $("#loadingIcon").show();
         var output = $("#searchResult");
         output.empty();
 
-        var natid = document.getElementById("NatId").value;
+        var natid = document.getElementById("NatId").value;        
 
         $.getJSON("@Url.Action("SearchNId", "Donor")", { NatId : natid }, function (data) {
             for (var i = 0; i < data.length; i++) {
@@ -119,10 +132,12 @@
                     + "<td>" + item.Last_Name + "</td>"
                     + "<td>" + item.National_ID + "</td>"
                     + "<td>" + item.Donate_Type + "</td>"
-                    + "<td>" + item.Patient_Name + "</td></tr>"
+                    + "<td>" + item.Patient_Name + "</td>"
+                    + "<td>" + "<a href=/Donor/Create?id="+item.Donar_Id +">Donate Again</a><td></tr>"
                     );
             }
         });
+        $("#loadingIcon").hide();
 
 
         

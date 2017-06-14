@@ -24,22 +24,13 @@ namespace BBMS.Controllers
             {
                 var u = db.Users.Where(r => r.Username == Username && r.Password == Password).ToList();
                 if (u.Count() > 0)
-                {
-                    //Session["aut"] = u.FirstOrDefault().Authority;
-                    //Session["UserId"] = u.FirstOrDefault().Id;
-                    //foreach (var c in u)
-                    //{
-                    //    switch (c.Authority)
-                    //    {
-                    //        case 1:
-                    //            return RedirectToAction("../User/Index");
-                    //        case 2:
-                    //            return RedirectToAction("../Doctor/Index");
-                    //        default:
-                    //            return RedirectToAction("../Donor/AllDonors");
-                    //    }
-                    //}
+                {                  
                     FormsAuthentication.RedirectFromLoginPage(u.FirstOrDefault().Username, true,ReturnUrl);
+                    if(ReturnUrl==null)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    return Redirect(ReturnUrl);
                 }
                 else
                 {
