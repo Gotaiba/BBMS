@@ -34,7 +34,6 @@ namespace BBMS.Models
         public virtual DbSet<Outgoing_Blood> Outgoing_Blood { get; set; }
         public virtual DbSet<Patient_Relation> Patient_Relation { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User_Type> User_Type { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Virus> Viruses { get; set; }

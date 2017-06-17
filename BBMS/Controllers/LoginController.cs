@@ -35,6 +35,7 @@ namespace BBMS.Controllers
                 else
                 {
                     ViewBag.data = "Invalid Username or Password";
+                    return View();
                 }
             }
             return RedirectToAction("Index", "Home");

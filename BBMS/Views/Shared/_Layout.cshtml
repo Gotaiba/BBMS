@@ -20,6 +20,10 @@
                 </button>
                 @Html.ActionLink("BBMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Users", "Index", "User")</li>
+                    }
                     @if (User.IsInRole("Admin") || User.IsInRole("Receptionist") || User.IsInRole("Nurse"))
                     {
                         <li class="dropdown">
