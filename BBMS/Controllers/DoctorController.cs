@@ -19,7 +19,7 @@ namespace BBMS.Controllers
         public ActionResult Index(string NationalId)
         {
             List<Donor> d = new List<Donor>();
-            d = db.Donors.OrderByDescending(o => o.Donar_Id).Where(x => x.National_ID == NationalId && x.CanDonate == 1).ToList();
+            d = db.Donors.OrderByDescending(o => o.Donar_Id).Where(x => x.National_ID.Contains(NationalId) && x.CanDonate == 1).ToList();
             if(string.IsNullOrEmpty(NationalId))
             {
                 d = db.Donors.OrderByDescending(o => o.Donar_Id).Where(x=> x.CanDonate == 1).ToList();
@@ -58,9 +58,7 @@ namespace BBMS.Controllers
         public ActionResult CollectBlood(Collected_Blood c)
         {
             DateTime d = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            if (ModelState.IsValid)
-            {
-                c.Donor_No = GetUrlId();
+                c.Donor_No = 
                 c.User_No = int.Parse(Session["UserId"].ToString());
                 db.Collected_Blood.Add(c);
                 db.SaveChanges();
@@ -75,8 +73,7 @@ namespace BBMS.Controllers
                     inc.User_No = int.Parse(Session["UserId"].ToString());
                     db.Incoming_Blood.Add(inc);
                     db.SaveChanges();
-                }
-            }
+                }            
             return RedirectToAction("TodayDonor");
         }
         public ActionResult Collected()
@@ -136,6 +133,11 @@ namespace BBMS.Controllers
         public int GetUrlId()
         {
             string id = Request.Url.Query;
+            string Url = Request.Url.ToString();
+            if (id=="")
+            {
+                return int.Parse(Url.Substring(Url.LastIndexOf("/")));
+            }
             return int.Parse(id.Substring(id.LastIndexOf('=') + 1));
         }
         [NonAction]

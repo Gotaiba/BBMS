@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BBMS.Models;
 using System.Web.Security;
 using System.Net;
+using Microsoft.AspNet.Identity;
 
 namespace BBMS.Controllers
 {
@@ -21,12 +22,13 @@ namespace BBMS.Controllers
         public ActionResult Index(string Password, string Username,string ReturnUrl)
         {
             if (ModelState.IsValid)
-            {
+            {            
                 var u = db.Users.Where(r => r.Username == Username && r.Password == Password).ToList();
                 if (u.Count() > 0)
-                {                  
+                {
+                    Session["UserId"]= u.FirstOrDefault().Id;
                     FormsAuthentication.RedirectFromLoginPage(u.FirstOrDefault().Username, true,ReturnUrl);
-                    if(ReturnUrl==null)
+                    if (ReturnUrl==null)
                     {
                         return RedirectToAction("Index", "Home");
                     }

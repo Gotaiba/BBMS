@@ -11,7 +11,7 @@ namespace BBMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,8 +22,8 @@ namespace BBMS.Models
             this.Donors = new HashSet<Donor>();
         }
     
-        public int Id { get; set; }
-        public string Username { get; set; }
+        public int Id { get; set; }        
+        public string Username { get; set; }      
         public string Password { get; set; }
         public int Authority { get; set; }
         public int User_Type_No { get; set; }

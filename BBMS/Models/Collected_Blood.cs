@@ -11,7 +11,7 @@ namespace BBMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Collected_Blood
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,8 +26,10 @@ namespace BBMS.Models
         public int ColIection_Id { get; set; }
         public int Donor_No { get; set; }
         public int Blood_Type_No { get; set; }
+        [Required]
         public bool Blood_Status_No { get; set; }
         public string Reason { get; set; }
+        [Required]
         public int Hemo { get; set; }
         public int User_No { get; set; }
     

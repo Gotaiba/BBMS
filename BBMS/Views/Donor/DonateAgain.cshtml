@@ -1,0 +1,71 @@
+﻿@model BBMS.Models.Donor
+@{
+    ViewBag.Title = "DonateAgain";
+}
+
+<h2>DonateAgain</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Donate_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="radio-inline">
+                        @Html.RadioButtonFor(model => model.Donate_Type, "V", new { id = "patient_false" })
+                        Volunter
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButtonFor(model => model.Donate_Type, "P", new { id = "patient_true" })
+                        For Patient
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Donate_Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="collapse" id="patient">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Patient_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Patient_Name, new { htmlAttributes = new { @class = "form-control", id = "pName" } })
+                        @Html.ValidationMessageFor(model => model.Patient_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Patient_Relation_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Patient_Relation_No", null, "[Select]", htmlAttributes: new { @class = "form-control", id = "pddl" })
+                        @Html.ValidationMessageFor(model => model.Patient_Relation_No, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Donate" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        var qsel = document.querySelector("#patient");
+        $("#patient_false").click(function () {
+            qsel.classList.remove("show");
+            qsel.classList.add("hide");
+            $("#pName").val("");
+            $("#pddl").val("");
+        });
+        $("#patient_true").click(function () {
+            qsel.classList.remove("hide");
+            qsel.classList.add("show");
+        });
+        $("#dp").datepicker({
+            multidate: true
+        });
+    });
+</script>
