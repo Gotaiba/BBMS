@@ -125,23 +125,13 @@ namespace BBMS.Controllers
             {
                 ModelState.AddModelError("Date_of_Birth", "Donor is Either too Old or too Samll");
             }
-            var chkid = (from q in db.Donors.ToList() where q.National_ID == obj.National_ID select q);
-            if (chkid.Count() == 0)
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    Donor donor = db.Donors.FirstOrDefault(d => d.Donar_Id == obj.Donar_Id);
-                    obj.CanDonate = donor.CanDonate;
-                    obj.User_No = int.Parse(Session["UserId"].ToString());
-                    db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("EditDonor");
-                }
-            }
-            else
-            {
-                ViewBag.data = "The National Id Provided is Existed";
-            }       
+                obj.User_No = int.Parse(Session["UserId"].ToString());
+                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("EditDonor");
+            }                
             ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name", obj.Patient_Relation_No);
             return View();
         }
