@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BBMSdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BBMSdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Blood_Stock">
           <Key>
             <PropertyRef Name="Storage_Id" />
@@ -373,15 +373,16 @@
             <End Role="Viruses" EntitySet="Viruses" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BBMSdbModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+      <Schema Namespace="BBMSdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Blood_Stock">
           <Key>
             <PropertyRef Name="Storage_Id" />
           </Key>
-          <Property Name="Storage_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Storage_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Collection_No" Type="Int32" Nullable="false" />
           <Property Name="Blood_Type_No" Type="Int32" Nullable="false" />
           <Property Name="Expiration_Date" Type="DateTime" Nullable="false" Precision="0" />
@@ -392,7 +393,7 @@
           <Key>
             <PropertyRef Name="Blood_Type_Id" />
           </Key>
-          <Property Name="Blood_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Blood_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Blood_Stock" Relationship="Self.FK_Blood_Stock_Blood_Type" FromRole="Blood_Type" ToRole="Blood_Stock" />
           <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Collected_Blood_Blood_Type" FromRole="Blood_Type" ToRole="Collected_Blood" />
@@ -401,7 +402,7 @@
           <Key>
             <PropertyRef Name="ColIection_Id" />
           </Key>
-          <Property Name="ColIection_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="ColIection_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Donor_No" Type="Int32" Nullable="false" />
           <Property Name="Blood_Type_No" Type="Int32" Nullable="false" />
           <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
@@ -420,7 +421,7 @@
           <Key>
             <PropertyRef Name="DonorInfo_Id" />
           </Key>
-          <Property Name="DonorInfo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="DonorInfo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Donor_No" Type="Int32" Nullable="false" />
           <Property Name="Surgery" Type="Boolean" />
           <Property Name="Blood_pressure" Type="Boolean" />
@@ -432,16 +433,16 @@
           <Property Name="Other_Problems_Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Weight" Type="Int32" Nullable="false" />
           <Property Name="User_No" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Donor" Relationship="Self.FK_Donor_Information_Donors" FromRole="Donor_Information" ToRole="Donors" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Donor_Information_Users" FromRole="Donor_Information" ToRole="Users" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IsDonate" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Donor" Relationship="Self.FK_Donor_Information_Donors" FromRole="Donor_Information" ToRole="Donors" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Donor_Information_Users" FromRole="Donor_Information" ToRole="Users" />
         </EntityType>
         <EntityType Name="Donor">
           <Key>
             <PropertyRef Name="Donar_Id" />
           </Key>
-          <Property Name="Donar_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
@@ -453,31 +454,31 @@
           <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Patient_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Patient_Relation_No" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="User_No" Type="Int32" Nullable="false" />
+          <Property Name="CanDonate" Type="Byte" />
           <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Collected_Blood_Donors" FromRole="Donors" ToRole="Collected_Blood" />
           <NavigationProperty Name="Donor_Information" Relationship="Self.FK_Donor_Information_Donors" FromRole="Donors" ToRole="Donor_Information" />
           <NavigationProperty Name="Patient_Relation" Relationship="Self.FK_Donors_Patient_Relation" FromRole="Donors" ToRole="Patient_Relation" />
           <NavigationProperty Name="User" Relationship="Self.FK_Donors_Users" FromRole="Donors" ToRole="Users" />
-          <Property Name="CanDonate" Type="Byte" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Incoming_Blood">
           <Key>
             <PropertyRef Name="Incoming_Id" />
           </Key>
-          <Property Name="Incoming_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Incoming_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Collection_No" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Incoming_Blood_Collected_Blood" FromRole="Incoming_Blood" ToRole="Collected_Blood" />
           <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="User_No" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <Property Name="User_No" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Incoming_Blood_Collected_Blood" FromRole="Incoming_Blood" ToRole="Collected_Blood" />
         </EntityType>
         <EntityType Name="Outgoing_Blood">
           <Key>
             <PropertyRef Name="Outgoing_Id" />
           </Key>
-          <Property Name="Outgoing_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Outgoing_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Collection_No" Type="Int32" Nullable="false" />
           <Property Name="Patient_No" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
@@ -488,7 +489,7 @@
           <Key>
             <PropertyRef Name="Patient_Relation_Id" />
           </Key>
-          <Property Name="Patient_Relation_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Patient_Relation_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Donors" Relationship="Self.FK_Donors_Patient_Relation" FromRole="Patient_Relation" ToRole="Donors" />
         </EntityType>
@@ -496,7 +497,7 @@
           <Key>
             <PropertyRef Name="Patiant_Id" />
           </Key>
-          <Property Name="Patiant_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Patiant_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Outgoing_Blood" Relationship="Self.FK_Outgoing_Blood_Patients" FromRole="Patients" ToRole="Outgoing_Blood" />
         </EntityType>
@@ -504,7 +505,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_Type_Name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_User_Type" FromRole="User_Type" ToRole="Users" />
         </EntityType>
@@ -512,7 +513,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Authority" Type="Int32" Nullable="false" />
@@ -526,7 +527,7 @@
           <Key>
             <PropertyRef Name="Virus_Id" />
           </Key>
-          <Property Name="Virus_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Virus_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Collection_No" Type="Int32" Nullable="false" />
           <Property Name="VDRL" Type="Boolean" />
           <Property Name="HCV" Type="Boolean" />
@@ -703,7 +704,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BBMSdbEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="BBMSdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Blood_Stock" EntityType="Self.Blood_Stock" />
           <EntitySet Name="Blood_Type" EntityType="Self.Blood_Type" />
           <EntitySet Name="Collected_Blood" EntityType="Self.Collected_Blood" />
@@ -777,170 +778,171 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BBMSdbModelStoreContainer" CdmEntityContainer="BBMSdbEntities">
-    <EntitySetMapping Name="Blood_Stock">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Blood_Stock)">
-        <MappingFragment StoreEntitySet="Blood_Stock">
-          <ScalarProperty Name="Storage_Id" ColumnName="Storage_Id" />
-          <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
-          <ScalarProperty Name="Blood_Type_No" ColumnName="Blood_Type_No" />
-          <ScalarProperty Name="Expiration_Date" ColumnName="Expiration_Date" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Blood_Type">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Blood_Type)">
-        <MappingFragment StoreEntitySet="Blood_Type">
-          <ScalarProperty Name="Blood_Type_Id" ColumnName="Blood_Type_Id" />
-          <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Collected_Blood">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Collected_Blood)">
-        <MappingFragment StoreEntitySet="Collected_Blood">
-          <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
-          <ScalarProperty Name="Donor_No" ColumnName="Donor_No" />
-          <ScalarProperty Name="Blood_Type_No" ColumnName="Blood_Type_No" />
-          <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
-          <ScalarProperty Name="Reason" ColumnName="Reason" />
-          <ScalarProperty Name="Hemo" ColumnName="Hemo" />
-          <ScalarProperty Name="User_No" ColumnName="User_No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Donor_Information">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Donor_Information)">
-        <MappingFragment StoreEntitySet="Donor_Information">
-          <ScalarProperty Name="DonorInfo_Id" ColumnName="DonorInfo_Id" />
-          <ScalarProperty Name="Donor_No" ColumnName="Donor_No" />
-          <ScalarProperty Name="Surgery" ColumnName="Surgery" />
-          <ScalarProperty Name="Blood_pressure" ColumnName="Blood_pressure" />
-          <ScalarProperty Name="Blood_Diabetes" ColumnName="Blood_Diabetes" />
-          <ScalarProperty Name="Heart_Disease" ColumnName="Heart_Disease" />
-          <ScalarProperty Name="Medicine" ColumnName="Medicine" />
-          <ScalarProperty Name="Smoker" ColumnName="Smoker" />
-          <ScalarProperty Name="Other_Problems" ColumnName="Other_Problems" />
-          <ScalarProperty Name="Other_Problems_Text" ColumnName="Other_Problems_Text" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="User_No" ColumnName="User_No" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="IsDonate" ColumnName="IsDonate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Donors">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Donor)">
-        <MappingFragment StoreEntitySet="Donors">
-          <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
-          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-          <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-          <ScalarProperty Name="National_ID" ColumnName="National_ID" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
-          <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
-          <ScalarProperty Name="Patient_Relation_No" ColumnName="Patient_Relation_No" />
-          <ScalarProperty Name="User_No" ColumnName="User_No" />
-          <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Incoming_Blood">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Incoming_Blood)">
-        <MappingFragment StoreEntitySet="Incoming_Blood">
-          <ScalarProperty Name="Incoming_Id" ColumnName="Incoming_Id" />
-          <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
-          <ScalarProperty Name="User_No" ColumnName="User_No" />
-          <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Outgoing_Blood">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Outgoing_Blood)">
-        <MappingFragment StoreEntitySet="Outgoing_Blood">
-          <ScalarProperty Name="Outgoing_Id" ColumnName="Outgoing_Id" />
-          <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
-          <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Patient_Relation">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Patient_Relation)">
-        <MappingFragment StoreEntitySet="Patient_Relation">
-          <ScalarProperty Name="Patient_Relation_Id" ColumnName="Patient_Relation_Id" />
-          <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Patients">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Patient)">
-        <MappingFragment StoreEntitySet="Patients">
-          <ScalarProperty Name="Patiant_Id" ColumnName="Patiant_Id" />
-          <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="User_Type">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.User_Type)">
-        <MappingFragment StoreEntitySet="User_Type">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="User_Type_Name" ColumnName="User_Type_Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.User)">
-        <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Authority" ColumnName="Authority" />
-          <ScalarProperty Name="User_Type_No" ColumnName="User_Type_No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Viruses">
-      <EntityTypeMapping TypeName="IsTypeOf(BBMSdbModel.Virus)">
-        <MappingFragment StoreEntitySet="Viruses">
-          <ScalarProperty Name="Virus_Id" ColumnName="Virus_Id" />
-          <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
-          <ScalarProperty Name="VDRL" ColumnName="VDRL" />
-          <ScalarProperty Name="HCV" ColumnName="HCV" />
-          <ScalarProperty Name="HBV" ColumnName="HBV" />
-          <ScalarProperty Name="HIV" ColumnName="HIV" />
-          <ScalarProperty Name="User_No" ColumnName="User_No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-  </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BBMSdbModelStoreContainer" CdmEntityContainer="BBMSdbEntities">
+          <EntitySetMapping Name="Blood_Stock">
+            <EntityTypeMapping TypeName="BBMSdbModel.Blood_Stock">
+              <MappingFragment StoreEntitySet="Blood_Stock">
+                <ScalarProperty Name="Storage_Id" ColumnName="Storage_Id" />
+                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
+                <ScalarProperty Name="Blood_Type_No" ColumnName="Blood_Type_No" />
+                <ScalarProperty Name="Expiration_Date" ColumnName="Expiration_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blood_Type">
+            <EntityTypeMapping TypeName="BBMSdbModel.Blood_Type">
+              <MappingFragment StoreEntitySet="Blood_Type">
+                <ScalarProperty Name="Blood_Type_Id" ColumnName="Blood_Type_Id" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collected_Blood">
+            <EntityTypeMapping TypeName="BBMSdbModel.Collected_Blood">
+              <MappingFragment StoreEntitySet="Collected_Blood">
+                <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
+                <ScalarProperty Name="Donor_No" ColumnName="Donor_No" />
+                <ScalarProperty Name="Blood_Type_No" ColumnName="Blood_Type_No" />
+                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Hemo" ColumnName="Hemo" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donor_Information">
+            <EntityTypeMapping TypeName="BBMSdbModel.Donor_Information">
+              <MappingFragment StoreEntitySet="Donor_Information">
+                <ScalarProperty Name="DonorInfo_Id" ColumnName="DonorInfo_Id" />
+                <ScalarProperty Name="Donor_No" ColumnName="Donor_No" />
+                <ScalarProperty Name="Surgery" ColumnName="Surgery" />
+                <ScalarProperty Name="Blood_pressure" ColumnName="Blood_pressure" />
+                <ScalarProperty Name="Blood_Diabetes" ColumnName="Blood_Diabetes" />
+                <ScalarProperty Name="Heart_Disease" ColumnName="Heart_Disease" />
+                <ScalarProperty Name="Medicine" ColumnName="Medicine" />
+                <ScalarProperty Name="Smoker" ColumnName="Smoker" />
+                <ScalarProperty Name="Other_Problems" ColumnName="Other_Problems" />
+                <ScalarProperty Name="Other_Problems_Text" ColumnName="Other_Problems_Text" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsDonate" ColumnName="IsDonate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donors">
+            <EntityTypeMapping TypeName="BBMSdbModel.Donor">
+              <MappingFragment StoreEntitySet="Donors">
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
+                <ScalarProperty Name="Patient_Relation_No" ColumnName="Patient_Relation_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incoming_Blood">
+            <EntityTypeMapping TypeName="BBMSdbModel.Incoming_Blood">
+              <MappingFragment StoreEntitySet="Incoming_Blood">
+                <ScalarProperty Name="Incoming_Id" ColumnName="Incoming_Id" />
+                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outgoing_Blood">
+            <EntityTypeMapping TypeName="BBMSdbModel.Outgoing_Blood">
+              <MappingFragment StoreEntitySet="Outgoing_Blood">
+                <ScalarProperty Name="Outgoing_Id" ColumnName="Outgoing_Id" />
+                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
+                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient_Relation">
+            <EntityTypeMapping TypeName="BBMSdbModel.Patient_Relation">
+              <MappingFragment StoreEntitySet="Patient_Relation">
+                <ScalarProperty Name="Patient_Relation_Id" ColumnName="Patient_Relation_Id" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="BBMSdbModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="Patiant_Id" ColumnName="Patiant_Id" />
+                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Type">
+            <EntityTypeMapping TypeName="BBMSdbModel.User_Type">
+              <MappingFragment StoreEntitySet="User_Type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_Type_Name" ColumnName="User_Type_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BBMSdbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Authority" ColumnName="Authority" />
+                <ScalarProperty Name="User_Type_No" ColumnName="User_Type_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Viruses">
+            <EntityTypeMapping TypeName="BBMSdbModel.Virus">
+              <MappingFragment StoreEntitySet="Viruses">
+                <ScalarProperty Name="Virus_Id" ColumnName="Virus_Id" />
+                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
+                <ScalarProperty Name="VDRL" ColumnName="VDRL" />
+                <ScalarProperty Name="HCV" ColumnName="HCV" />
+                <ScalarProperty Name="HBV" ColumnName="HBV" />
+                <ScalarProperty Name="HIV" ColumnName="HIV" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <edmx:Designer>
-    <edmx:Connection>
-      <edmx:DesignerInfoPropertySet>
-        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
-      </edmx:DesignerInfoPropertySet>
-    </edmx:Connection>
-    <edmx:Options>
-      <edmx:DesignerInfoPropertySet>
-        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <edmx:DesignerProperty Name="EnablePluralization" Value="true" />
-        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <edmx:DesignerProperty Name="UseLegacyProvider" Value="False" />
-        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-      </edmx:DesignerInfoPropertySet>
-    </edmx:Options>
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <edmx:Diagrams />
-  </edmx:Designer>
+    <Diagrams></Diagrams>
+  </Designer>
 </edmx:Edmx>

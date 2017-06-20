@@ -63,9 +63,7 @@ namespace BBMS.Controllers
                 {
                     ModelState.AddModelError("Patient Name", "Please Enter Patient Name");
                     ModelState.AddModelError("Patient_Relation_No", "Select Patient Relation");
-                }
-                else
-                {
+                }                             
                     var chkid = (from q in db.Donors.ToList() where q.National_ID == d.National_ID select q);
                     if (chkid.Count() == 0)
                     {
@@ -78,8 +76,7 @@ namespace BBMS.Controllers
                     else
                     {
                         ViewBag.data = "The National Id Provided is Existed";
-                    }
-                }
+                    }               
             }
             ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name", d.Patient_Relation_No);
             return View();
@@ -132,7 +129,16 @@ namespace BBMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                Donor donor = db.Donors.FirstOrDefault(d => d.Donar_Id == obj.Donar_Id);
+                donor.First_Name = obj.First_Name;
+                donor.Last_Name = obj.Last_Name;
+                donor.Gender = obj.Gender;
+                donor.Address = obj.Address;
+                donor.Date_of_Birth = obj.Date_of_Birth;
+                donor.Telephone = obj.Telephone;
+                donor.Email = obj.Email;
+                donor.Donate_Type = obj.Donate_Type;
+                db.Entry(donor).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("AllDonors");
             }
