@@ -27,7 +27,7 @@ namespace BBMS.Models
         [Required]
         public string Last_Name { get; set; }
         [Required]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Date_of_Birth { get; set; }
         [Required]
         public string Gender { get; set; }
