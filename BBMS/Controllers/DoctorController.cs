@@ -35,6 +35,11 @@ namespace BBMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(di.Blood_pressure==true || di.Heart_Disease==true || di.Blood_Diabetes==true||di.Surgery==true)
+                {
+                    ViewBag.data = "Not Eligible To Donate";
+                    return View();
+                }
                 UpdateCanDonate(GetUrlId());
                 di.Donor_No = GetUrlId();
                 di.User_No= int.Parse(Session["UserId"].ToString());

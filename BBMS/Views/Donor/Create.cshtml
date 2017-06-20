@@ -26,7 +26,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.First_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.First_Name,"First Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Last_Name,"Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Date_of_Birth, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Date_of_Birth,"Date of Birth", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date_of_Birth, new { htmlAttributes = new { @class = "form-control",placeHolder="dd/mm/yyyy", id="dp" } })
                 @Html.ValidationMessageFor(model => model.Date_of_Birth, "", new { @class = "text-danger" })
@@ -81,7 +81,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.National_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.National_ID,"National Id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.National_ID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.National_ID, "", new { @class = "text-danger" })
@@ -97,7 +97,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Donate_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Donate_Type,"Donate Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="radio-inline">                    
                     @Html.RadioButtonFor(model => model.Donate_Type, "V", new {id="patient_false" })                   
@@ -112,14 +112,14 @@
         </div>
         <div class="collapse" id="patient">
             <div class="form-group">
-                @Html.LabelFor(model => model.Patient_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Patient_Name,"Patient Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Patient_Name, new { htmlAttributes = new { @class = "form-control",id="pName"} })
                     @Html.ValidationMessageFor(model => model.Patient_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Patient_Relation_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Patient_Relation_No,"Patient Relation", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                    @Html.DropDownList("Patient_Relation_No", null, "[Select]", htmlAttributes: new { @class = "form-control", id = "pddl" })
                     @Html.ValidationMessageFor(model => model.Patient_Relation_No, "", new { @class = "text-danger" })

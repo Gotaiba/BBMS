@@ -11,7 +11,7 @@ namespace BBMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Donor_Information
     {
         public int DonorInfo_Id { get; set; }
@@ -24,6 +24,8 @@ namespace BBMS.Models
         public Nullable<bool> Smoker { get; set; }
         public Nullable<bool> Other_Problems { get; set; }
         public string Other_Problems_Text { get; set; }
+        [Required]
+        [Range(60,200)]
         public int Weight { get; set; }
         public int User_No { get; set; }
         public System.DateTime Date { get; set; }

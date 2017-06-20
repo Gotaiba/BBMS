@@ -21,31 +21,10 @@ namespace BBMS.Controllers
         {
             return View(db.Donors.ToList());
         }
-        [AllowAnonymous]
         public ActionResult Create(int? id)
         {
             if (Session["UserId"] != null)
-            {
-                if (id > 0)
-                {
-                    Donor d = db.Donors.Find(id);
-                    DateTime firstDonation = (DateTime)d.Date;
-                    int monthsApart = 12 * (DateTime.Now.Year - firstDonation.Year) + DateTime.Now.Month - firstDonation.Month;
-                    if (monthsApart > 6)
-                    {
-                        d.CanDonate = 1;
-                        d.Date = DateTime.Now;
-                        db.Entry(d).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
-                        TempData["msg"] = "Donated Successdfully";
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        TempData["msg"] = "This Donor Have Donate Less than 6 Month";
-                        return RedirectToAction("Index");
-                    }
-                }
+            {                
                 ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name");
                 return View();
             }
@@ -57,31 +36,38 @@ namespace BBMS.Controllers
         [HttpPost]
         public ActionResult Create(Donor d)
         {
-            if (ModelState.IsValid)
+            int age = CalculateAge(d.Date_of_Birth);
+            if (d.Donate_Type == "P")
             {
-                if (d.Donate_Type == "P")
-                {
-                    ModelState.AddModelError("Patient Name", "Please Enter Patient Name");
+                if(string.IsNullOrWhiteSpace(d.Patient_Name))
+                    ModelState.AddModelError("Patient_Name", "Please Enter Patient Name");
+                if(d.Patient_Relation_No==null)
                     ModelState.AddModelError("Patient_Relation_No", "Select Patient Relation");
-                }                             
-                    var chkid = (from q in db.Donors.ToList() where q.National_ID == d.National_ID select q);
-                    if (chkid.Count() == 0)
-                    {
-                        d.User_No = int.Parse(Session["UserId"].ToString());
-                        d.Date = DateTime.Now;
-                        db.Donors.Add(d);
-                        db.SaveChanges();
-                        return RedirectToAction("EditDonor");
-                    }
-                    else
-                    {
-                        ViewBag.data = "The National Id Provided is Existed";
-                    }               
+            }
+            if (age < 20 || age > 50)
+            {
+                ModelState.AddModelError("Date_of_Birth", "Donor is Either too Old or too Samll");
+            }
+            var chkid = (from q in db.Donors.ToList() where q.National_ID == d.National_ID select q);
+            if (chkid.Count() == 0)
+            {
+                if (ModelState.IsValid)
+                {
+                    d.User_No = int.Parse(Session["UserId"].ToString());
+                    d.Date = DateTime.Now;
+                    db.Donors.Add(d);
+                    db.SaveChanges();
+                    return RedirectToAction("EditDonor");
+                }
+
+            }
+            else
+            {
+                ViewBag.data = "The National Id Provided is Existed";
             }
             ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name", d.Patient_Relation_No);
             return View();
-           
-        }
+        }               
         public ActionResult DonateAgain(int? id)
         {
             if (id == null)
@@ -96,7 +82,7 @@ namespace BBMS.Controllers
             Donor d = db.Donors.Find(GetUrlId());
             DateTime firstDonation = (DateTime)d.Date;
             int monthsApart = 12 * (DateTime.Now.Year - firstDonation.Year) + DateTime.Now.Month - firstDonation.Month;
-            if (monthsApart > 6)
+            if (monthsApart > 3)
             {
                 d.CanDonate = 1;
                 d.Date = DateTime.Now;
@@ -110,7 +96,7 @@ namespace BBMS.Controllers
             }
             else
             {
-                TempData["msg"] = "This Donor Have Donate Less than 6 Month";
+                TempData["msg"] = "This Donor Have Donate Less than 3 Month";
                 return RedirectToAction("Index", "Donor");
             }
         }
@@ -127,21 +113,35 @@ namespace BBMS.Controllers
         [HttpPost]
         public ActionResult Edit(Donor obj)
         {
-            if (ModelState.IsValid)
+            int age = CalculateAge(obj.Date_of_Birth);
+            if (obj.Donate_Type == "P")
             {
-                Donor donor = db.Donors.FirstOrDefault(d => d.Donar_Id == obj.Donar_Id);
-                donor.First_Name = obj.First_Name;
-                donor.Last_Name = obj.Last_Name;
-                donor.Gender = obj.Gender;
-                donor.Address = obj.Address;
-                donor.Date_of_Birth = obj.Date_of_Birth;
-                donor.Telephone = obj.Telephone;
-                donor.Email = obj.Email;
-                donor.Donate_Type = obj.Donate_Type;
-                db.Entry(donor).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("AllDonors");
+                if (string.IsNullOrWhiteSpace(obj.Patient_Name))
+                    ModelState.AddModelError("Patient_Name", "Please Enter Patient Name");
+                if (obj.Patient_Relation_No == null)
+                    ModelState.AddModelError("Patient_Relation_No", "Select Patient Relation");
             }
+            if (age < 20 || age > 50)
+            {
+                ModelState.AddModelError("Date_of_Birth", "Donor is Either too Old or too Samll");
+            }
+            var chkid = (from q in db.Donors.ToList() where q.National_ID == obj.National_ID select q);
+            if (chkid.Count() == 0)
+            {
+                if (ModelState.IsValid)
+                {
+                    Donor donor = db.Donors.FirstOrDefault(d => d.Donar_Id == obj.Donar_Id);
+                    obj.CanDonate = donor.CanDonate;
+                    obj.User_No = int.Parse(Session["UserId"].ToString());
+                    db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("EditDonor");
+                }
+            }
+            else
+            {
+                ViewBag.data = "The National Id Provided is Existed";
+            }       
             ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name", obj.Patient_Relation_No);
             return View();
         }
@@ -196,6 +196,12 @@ namespace BBMS.Controllers
         {
             string id = Request.Url.Query;
             return int.Parse(id.Substring(id.LastIndexOf('=') + 1));
+        }
+        [NonAction]
+        public int CalculateAge(DateTime DoB)
+        {
+            int age = DateTime.Now.Year - DoB.Year;
+            return age;
         }
     }
 }

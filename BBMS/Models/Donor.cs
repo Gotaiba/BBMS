@@ -27,6 +27,7 @@ namespace BBMS.Models
         [Required]
         public string Last_Name { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public System.DateTime Date_of_Birth { get; set; }
         [Required]
         public string Gender { get; set; }
@@ -34,11 +35,13 @@ namespace BBMS.Models
         [Required]
         public string Telephone { get; set; }
         [Required]
+        [MinLength(11)]
+        [MaxLength(11)]
         public string National_ID { get; set; }
         public string Email { get; set; }
         [Required]
         public string Donate_Type { get; set; }
-        public string Patient_Name { get; set; }
+        public  string Patient_Name { get; set; }
         public Nullable<int> Patient_Relation_No { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public int User_No { get; set; }
