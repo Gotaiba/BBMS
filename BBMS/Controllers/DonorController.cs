@@ -55,6 +55,7 @@ namespace BBMS.Controllers
                 {
                     d.User_No = int.Parse(Session["UserId"].ToString());
                     d.Date = DateTime.Now;
+                    d.CanDonate = 1;
                     db.Donors.Add(d);
                     db.SaveChanges();
                     return RedirectToAction("EditDonor");
@@ -81,8 +82,9 @@ namespace BBMS.Controllers
             ViewBag.Patient_Relation_No = new SelectList(db.Patient_Relation, "Patient_Relation_Id", "Patient_Relation_Name");
             Donor d = db.Donors.Find(GetUrlId());
             DateTime firstDonation = (DateTime)d.Date;
-            int monthsApart = 12 * (DateTime.Now.Year - firstDonation.Year) + DateTime.Now.Month - firstDonation.Month;
-            if (monthsApart > 3)
+            int weeks=Convert.ToInt32((DateTime.Now - firstDonation).TotalDays / 7);
+            //int monthsApart = 12 * (DateTime.Now.Year - firstDonation.Year) + DateTime.Now - firstDonation.Month;
+            if (weeks >= 2)
             {
                 d.CanDonate = 1;
                 d.Date = DateTime.Now;
@@ -96,7 +98,7 @@ namespace BBMS.Controllers
             }
             else
             {
-                TempData["msg"] = "This Donor Have Donate Less than 3 Month";
+                TempData["msg"] = "This Donor Have Donate Less than 2 weeks";
                 return RedirectToAction("Index", "Donor");
             }
         }
@@ -139,23 +141,7 @@ namespace BBMS.Controllers
         {           
             return View();
         }
-        [HttpPost]
-        public ActionResult Index(string NatId)
-        {
-            Donor d = db.Donors.Find(NatId);           
-            var chkId = from q in db.Donors.ToList() where q.National_ID == NatId select q;
-            if (chkId.Count() > 0)
-            {               
-                ViewBag.data = "This Donor is Already Registered";
-                
-                return View(chkId);
-            }
-            else
-            {
-                ViewBag.data = "No record for this Id, Please Register first";
-                return View();
-            }
-        }  
+  
         [AllowAnonymous]
         public JsonResult SearchNId(string NatId)
         {

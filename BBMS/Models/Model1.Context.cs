@@ -37,5 +37,6 @@ namespace BBMS.Models
         public virtual DbSet<User_Type> User_Type { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Virus> Viruses { get; set; }
+        public virtual DbSet<vwIncomingInfo> vwIncomingInfoes { get; set; }
     }
 }

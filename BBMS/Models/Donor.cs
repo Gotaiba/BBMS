@@ -11,7 +11,7 @@ namespace BBMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Donor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,26 +22,16 @@ namespace BBMS.Models
         }
     
         public int Donar_Id { get; set; }
-        [Required]
         public string First_Name { get; set; }
-        [Required]
         public string Last_Name { get; set; }
-        [Required]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Date_of_Birth { get; set; }
-        [Required]
         public string Gender { get; set; }
         public string Address { get; set; }
-        [Required]
         public string Telephone { get; set; }
-        [Required]
-        [MinLength(11)]
-        [MaxLength(11)]
         public string National_ID { get; set; }
         public string Email { get; set; }
-        [Required]
         public string Donate_Type { get; set; }
-        public  string Patient_Name { get; set; }
+        public string Patient_Name { get; set; }
         public Nullable<int> Patient_Relation_No { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public int User_No { get; set; }

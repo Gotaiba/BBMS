@@ -63,7 +63,7 @@ namespace BBMS.Controllers
         public ActionResult CollectBlood(Collected_Blood c)
         {
             DateTime d = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-                c.Donor_No = 
+            c.Donor_No = GetUrlId(); 
                 c.User_No = int.Parse(Session["UserId"].ToString());
                 db.Collected_Blood.Add(c);
                 db.SaveChanges();
@@ -141,7 +141,7 @@ namespace BBMS.Controllers
             string Url = Request.Url.ToString();
             if (id=="")
             {
-                return int.Parse(Url.Substring(Url.LastIndexOf("/")));
+                return int.Parse(Url.Substring(Url.LastIndexOf("/")+1));
             }
             return int.Parse(id.Substring(id.LastIndexOf('=') + 1));
         }
