@@ -30,11 +30,11 @@
             <div class="col-md-10">
                 <div class="radio-inline">
                     @Html.RadioButtonFor(model => model.Blood_Status_No,true)
-                    Complete
+                    Sufficient
                 </div>
                 <div class="radio-inline">
                     @Html.RadioButtonFor(model => model.Blood_Status_No,false)
-                    Not Complete
+                    Not Sufficient
                 </div>
                 @Html.ValidationMessageFor(model => model.Blood_Status_No, "", new { @class = "text-danger" })
             </div>

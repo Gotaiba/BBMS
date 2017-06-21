@@ -76,6 +76,15 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Medicine_Text, "Do you take any kind of Medicine at the moment?", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-7">
+                <div class="checkbox">
+                    @Html.TextAreaFor(model => model.Medicine_Text, new { htmlAttributes = new { @class = "form-control" }, rows = "5", cols = "50" })
+                    @Html.ValidationMessageFor(model => model.Medicine_Text, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Smoker,"Did you Somke or Smoked within two Hours?", htmlAttributes: new { @class = "control-label col-md-5" })

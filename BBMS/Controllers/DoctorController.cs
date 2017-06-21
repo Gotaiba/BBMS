@@ -63,7 +63,7 @@ namespace BBMS.Controllers
         public ActionResult CollectBlood(Collected_Blood c)
         {
             DateTime d = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            c.Donor_No = GetUrlId(); 
+               c.Donor_No = GetUrlId(); 
                 c.User_No = int.Parse(Session["UserId"].ToString());
                 db.Collected_Blood.Add(c);
                 db.SaveChanges();

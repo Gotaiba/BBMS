@@ -30,7 +30,7 @@
           <Property Name="Blood_Type_No" Type="int" Nullable="false" />
           <Property Name="Blood_Status_No" Type="bit" Nullable="false" />
           <Property Name="Reason" Type="nvarchar(max)" />
-          <Property Name="Hemo" Type="int" Nullable="false" />
+          <Property Name="Hemo" Type="float" Nullable="false" />
           <Property Name="User_No" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Donor_Information">
@@ -44,6 +44,7 @@
           <Property Name="Blood_Diabetes" Type="bit" />
           <Property Name="Heart_Disease" Type="bit" />
           <Property Name="Medicine" Type="bit" />
+          <Property Name="Medicine_Text" Type="nvarchar" MaxLength="50" />
           <Property Name="Smoker" Type="bit" />
           <Property Name="Other_Problems" Type="bit" />
           <Property Name="Other_Problems_Text" Type="nvarchar" MaxLength="50" />
@@ -464,7 +465,7 @@ warning 6002: The table/view 'BBMSdb.dbo.vwStatusInfo' does not have a primary k
           <Property Name="Blood_Type_No" Type="Int32" Nullable="false" />
           <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
           <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Hemo" Type="Int32" Nullable="false" />
+          <Property Name="Hemo" Type="Double" Nullable="false" />
           <Property Name="User_No" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Blood_Stock" Relationship="Self.FK_Blood_Stock_Collected_Blood" FromRole="Collected_Blood" ToRole="Blood_Stock" />
           <NavigationProperty Name="Blood_Type" Relationship="Self.FK_Collected_Blood_Blood_Type" FromRole="Collected_Blood" ToRole="Blood_Type" />
@@ -494,6 +495,7 @@ warning 6002: The table/view 'BBMSdb.dbo.vwStatusInfo' does not have a primary k
           <Property Name="IsDonate" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Donor" Relationship="Self.FK_Donor_Information_Donors" FromRole="Donor_Information" ToRole="Donors" />
           <NavigationProperty Name="User" Relationship="Self.FK_Donor_Information_Users" FromRole="Donor_Information" ToRole="Users" />
+          <Property Name="Medicine_Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Donor">
           <Key>
@@ -905,6 +907,7 @@ warning 6002: The table/view 'BBMSdb.dbo.vwStatusInfo' does not have a primary k
           <EntitySetMapping Name="Donor_Information">
             <EntityTypeMapping TypeName="BBMSdbModel.Donor_Information">
               <MappingFragment StoreEntitySet="Donor_Information">
+                <ScalarProperty Name="Medicine_Text" ColumnName="Medicine_Text" />
                 <ScalarProperty Name="DonorInfo_Id" ColumnName="DonorInfo_Id" />
                 <ScalarProperty Name="Donor_No" ColumnName="Donor_No" />
                 <ScalarProperty Name="Surgery" ColumnName="Surgery" />

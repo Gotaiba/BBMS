@@ -17,15 +17,14 @@
         <div class="logo-content">
             <img src="~/Content/logo.png" class="logo-img" />
         </div>
-        <div class="form">
-            <form class="">
+        <div class="form">        
                 @using (Html.BeginForm(new { htmlAttributes = new { @class = "login-form" } }))
                 {
-                    <input type="text" placeholder="username" />
-                            <input type="password" placeholder="password" />
-                            <button>login</button>
+                    <input type="text" name="Username" placeholder="username" />
+                            <input name="Password" type="password" placeholder="password" />
+                            <button type="submit">login</button>
                 }
-            </form>
+        
         </div>
     </div>
     @{

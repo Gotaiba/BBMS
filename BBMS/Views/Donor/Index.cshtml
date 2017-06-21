@@ -1,6 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Index";   
+    ViewBag.Title = "Index";
+}
 @using BBMS.Models
 @using BBMS.Resources
 @model IEnumerable<Donor>
@@ -43,7 +44,7 @@
         </div>
         <div class="form-group">
             <div class="col-lg-offset-5 col-lg-7">
-                <input type="button" onKeyDown="if (event.keyCode == 13) GetData();" onclick="GetData();" value=@BBMS_String.Search id="btnGet" class="btn btn-primary btn-block" />               
+                <input type="button" onKeyDown="if(event.keyCode == 13) GetData();" onclick="GetData();" value=@BBMS_String.Search id="btnGet" class="btn btn-primary btn-block" />               
             </div>
         </div>
     </div>
@@ -62,6 +63,7 @@
     </tbody>
 </table>
 <script type="text/javascript">
+    
     function GetData()
     {
         $("#loadingIcon").show();
