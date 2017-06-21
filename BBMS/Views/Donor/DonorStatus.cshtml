@@ -1,0 +1,25 @@
+﻿@using BBMS.Models
+@model List<vwStatusInfo>
+@{
+    ViewBag.Title = "DonorStatus";
+}
+
+<h2>DonorStatus</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        @*<th>Blood Type</th>
+        <th>Status</th>
+        <th>Reason</th>
+        <th>Username</th>*@
+    </tr>
+    @{ 
+        foreach(var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.First_Name) </td>
+            </tr>
+        }
+    }
+</table>

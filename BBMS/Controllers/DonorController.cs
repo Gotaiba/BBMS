@@ -102,6 +102,11 @@ namespace BBMS.Controllers
                 return RedirectToAction("Index", "Donor");
             }
         }
+        public ActionResult DonorStatus()
+        {
+            
+            return View(db.vwStatusInfoes.ToList());
+        }
         public ActionResult Details(int? id)     
         {
             return View(db.Donors.Find(id));

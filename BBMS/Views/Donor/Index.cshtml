@@ -1,13 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    /*AjaxOptions opt = new AjaxOptions
-    {
-        LoadingElementId = "loadingIcon",
-        OnSuccess = "GetData",
-        Url = Url.Action("SearchNId")
-    };*/
-}
+    ViewBag.Title = "Index";   
 @using BBMS.Models
 @using BBMS.Resources
 @model IEnumerable<Donor>
@@ -50,7 +43,7 @@
         </div>
         <div class="form-group">
             <div class="col-lg-offset-5 col-lg-7">
-                <input type="button" onclick="GetData();" value=@BBMS_String.Search id="btnGet" class="btn btn-primary btn-block" />               
+                <input type="button" onKeyDown="if (event.keyCode == 13) GetData();" onclick="GetData();" value=@BBMS_String.Search id="btnGet" class="btn btn-primary btn-block" />               
             </div>
         </div>
     </div>
@@ -68,53 +61,6 @@
 
     </tbody>
 </table>
-@*Don
-        @{
-            if(Model!=null)
-            {
-                foreach (Donor d in Model)
-                {
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.First_Name)
-                        </dt>
-
-                        <dd>
-                            @d.First_Name
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Last_Name)
-                        </dt>
-
-                        <dd>
-                            @d.Last_Name
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.National_ID)
-                        </dt>
-
-                        <dd>
-                            @d.National_ID
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Donate_Type)
-                        </dt>
-
-                        <dd>
-                            @d.Donate_Type
-                        </dd>                        
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Patient_Name)
-                        </dt>
-
-                        <dd>
-                            @d.Patient_Name
-                        </dd>
-                    </dl>
-                }
-                <a href="/Donor/Details/@Model.FirstOrDefault().Donar_Id" class="btn btn-primary">Donate Again</a>
-           }
-    } *@
 <script type="text/javascript">
     function GetData()
     {

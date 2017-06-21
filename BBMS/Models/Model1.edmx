@@ -136,27 +136,39 @@
           <Property Name="User_No" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'BBMSdb.dbo.vwIncomingInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="vwIncomingInfo">
+warning 6002: The table/view 'BBMSdb.dbo.vwRegisteredDonors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwRegisteredDonors">
           <Key>
-            <PropertyRef Name="IncomingDate" />
             <PropertyRef Name="First_Name" />
             <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
             <PropertyRef Name="Donate_Type" />
-            <PropertyRef Name="National_ID" />
-            <PropertyRef Name="Type_Name" />
-            <PropertyRef Name="Hemo" />
-            <PropertyRef Name="Username" />
           </Key>
-          <Property Name="IncomingDate" Type="date" Nullable="false" />
           <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="National_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Patient_Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="DonatingDate" Type="date" />
+          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BBMSdb.dbo.vwStatusInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStatusInfo">
+          <Key>
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="bit" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" />
           <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Hemo" Type="int" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Blood_Stock_Blood_Type">
@@ -340,19 +352,27 @@ warning 6002: The table/view 'BBMSdb.dbo.vwIncomingInfo' does not have a primary
           <EntitySet Name="User_Type" EntityType="Self.User_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Viruses" EntityType="Self.Viruses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vwIncomingInfo" EntityType="Self.vwIncomingInfo" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="vwRegisteredDonors" EntityType="Self.vwRegisteredDonors" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [vwIncomingInfo].[IncomingDate] AS [IncomingDate], 
-    [vwIncomingInfo].[First_Name] AS [First_Name], 
-    [vwIncomingInfo].[Last_Name] AS [Last_Name], 
-    [vwIncomingInfo].[Donate_Type] AS [Donate_Type], 
-    [vwIncomingInfo].[National_ID] AS [National_ID], 
-    [vwIncomingInfo].[Patient_Name] AS [Patient_Name], 
-    [vwIncomingInfo].[DonatingDate] AS [DonatingDate], 
-    [vwIncomingInfo].[Type_Name] AS [Type_Name], 
-    [vwIncomingInfo].[Hemo] AS [Hemo], 
-    [vwIncomingInfo].[Username] AS [Username]
-    FROM [dbo].[vwIncomingInfo] AS [vwIncomingInfo]</DefiningQuery>
+    [vwRegisteredDonors].[First_Name] AS [First_Name], 
+    [vwRegisteredDonors].[Last_Name] AS [Last_Name], 
+    [vwRegisteredDonors].[Gender] AS [Gender], 
+    [vwRegisteredDonors].[Telephone] AS [Telephone], 
+    [vwRegisteredDonors].[Donate_Type] AS [Donate_Type], 
+    [vwRegisteredDonors].[Patient_Name] AS [Patient_Name], 
+    [vwRegisteredDonors].[Patient_Relation_Name] AS [Patient_Relation_Name], 
+    [vwRegisteredDonors].[Date] AS [Date]
+    FROM [dbo].[vwRegisteredDonors] AS [vwRegisteredDonors]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwStatusInfo" EntityType="Self.vwStatusInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStatusInfo].[First_Name] AS [First_Name], 
+    [vwStatusInfo].[Last_Name] AS [Last_Name], 
+    [vwStatusInfo].[Blood_Status_No] AS [Blood_Status_No], 
+    [vwStatusInfo].[Reason] AS [Reason], 
+    [vwStatusInfo].[Type_Name] AS [Type_Name], 
+    [vwStatusInfo].[Username] AS [Username]
+    FROM [dbo].[vwStatusInfo] AS [vwStatusInfo]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Blood_Stock_Blood_Type" Association="Self.FK_Blood_Stock_Blood_Type">
             <End Role="Blood_Type" EntitySet="Blood_Type" />
@@ -810,28 +830,39 @@ warning 6002: The table/view 'BBMSdb.dbo.vwIncomingInfo' does not have a primary
             <End Role="User_Type" EntitySet="User_Type" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="vwIncomingInfoes" EntityType="BBMSdbModel.vwIncomingInfo" />
+          <EntitySet Name="vwRegisteredDonors" EntityType="BBMSdbModel.vwRegisteredDonor" />
+          <EntitySet Name="vwStatusInfoes" EntityType="BBMSdbModel.vwStatusInfo" />
         </EntityContainer>
-        <EntityType Name="vwIncomingInfo">
+        <EntityType Name="vwRegisteredDonor">
           <Key>
-            <PropertyRef Name="IncomingDate" />
             <PropertyRef Name="First_Name" />
             <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
             <PropertyRef Name="Donate_Type" />
-            <PropertyRef Name="National_ID" />
-            <PropertyRef Name="Type_Name" />
-            <PropertyRef Name="Hemo" />
-            <PropertyRef Name="Username" />
           </Key>
-          <Property Name="IncomingDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Donate_Type" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="National_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Patient_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DonatingDate" Type="DateTime" Precision="0" />
+          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="vwStatusInfo">
+          <Key>
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Type_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Hemo" Type="Int32" Nullable="false" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
@@ -982,19 +1013,29 @@ warning 6002: The table/view 'BBMSdb.dbo.vwIncomingInfo' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwIncomingInfoes">
-            <EntityTypeMapping TypeName="BBMSdbModel.vwIncomingInfo">
-              <MappingFragment StoreEntitySet="vwIncomingInfo">
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Hemo" ColumnName="Hemo" />
-                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
-                <ScalarProperty Name="DonatingDate" ColumnName="DonatingDate" />
+          <EntitySetMapping Name="vwRegisteredDonors">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwRegisteredDonor">
+              <MappingFragment StoreEntitySet="vwRegisteredDonors">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
                 <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
-                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
                 <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="IncomingDate" ColumnName="IncomingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStatusInfoes">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwStatusInfo">
+              <MappingFragment StoreEntitySet="vwStatusInfo">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -49,5 +49,9 @@ namespace BBMS.Controllers
             return RedirectToAction("Index", "Login");
 
         }
+        public ActionResult login()
+        {
+            return View();
+        }
     }
 }
