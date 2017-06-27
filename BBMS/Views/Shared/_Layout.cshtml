@@ -3,14 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>  
+    <title>@ViewBag.Title - My ASP.NET Application</title> 
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> 
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" /> 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/datepicker.css" rel="stylesheet" />   
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />  
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,7 +20,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("BBMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="#">
+                    <img src="~/Content/logo.png" class="logo-img" />
+                </a>
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Admin"))
                     {
@@ -47,6 +51,20 @@
                         <li>
                             @Html.ActionLink("Collected Blood", "Collected", "Doctor")                           
                         </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Reports <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Donors", "Donors", "Report")</li>
+                                <li>@Html.ActionLink("Details Donors", "DetailedDonor", "Report")</li>
+                                <li>@Html.ActionLink("Blood Stock", "BloodStock", "Report")</li>
+                                <li>@Html.ActionLink("Infected Blood", "InfectedBlood", "Report")</li>
+                                <li>@Html.ActionLink("Outgoing Blood", "OutgoingBlood", "Report")</li>
+                                <li>@Html.ActionLink("User Entries", "UserEntries", "Report")</li>
+                            </ul>
+                        </li>
                     }                   
                </ul>              
             </div>
@@ -65,7 +83,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - BBMS All Rights Reserved.</p>
         </footer>
     </div>
 

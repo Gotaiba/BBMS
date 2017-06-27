@@ -5,19 +5,24 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="page-title">Applied Donors</h2>
 
 @using (Html.BeginForm())
 {
      <div class="form-horizontal">
-        <h4>Search</h4>
         <hr />
-        <div class="input-group">
-            <input type="text" name="NationalId" placeholder="Search..." class="form-control" aria-label="...">
-            <div class="input-group-btn">
-                <input type="submit" value="Search" class="btn btn-default" />
-            </div>
-        </div>
+         <div class="row">
+             <div class="col-md-3">
+                 <div class="input-group">
+                     <input type="text" name="NationalId" placeholder="Search..." class="form-control" aria-label="...">
+                     <span class="input-group-btn">                   
+                         <input type="submit" value="Search" class="btn btn-default" />
+                     </span>
+                 </div>
+             </div>
+         </div>
+         <br />
+         <br />      
     </div>
     <table class="table table-bordered table-hover">
         <tr>
@@ -37,7 +42,7 @@
                         <td>@item.Donate_Type               
                         </td>
                         <td>
-                            @Html.ActionLink("Donate", "QuestionForm",new {Donor_No=item.Donar_Id })
+                            <a href="@Url.Action("QuestionForm",new {Donor_No=item.Donar_Id })" class="btn btn-sm btn-success">Donate <i class="glyphicon glyphicon-heart" style="color:#b22c2c"></i></a>                        
                         </td>
                     </tr>
                 }

@@ -5,7 +5,7 @@
 @using BBMS.Models
 @using BBMS.Resources
 @model IEnumerable<Donor>
-<h2>Search Donor</h2>
+<h2 class="page-title">Search Donor</h2>
 
 @using (Html.BeginForm())
 {
@@ -20,6 +20,7 @@
             }
             else
             {
+@*< a href = "~/Views/Donor/Index.cshtml" > ~/ Views / Donor / Index.cshtml </ a >*@
                 <div class="alert alert-success show">@TempData["msg"].ToString()</div>
             }
         }
@@ -44,7 +45,7 @@
         </div>
         <div class="form-group">
             <div class="col-lg-offset-5 col-lg-7">
-                <input type="button" onKeyDown="if(event.keyCode == 13) GetData();" onclick="GetData();" value=@BBMS_String.Search id="btnGet" class="btn btn-primary btn-block" />               
+                <input type="button" onKeyDown="if (event.keyCode == 13) { GetData(); }" onclick="GetData();" value=@BBMS_String.Search id="btnGet" class="btn btn-primary btn-block" />               
             </div>
         </div>
     </div>
@@ -75,13 +76,25 @@
         $.getJSON("@Url.Action("SearchNId", "Donor")", { NatId : natid }, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
+                if (item.Donate_Type == 'V')
+                {
+                    item.Donate_Type = "Volunteer";
+                }
+                else
+                {
+                    item.Donate_Type = "For Paitent";
+                }
+                if (item.Patient_Name == null)
+                {
+                    item.Patient_Name = "N/A";
+                }
                 output.append("<tr>"
                     + "<td>" + item.First_Name + "</td>"
                     + "<td>" + item.Last_Name + "</td>"
                     + "<td>" + item.National_ID + "</td>"
                     + "<td>" + item.Donate_Type + "</td>"
                     + "<td>" + item.Patient_Name + "</td>"
-                    + "<td>" + "<a href=/Donor/DonateAgain?id="+item.Donar_Id +">Donate Again</a><td></tr>"
+                    + "<td>" + "<a class='btn btn-sm btn-primary' href=/Donor/DonateAgain?id=" + item.Donar_Id + ">Donate <i class='glyphicon glyphicon-heart'></i></a></td></tr>"
                     );
             }
         });

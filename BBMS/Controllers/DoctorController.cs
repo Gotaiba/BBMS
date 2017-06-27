@@ -62,23 +62,31 @@ namespace BBMS.Controllers
         [HttpPost]
         public ActionResult CollectBlood(Collected_Blood c)
         {
-            DateTime d = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-               c.Donor_No = GetUrlId(); 
-                c.User_No = int.Parse(Session["UserId"].ToString());
-                db.Collected_Blood.Add(c);
-                db.SaveChanges();
-                int id = db.Donor_Information.Where(x => x.IsDonate == 0 && x.Date == d && x.Donor_No == c.Donor_No).ToList().FirstOrDefault().DonorInfo_Id;
-                updateIsDonate(id);
-                if (c.Blood_Status_No)
+            if (c.Blood_Status_No == false)
+            {
+                if (string.IsNullOrEmpty(c.Reason))
                 {
-                    Incoming_Blood inc = new Incoming_Blood();
-                    inc.Collection_No = c.ColIection_Id;
-                    inc.Date = DateTime.Now;
-                    inc.ExpirationDate = DateTime.Now.AddYears(1);
-                    inc.User_No = int.Parse(Session["UserId"].ToString());
-                    db.Incoming_Blood.Add(inc);
-                    db.SaveChanges();
-                }            
+                    ModelState.AddModelError("Reason", "Indicate the Reason Please..!");
+                    ViewBag.Blood_Type_No = new SelectList(db.Blood_Type, "Blood_Type_Id", "Type_Name");
+                    return View();
+                }
+            }
+            DateTime d = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            c.Donor_No = GetUrlId();
+            c.User_No = int.Parse(Session["UserId"].ToString());
+            db.Collected_Blood.Add(c);
+            db.SaveChanges();
+            int id = db.Donor_Information.Where(x => x.IsDonate == 0 && x.Date == d && x.Donor_No == c.Donor_No).ToList().FirstOrDefault().DonorInfo_Id;
+            updateIsDonate(id);
+            if (c.Blood_Status_No)
+            {
+                Incoming_Blood inc = new Incoming_Blood();
+                inc.Collection_No = c.ColIection_Id;
+                inc.Date = DateTime.Now;
+                inc.User_No = int.Parse(Session["UserId"].ToString());
+                db.Incoming_Blood.Add(inc);
+                db.SaveChanges();
+            }
             return RedirectToAction("TodayDonor");
         }
         public ActionResult Collected()
@@ -102,7 +110,6 @@ namespace BBMS.Controllers
                     Incoming_Blood inc = new Incoming_Blood();
                     inc.Collection_No = v.Collection_No;
                     inc.Date = DateTime.Now;
-                    inc.ExpirationDate = DateTime.Now.AddYears(1);
                     inc.User_No= int.Parse(Session["UserId"].ToString());
                     db.Incoming_Blood.Add(inc);
                     db.SaveChanges();

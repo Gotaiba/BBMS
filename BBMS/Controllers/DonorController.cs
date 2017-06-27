@@ -46,7 +46,7 @@ namespace BBMS.Controllers
             }
             if (age < 20 || age > 50)
             {
-                ModelState.AddModelError("Date_of_Birth", "Donor is Either too Old or too Samll");
+                ModelState.AddModelError("Date_of_Birth", "Donor Age is Not Valid");
             }
             var chkid = (from q in db.Donors.ToList() where q.National_ID == d.National_ID select q);
             if (chkid.Count() == 0)
@@ -103,8 +103,7 @@ namespace BBMS.Controllers
             }
         }
         public ActionResult DonorStatus()
-        {
-            
+        {           
             return View(db.vwStatusInfoes.ToList());
         }
         public ActionResult Details(int? id)     
@@ -130,7 +129,7 @@ namespace BBMS.Controllers
             }
             if (age < 20 || age > 50)
             {
-                ModelState.AddModelError("Date_of_Birth", "Donor is Either too Old or too Samll");
+                ModelState.AddModelError("Date_of_Birth", "Donor Age is Not Valid");
             }
             if (ModelState.IsValid)
             {

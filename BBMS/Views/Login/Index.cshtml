@@ -18,25 +18,26 @@
             <img src="~/Content/logo.png" class="logo-img" />
         </div>
         <div class="form">        
-                @using (Html.BeginForm(new { htmlAttributes = new { @class = "login-form" } }))
+                @using (Html.BeginForm("Index","Login", new { htmlAttributes = new { @class = "login-form" }, ReturnUrl = Request.QueryString["ReturnUrl"] }))
                 {
                     <input type="text" name="Username" placeholder="username" />
                             <input name="Password" type="password" placeholder="password" />
-                            <button type="submit">login</button>
+                            <button type="submit">login</button>              
                 }
+            <br />
+            @{
+                if (ViewBag.data == null)
+                {
+                    <div class="alert alert-danger hide">@ViewBag.data</div>
+                }
+                else
+                {
+                    <div class="alert alert-danger show">@ViewBag.data</div>
+                }
+            }
         
         </div>
-    </div>
-    @{
-        if (ViewBag.data == null)
-        {
-            <div class="alert-danger hide">@ViewBag.data</div>
-        }
-        else
-        {
-            <div class="alert-danger show">@ViewBag.data</div>
-        }
-    }
+    </div>  
     
 </body>
 </html>

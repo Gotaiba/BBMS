@@ -5,7 +5,7 @@
 @using BBMS.Models
 @model IEnumerable<Donor_Information>
 
-<h2>TodayDonor</h2>
+<h2 class="page-title">Today's Donor</h2>
 
 <table class="table table-bordered table-condensed">
     <tr>
@@ -27,7 +27,7 @@
                     <td>@x.Donor.National_ID</td>
                     <td>@x.Donor.Donate_Type</td>
                     <td>
-                        @Html.ActionLink("Enter Blood Info", "CollectBlood", new { id = x.Donor_No })
+                        <a href="@Url.Action("CollectBlood",new { id = x.Donor_No })" class="btn btn-sm btn-success">Enter Blood Info <i class="glyphicon glyphicon-tint" style="color:#b22e2e"></i></a>                 
                     </td>
                 </tr>
             }

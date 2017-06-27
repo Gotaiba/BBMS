@@ -12,24 +12,24 @@ namespace BBMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class vwStatusInfo
+    public partial class vwIncomingInfo
     {
+        public System.DateTime IncomingDate { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
-        public bool Blood_Status_No { get; set; }
-        public string Reason { get; set; }
+        public string Donate_Type { get; set; }
+        public string National_ID { get; set; }
+        public string Patient_Name { get; set; }
+        public Nullable<System.DateTime> DonatingDate { get; set; }
         public string Type_Name { get; set; }
+        public double Hemo { get; set; }
         public string Username { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public bool IsUsed { get; set; }
+        public int Donar_Id { get; set; }
         public System.DateTime Date_of_Birth { get; set; }
         public string Gender { get; set; }
         public string Address { get; set; }
         public string Telephone { get; set; }
-        public string National_ID { get; set; }
         public string Email { get; set; }
-        public string Donate_Type { get; set; }
-        public string Patient_Name { get; set; }
-        public string Patient_Relation_Name { get; set; }
-        public int Donar_Id { get; set; }
     }
 }

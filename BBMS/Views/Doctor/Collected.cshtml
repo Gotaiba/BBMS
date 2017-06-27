@@ -3,7 +3,7 @@
     ViewBag.Title = "Collected";
 }
 
-<h2>Collected Blood</h2>
+<h2 class="page-title">Collected Blood</h2>
 @using BBMS.Models
 @model IEnumerable<Collected_Blood>
 
@@ -26,7 +26,7 @@
                         <td>@x.Donor.National_ID</td>
                         <td>@x.Reason</td>
                         <td>
-                            @Html.ActionLink("Enter Virus","Virus",new { ColId=x.ColIection_Id })
+                            <a href="@Url.Action("Virus",new {ColId=x.ColIection_Id })" class="btn btn-sm btn-danger">Enter Virus <i class="glyphicon glyphicon-flag"></i></a>                       
                         </td>
                     </tr>
                 }
@@ -34,7 +34,7 @@
             else
             {
                 <tr>
-                    <td colspan="4">
+                    <td colspan="5">
                         <div class="alert alert-info">--No Records Available--+</div>
                     </td>
                 </tr>

@@ -12,14 +12,13 @@ namespace BBMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Blood_Stock
+    public partial class vwUserEntry
     {
-        public int Storage_Id { get; set; }
-        public int Collection_No { get; set; }
-        public int Blood_Type_No { get; set; }
-        public System.DateTime Expiration_Date { get; set; }
-    
-        public virtual Blood_Type Blood_Type { get; set; }
-        public virtual Collected_Blood Collected_Blood { get; set; }
+        public string Username { get; set; }
+        public int Authority { get; set; }
+        public string User_Type_Name { get; set; }
+        public int Donar_Id { get; set; }
+        public int ColIection_Id { get; set; }
+        public int DonorInfo_Id { get; set; }
     }
 }

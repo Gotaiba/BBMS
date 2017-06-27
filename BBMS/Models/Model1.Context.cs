@@ -25,7 +25,6 @@ namespace BBMS.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Blood_Stock> Blood_Stock { get; set; }
         public virtual DbSet<Blood_Type> Blood_Type { get; set; }
         public virtual DbSet<Collected_Blood> Collected_Blood { get; set; }
         public virtual DbSet<Donor_Information> Donor_Information { get; set; }
@@ -39,5 +38,9 @@ namespace BBMS.Models
         public virtual DbSet<Virus> Viruses { get; set; }
         public virtual DbSet<vwRegisteredDonor> vwRegisteredDonors { get; set; }
         public virtual DbSet<vwStatusInfo> vwStatusInfoes { get; set; }
+        public virtual DbSet<vwIncomingInfo> vwIncomingInfoes { get; set; }
+        public virtual DbSet<vwOutgoingInfo> vwOutgoingInfoes { get; set; }
+        public virtual DbSet<vwUserEntry> vwUserEntries { get; set; }
+        public virtual DbSet<vwVisursInfo> vwVisursInfoes { get; set; }
     }
 }

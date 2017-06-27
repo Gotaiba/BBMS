@@ -27,8 +27,8 @@ namespace BBMS.Controllers
                 if (u.Count() > 0)
                 {
                     Session["UserId"]= u.FirstOrDefault().Id;
-                    FormsAuthentication.RedirectFromLoginPage(u.FirstOrDefault().Username, true,ReturnUrl);
-                    if (ReturnUrl==null)
+                    FormsAuthentication.RedirectFromLoginPage(u.FirstOrDefault().Username, true, ReturnUrl);
+                    if (ReturnUrl == null)
                     {
                         return RedirectToAction("Index", "Home");
                     }

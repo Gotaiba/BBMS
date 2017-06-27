@@ -16,7 +16,6 @@ namespace BBMS.Models
     {
         public int Incoming_Id { get; set; }
         public int Collection_No { get; set; }
-        public System.DateTime ExpirationDate { get; set; }
         public System.DateTime Date { get; set; }
         public bool IsUsed { get; set; }
         public int User_No { get; set; }

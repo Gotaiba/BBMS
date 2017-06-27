@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace BBMS.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: Home

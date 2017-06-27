@@ -4,22 +4,43 @@
     ViewBag.Title = "DonorStatus";
 }
 
-<h2>DonorStatus</h2>
+<h2 class="page-title">Donor Status</h2>
 
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
     <tr>
         <th>Name</th>
-        @*<th>Blood Type</th>
+        <th>Blood Type</th>
         <th>Status</th>
         <th>Reason</th>
-        <th>Username</th>*@
+        <th>Username</th>
     </tr>
     @{ 
-        foreach(var item in Model)
+        foreach (var item in Model)
         {
+            int index = item.Type_Name.ToString().IndexOf('+');
+            if(index<0)
+            {
+                index = 2;
+            }
+            string sub = item.Type_Name.ToString().Substring(0, index);
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.First_Name) </td>
-            </tr>
+                <td>@Html.DisplayFor(modelItem => item.First_Name) @Html.DisplayFor(modelItem => item.Last_Name)</td>
+                <td><img src="~/Content/BloodTypes/@(sub).png" /></td>
+                <td>
+                    @if(item.Blood_Status_No)
+                    {
+                       @:<div class="alert alert-success">Good <span class="glyphicon glyphicon-thumbs-up"></span></div>
+                    }
+                    else
+                    {
+                        @:<div class="alert alert-danger">Bad <span class="glyphicon glyphicon-thumbs-up"></span></div>
+                    }
+                        
+                </td>
+                 <td>@item.Reason</td>
+                <td>@item.Username</td>
+  
+              </tr>
         }
     }
 </table>
