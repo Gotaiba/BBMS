@@ -74,6 +74,7 @@ namespace BBMS.Controllers
             DateTime d = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             c.Donor_No = GetUrlId();
             c.User_No = int.Parse(Session["UserId"].ToString());
+            c.Date = DateTime.Now;
             db.Collected_Blood.Add(c);
             db.SaveChanges();
             int id = db.Donor_Information.Where(x => x.IsDonate == 0 && x.Date == d && x.Donor_No == c.Donor_No).ToList().FirstOrDefault().DonorInfo_Id;

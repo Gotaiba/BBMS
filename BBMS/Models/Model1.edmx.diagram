@@ -4,18 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8cd8da5420f3401493e9c80cc3c29b87" Name="Diagram1" ZoomLevel="54">
-        <EntityTypeShape EntityType="BBMSdbModel.Blood_Type" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.Collected_Blood" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.Donor_Information" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.Donor" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.Incoming_Blood" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.Outgoing_Blood" Width="1.5" PointX="11.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.Patient_Relation" Width="1.5" PointX="1.5" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.Patient" Width="1.5" PointX="9" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.User_Type" Width="1.5" PointX="1.5" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.User" Width="1.5" PointX="1.5" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BBMSdbModel.Virus" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
+      <Diagram DiagramId="8a736d0d4fe947489fbdf70259cfb02f" Name="Diagram1">
+        <EntityTypeShape EntityType="BBMSdbModel.Blood_Type" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Collected_Blood" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Donor_Information" Width="1.5" PointX="10.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Donor" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Incoming_Blood" Width="1.5" PointX="9.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Outgoing_Blood" Width="1.5" PointX="12.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Patient_Relation" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Patient" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.User_Type" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.User" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.Virus" Width="1.5" PointX="9.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.vwIncomingInfo" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.vwOutgoingInfo" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.vwRegisteredDonor" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.vwStatusInfo" Width="1.5" PointX="6.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.vwUserEntry" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBMSdbModel.vwVisursInfo" Width="1.5" PointX="13.75" PointY="10.75" IsExpanded="true" />
         <AssociationConnector Association="BBMSdbModel.FK_Collected_Blood_Blood_Type" ManuallyRouted="false" />
         <AssociationConnector Association="BBMSdbModel.FK_Collected_Blood_Donors" ManuallyRouted="false" />
         <AssociationConnector Association="BBMSdbModel.FK_Collected_Blood_Users" ManuallyRouted="false" />
@@ -24,16 +31,11 @@
         <AssociationConnector Association="BBMSdbModel.FK_Viruses_Collected_Blood" ManuallyRouted="false" />
         <AssociationConnector Association="BBMSdbModel.FK_Donor_Information_Donors" ManuallyRouted="false" />
         <AssociationConnector Association="BBMSdbModel.FK_Donor_Information_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="BBMSdbModel.FK_Donors_Patient_Relation" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Donors_Patients" ManuallyRouted="false" />
         <AssociationConnector Association="BBMSdbModel.FK_Donors_Users" ManuallyRouted="false" />
         <AssociationConnector Association="BBMSdbModel.FK_Outgoing_Blood_Patients" ManuallyRouted="false" />
+        <AssociationConnector Association="BBMSdbModel.FK_Patients_Patient_Relation" ManuallyRouted="false" />
         <AssociationConnector Association="BBMSdbModel.FK_Users_User_Type" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="BBMSdbModel.vwRegisteredDonor" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BBMSdbModel.vwStatusInfo" Width="1.5" PointX="10.75" PointY="10.75" />
-        <EntityTypeShape EntityType="BBMSdbModel.vwIncomingInfo" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="BBMSdbModel.vwOutgoingInfo" Width="1.5" PointX="4.375" PointY="11.75" />
-        <EntityTypeShape EntityType="BBMSdbModel.vwUserEntry" Width="1.5" PointX="13.375" PointY="0.75" />
-        <EntityTypeShape EntityType="BBMSdbModel.vwVisursInfo" Width="1.5" PointX="13.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

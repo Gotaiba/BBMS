@@ -35,7 +35,9 @@ namespace BBMS.Models
         public string National_ID { get; set; }
         public string Email { get; set; }
         public string Donate_Type { get; set; }
-        public string Patient_Name { get; set; }
         public Nullable<System.DateTime> Expr1 { get; set; }
+        public Nullable<byte> CanDonate { get; set; }
+        public string Patient_Relation_Name { get; set; }
+        public string Patiant_Name { get; set; }
     }
 }

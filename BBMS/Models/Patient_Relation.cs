@@ -17,13 +17,13 @@ namespace BBMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient_Relation()
         {
-            this.Donors = new HashSet<Donor>();
+            this.Patients = new HashSet<Patient>();
         }
     
         public int Patient_Relation_Id { get; set; }
         public string Patient_Relation_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donor> Donors { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; }
     }
 }

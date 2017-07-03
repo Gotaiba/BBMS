@@ -1,0 +1,86 @@
+﻿@using BBMS.Models
+@model List<vwStatusInfo>
+@{
+    ViewBag.Title = "Withdrawal";
+}
+
+<h2 class="page-title">Withdrawal</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @{
+                if (TempData["msg"] != null)
+                {
+                    if (TempData["msg"].ToString().Contains("This"))
+                    {
+                        <div class="alert alert-warning show">@TempData["msg"].ToString()</div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success show">@TempData["msg"].ToString()</div>
+                    }
+                }
+            }
+            <hr />
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Donor Name</th>
+                    <th>Patient Name</th>
+                    <th>Natioanl Id</th>
+                    <th>Donate Type</th>
+                    <th>Blood Type</th>
+                    <th>Date of Donation</th>
+                    <th></th>
+                </tr>
+                @{  
+                    if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            int index = item.Type_Name.ToString().IndexOf('+');
+                            if (index < 0)
+                            {
+                                index = 2;
+                            }
+                            string sub = item.Type_Name.ToString().Substring(0, index);
+                        <tr>
+                            <td>
+                                @item.First_Name @item.Last_Name
+                            </td>
+                            <td>
+                                @item.Patiant_Name
+                            </td>
+                            <td>
+                                @item.National_ID
+                            </td>
+                            <td>
+                                @if (item.Donate_Type == "V")
+                                {
+                                    <span>Volunteer</span>
+                                }
+                                else
+                                {
+                                    <span>For Patient</span>
+                                }
+                            </td>
+                            <td>
+                                <img src="~/Content/BloodTypes/@(sub).png" />
+                            </td>  
+                            <td>
+                                @item.Date
+                            </td>
+                            <td>
+                                @Html.Hidden("Collection", item.ColIection_Id)
+                                @Html.Hidden("Donor_No", item.Donar_Id)
+                                <input type="submit" class="btn btn-primary" value="Checkout" />
+                            </td>                          
+                        </tr>
+                            }
+                        }
+
+                    }
+
+            </table>
+        </div>
+}
