@@ -9,8 +9,7 @@
 
 @using (Html.BeginForm())
 {
-    <div class="form-horizontal">
-        <h4>Home</h4>
+    <div class="form-horizontal">       
     @{
         if (TempData["msg"] != null)
         {
@@ -20,7 +19,6 @@
             }
             else
             {
-@*< a href = "~/Views/Donor/Index.cshtml" > ~/ Views / Donor / Index.cshtml </ a >*@
                 <div class="alert alert-success show">@TempData["msg"].ToString()</div>
             }
         }
@@ -37,7 +35,7 @@
         <div class="form-group text-center">
             <label class="control-label col-lg-offset-3 col-md-2">@BBMS_String.NationalId:</label>
             <div class="col-lg-7 text-center">
-                <div id="loadingIcon" style="color: red; background-color: yellow; fontsize: larger; display: none;">
+                <div id="loadingIcon" style="color: red; background-color: yellow; display: none;">
                     Loading ....
                 </div>
                 <input type="text" class="form-control" name="NatId" id="NatId" placeholder=@BBMS_String.EnterNationalId />

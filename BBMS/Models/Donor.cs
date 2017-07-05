@@ -12,6 +12,7 @@ namespace BBMS.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     public partial class Donor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -41,8 +42,7 @@ namespace BBMS.Models
         public string Email { get; set; }
         [Required]
         public string Donate_Type { get; set; }
-        public string Patient_Name { get; set; }
-        public Nullable<int> Patient_Relation_No { get; set; }
+        public Nullable<int> Patient_No { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public int User_No { get; set; }
         public Nullable<byte> CanDonate { get; set; }
@@ -51,7 +51,7 @@ namespace BBMS.Models
         public virtual ICollection<Collected_Blood> Collected_Blood { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Donor_Information> Donor_Information { get; set; }
-        public virtual Patient_Relation Patient_Relation { get; set; }
+        public virtual Patient Patient { get; set; }
         public virtual User User { get; set; }
     }
 }

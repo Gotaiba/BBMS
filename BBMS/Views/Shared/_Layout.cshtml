@@ -39,11 +39,18 @@
                                 <li>@Html.ActionLink("Edit Donor", "EditDonor", "Donor")</li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Withdrawal <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("For Patient", "Withdrawal", "Donor")</li>
+                                <li>@Html.ActionLink("From Stock", "Outgoing", "Donor")</li>
+                            </ul>
+                        </li>
                     }
                     @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
                     {
                         <li>
-                            @Html.ActionLink("Applicable Donor", "Index", "Doctor")
+                            @Html.ActionLink("Applied Donor", "Index", "Doctor")
                         </li>
                         <li>
                             @Html.ActionLink("Today's Donor", "TodayDonor", "Doctor")                    

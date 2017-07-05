@@ -19,7 +19,6 @@ namespace BBMS.Models
         public string Last_Name { get; set; }
         public string Donate_Type { get; set; }
         public string National_ID { get; set; }
-        public string Patient_Name { get; set; }
         public Nullable<System.DateTime> DonatingDate { get; set; }
         public string Type_Name { get; set; }
         public double Hemo { get; set; }
@@ -31,5 +30,7 @@ namespace BBMS.Models
         public string Address { get; set; }
         public string Telephone { get; set; }
         public string Email { get; set; }
+        public string Patiant_Name { get; set; }
+        public string Patient_Relation_Name { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace BBMS.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     public partial class Donor_Information
     {
         public int DonorInfo_Id { get; set; }
@@ -21,16 +22,16 @@ namespace BBMS.Models
         public Nullable<bool> Blood_Diabetes { get; set; }
         public Nullable<bool> Heart_Disease { get; set; }
         public Nullable<bool> Medicine { get; set; }
+        public string Medicine_Text { get; set; }
         public Nullable<bool> Smoker { get; set; }
         public Nullable<bool> Other_Problems { get; set; }
         public string Other_Problems_Text { get; set; }
         [Required]
-        [Range(55,200)]
+        [Range(55, 200)]
         public int Weight { get; set; }
         public int User_No { get; set; }
         public System.DateTime Date { get; set; }
         public byte IsDonate { get; set; }
-        public string Medicine_Text { get; set; }
     
         public virtual Donor Donor { get; set; }
         public virtual User User { get; set; }
