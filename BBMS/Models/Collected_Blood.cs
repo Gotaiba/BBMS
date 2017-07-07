@@ -12,15 +12,15 @@ namespace BBMS.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Collected_Blood
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Collected_Blood()
         {
             this.Incoming_Blood = new HashSet<Incoming_Blood>();
-            this.Outgoing_Blood = new HashSet<Outgoing_Blood>();
             this.Viruses = new HashSet<Virus>();
+            this.Outgoing_Blood = new HashSet<Outgoing_Blood>();
         }
     
         public int ColIection_Id { get; set; }
@@ -31,7 +31,7 @@ namespace BBMS.Models
         public bool Blood_Status_No { get; set; }
         public string Reason { get; set; }
         [Required]
-        [Range(12, 17.5)]
+        [Range(12.0,17.5)]
         public double Hemo { get; set; }
         public int User_No { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
@@ -42,8 +42,8 @@ namespace BBMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Incoming_Blood> Incoming_Blood { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Outgoing_Blood> Outgoing_Blood { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Virus> Viruses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Outgoing_Blood> Outgoing_Blood { get; set; }
     }
 }

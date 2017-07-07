@@ -16,7 +16,7 @@ namespace BBMS.Models
     {
         public int Outgoing_Id { get; set; }
         public int Collection_No { get; set; }
-        public int Patient_No { get; set; }
+        public Nullable<int> Patient_No { get; set; }
         public System.DateTime Date { get; set; }
     
         public virtual Collected_Blood Collected_Blood { get; set; }

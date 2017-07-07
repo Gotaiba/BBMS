@@ -33,6 +33,15 @@ namespace BBMS.Controllers
         [HttpPost]
         public ActionResult QuestionForm(Donor_Information di)
         {
+            CheckSession();
+            if(di.Medicine==true)
+            {
+                if(di.Medicine_Text==null)
+                {
+                    ModelState.AddModelError("Medicine_Text", "Please fill the Medicine field");
+                    return View();
+                }
+            }
             if (ModelState.IsValid)
             {
                 if(di.Blood_pressure==true || di.Heart_Disease==true || di.Blood_Diabetes==true||di.Surgery==true)
@@ -62,6 +71,7 @@ namespace BBMS.Controllers
         [HttpPost]
         public ActionResult CollectBlood(Collected_Blood c)
         {
+            CheckSession();           
             if (c.Blood_Status_No == false)
             {
                 if (string.IsNullOrEmpty(c.Reason))
@@ -88,11 +98,11 @@ namespace BBMS.Controllers
                 db.Incoming_Blood.Add(inc);
                 db.SaveChanges();
             }
-            return RedirectToAction("TodayDonor");
+            return RedirectToAction("Collected");
         }
         public ActionResult Collected()
         {
-            return View(db.Collected_Blood.Where(c=> c.Blood_Status_No==false).ToList());
+            return View(db.Collected_Blood.ToList());
         }
 
         public ActionResult Virus(int? ColId)
@@ -102,6 +112,7 @@ namespace BBMS.Controllers
         [HttpPost]
         public ActionResult Virus(Virus v)
         {
+            CheckSession();
             if (ModelState.IsValid)
             {               
                 v.Collection_No = GetUrlId();
@@ -160,6 +171,14 @@ namespace BBMS.Controllers
             c.Blood_Status_No = true;
             db.Entry(c).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
+        }
+        [NonAction]
+        public void CheckSession()
+        {
+            if (Session["UserId"] == null)
+            {
+                RedirectToAction("Index", "Login");
+            }
         }
     }
 }

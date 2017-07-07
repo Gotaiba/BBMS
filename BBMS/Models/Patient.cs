@@ -27,8 +27,8 @@ namespace BBMS.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Donor> Donors { get; set; }
+        public virtual Patient_Relation Patient_Relation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Outgoing_Blood> Outgoing_Blood { get; set; }
-        public virtual Patient_Relation Patient_Relation { get; set; }
     }
 }

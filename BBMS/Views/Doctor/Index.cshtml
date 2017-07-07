@@ -39,7 +39,15 @@
                     <tr>
                         <td>@item.First_Name @item.Last_Name</td>
                         <td>@item.National_ID</td>
-                        <td>@item.Donate_Type               
+                        <td>
+                            @if (item.Donate_Type == "V")
+                        {
+                                <span>Volunteer</span>
+                            }
+                            else
+                            {
+                                <span>For Patient</span>
+                            }
                         </td>
                         <td>
                             <a href="@Url.Action("QuestionForm",new {Donor_No=item.Donar_Id })" class="btn btn-sm btn-success">Donate <i class="glyphicon glyphicon-heart" style="color:#b22c2c"></i></a>                        

@@ -30,7 +30,6 @@ namespace BBMS.Models
         public virtual DbSet<Donor_Information> Donor_Information { get; set; }
         public virtual DbSet<Donor> Donors { get; set; }
         public virtual DbSet<Incoming_Blood> Incoming_Blood { get; set; }
-        public virtual DbSet<Outgoing_Blood> Outgoing_Blood { get; set; }
         public virtual DbSet<Patient_Relation> Patient_Relation { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -40,8 +39,9 @@ namespace BBMS.Models
         public virtual DbSet<vwIncomingInfo> vwIncomingInfoes { get; set; }
         public virtual DbSet<vwOutgoingInfo> vwOutgoingInfoes { get; set; }
         public virtual DbSet<vwRegisteredDonor> vwRegisteredDonors { get; set; }
-        public virtual DbSet<vwStatusInfo> vwStatusInfoes { get; set; }
         public virtual DbSet<vwUserEntry> vwUserEntries { get; set; }
         public virtual DbSet<vwVisursInfo> vwVisursInfoes { get; set; }
+        public virtual DbSet<vwStatusInfo> vwStatusInfoes { get; set; }
+        public virtual DbSet<Outgoing_Blood> Outgoing_Blood { get; set; }
     }
 }

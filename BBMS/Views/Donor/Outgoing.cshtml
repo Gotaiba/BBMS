@@ -1,0 +1,100 @@
+﻿@using BBMS.Models
+@model List<vwStatusInfo>
+@{
+    ViewBag.Title = "Outgoing";
+}
+
+<h2 class="page-title">Outgoing Blood</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @{
+            if (ViewBag.msg == null)
+            {
+                <div class="alert alert-info hide">@ViewBag.msg</div>
+            }
+            else
+            {
+                <div class="alert alert-info show">@ViewBag.msg</div>
+            }
+        }
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="form-group">
+                @Html.Label("Blood Type",new { @class="control-lable col-md-2 text-right"})
+                <div class="col-md-3">
+                    @Html.DropDownList("BloodTypeNo",null,"[Select]",new { @class="form-control"})
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Search" name="Search" class="btn btn-default" />
+                </div>
+            </div>                     
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Donor Name</th>          
+            <th>Donate Type</th>
+            <th>Blood Type</th>
+            <th>Hemoglobin</th>
+            <th>Date of Donation</th>
+            <th></th>
+        </tr>
+        @{
+            if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    int index = item.Type_Name.ToString().IndexOf('+');
+                    if (index < 0)
+                    {
+                        index = 2;
+                    }
+                    string sub = item.Type_Name.ToString().Substring(0, index);
+                    <tr>
+                        <td>@item.First_Name @item.Last_Name</td>
+                        <td>
+                            @if (item.Donate_Type == "V")
+                        {
+                                <span>Volunteer</span>
+                            }
+                            else
+                            {
+                                <span>For Patient</span>
+                            }
+                        </td>
+                        <td>
+                            <img src="~/Content/BloodTypes/@(sub).png" />
+                        </td>
+                        <td>
+                            @item.Hemo
+                        </td>
+                        <td>
+                            @item.Date.Value.ToShortDateString()
+                        </td>
+                        <td>
+                            @Html.Hidden("CollectionId", item.ColIection_Id)
+                            @Html.Hidden("DonorNo", item.Donar_Id)
+                            <input type="submit" name="Checkout" class="btn btn-primary" value="Checkout" />
+                        </td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <div class="alert alert-info">-- No Available Data to Show --</div>
+                    </td>
+                </tr>
+            }
+        }
+    </table>  
+}
+
+

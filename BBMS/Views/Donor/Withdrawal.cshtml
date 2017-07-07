@@ -68,7 +68,7 @@
                                 <img src="~/Content/BloodTypes/@(sub).png" />
                             </td>  
                             <td>
-                                @item.Date
+                                @item.Date.Value.ToShortDateString()
                             </td>
                             <td>
                                 @Html.Hidden("Collection", item.ColIection_Id)

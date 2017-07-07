@@ -36,5 +36,10 @@ namespace BBMS.Models
         public int Authority { get; set; }
         public string Patient_Relation_Name { get; set; }
         public string Patiant_Name { get; set; }
+        public bool IsUsed { get; set; }
+        public int Incoming_Id { get; set; }
+        public System.DateTime IncDate { get; set; }
+        public double Hemo { get; set; }
+        public Nullable<System.DateTime> RegistrationDate { get; set; }
     }
 }

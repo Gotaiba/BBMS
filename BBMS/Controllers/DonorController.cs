@@ -37,6 +37,7 @@ namespace BBMS.Controllers
         [HttpPost]
         public ActionResult Create(Donor d,string Patient_Relation_No)
         {
+            CheckSession();
             int age = CalculateAge(d.Date_of_Birth);
             if (d.Donate_Type == "P")
             {
@@ -220,7 +221,7 @@ namespace BBMS.Controllers
         public ActionResult Withdrawal()
         {
             List<vwStatusInfo> vw = new List<vwStatusInfo>();
-            vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true).ToList();
+            vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true && x.IsUsed==false).ToList();
             return View(vw);
         }
         [HttpPost]
@@ -241,6 +242,52 @@ namespace BBMS.Controllers
             db.SaveChanges();
             TempData["msg"] = "Checkout Successdfully";
             return View();
+        }
+        public ActionResult Outgoing()
+        {
+            ViewBag.BloodTypeNo = new SelectList(db.Blood_Type, "Blood_Type_Id", "Type_Name");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Outgoing(string Checkout,string Search,int? BloodTypeNo, int? DonorNo,int? CollectionId)
+        {
+            ViewBag.BloodTypeNo = new SelectList(db.Blood_Type, "Blood_Type_Id", "Type_Name");
+            if (!string.IsNullOrEmpty(Search))
+            {
+                List<vwStatusInfo> vw = new List<vwStatusInfo>();
+                if(BloodTypeNo==null)
+                {
+                    vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true && x.IsUsed == false && x.Donate_Type=="V").ToList();
+                }
+                else
+                    vw =db.vwStatusInfoes.Where(x => x.Blood_Type_Id == BloodTypeNo && x.Blood_Status_No == true && x.IsUsed == false && x.Donate_Type == "V").ToList();
+                if(vw.Count()<1)
+                {
+                    ViewBag.msg = "No Available Blood for this Type !";
+                    return View();
+                }
+                else
+                {
+                    return View(vw);
+                }            
+            }
+            else
+            {
+                Incoming_Blood inc = new Incoming_Blood();
+                Donor donor = new Donor();
+                inc = GetIncominginfo(CollectionId);
+                donor = GetDonorInfo(DonorNo);
+                Outgoing_Blood outg = new Outgoing_Blood();
+                inc.IsUsed = true;
+                db.Entry(inc).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                outg.Collection_No = (int)CollectionId;             
+                outg.Date = DateTime.Now;
+                db.Outgoing_Blood.Add(outg);
+                db.SaveChanges();
+                ViewBag.msg = "Checkout Blood Completed Successfully";
+                return View();
+            }
         }
         public ActionResult Delete(int? id)
         {
@@ -274,16 +321,24 @@ namespace BBMS.Controllers
             db.SaveChanges();
         }
         [NonAction]
-        public Incoming_Blood GetIncominginfo(int collectionId)
+        public Incoming_Blood GetIncominginfo(int? collectionId)
         {
             Incoming_Blood inc = db.Incoming_Blood.Where(i => i.Collection_No == collectionId).FirstOrDefault();
             return inc;
         }
         [NonAction]
-        public Donor GetDonorInfo(int DonorId)
+        public Donor GetDonorInfo(int? DonorId)
         {
             Donor d = db.Donors.Find(DonorId);
             return d;
+        }
+        [NonAction]
+        public void CheckSession()
+        {
+            if (Session["UserId"] == null)
+            {
+                RedirectToAction("Index", "Login");
+            }
         }
     }
 }

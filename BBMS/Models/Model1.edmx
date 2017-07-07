@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BBMSdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BBMSdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Blood_Type">
           <Key>
             <PropertyRef Name="Blood_Type_Id" />
@@ -80,7 +80,7 @@
           </Key>
           <Property Name="Outgoing_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Collection_No" Type="int" Nullable="false" />
-          <Property Name="Patient_No" Type="int" Nullable="false" />
+          <Property Name="Patient_No" Type="int" />
           <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient_Relation">
@@ -272,8 +272,10 @@ warning 6002: The table/view 'BBMSdb.dbo.vwStatusInfo' does not have a primary k
             <PropertyRef Name="Blood_Type_Id" />
             <PropertyRef Name="Id" />
             <PropertyRef Name="Authority" />
-            <PropertyRef Name="Patient_Relation_Name" />
-            <PropertyRef Name="Patiant_Name" />
+            <PropertyRef Name="IsUsed" />
+            <PropertyRef Name="Incoming_Id" />
+            <PropertyRef Name="IncDate" />
+            <PropertyRef Name="Hemo" />
           </Key>
           <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -295,8 +297,13 @@ warning 6002: The table/view 'BBMSdb.dbo.vwStatusInfo' does not have a primary k
           <Property Name="Blood_Type_Id" Type="int" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Authority" Type="int" Nullable="false" />
-          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Patiant_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patiant_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
+          <Property Name="Incoming_Id" Type="int" Nullable="false" />
+          <Property Name="IncDate" Type="date" Nullable="false" />
+          <Property Name="Hemo" Type="float" Nullable="false" />
+          <Property Name="RegistrationDate" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BBMSdb.dbo.vwUserEntries' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -471,7 +478,7 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Outgoing_Blood_Patients">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
           <End Role="Outgoing_Blood" Type="Self.Outgoing_Blood" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
@@ -620,7 +627,12 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
     [vwStatusInfo].[Id] AS [Id], 
     [vwStatusInfo].[Authority] AS [Authority], 
     [vwStatusInfo].[Patient_Relation_Name] AS [Patient_Relation_Name], 
-    [vwStatusInfo].[Patiant_Name] AS [Patiant_Name]
+    [vwStatusInfo].[Patiant_Name] AS [Patiant_Name], 
+    [vwStatusInfo].[IsUsed] AS [IsUsed], 
+    [vwStatusInfo].[Incoming_Id] AS [Incoming_Id], 
+    [vwStatusInfo].[IncDate] AS [IncDate], 
+    [vwStatusInfo].[Hemo] AS [Hemo], 
+    [vwStatusInfo].[RegistrationDate] AS [RegistrationDate]
     FROM [dbo].[vwStatusInfo] AS [vwStatusInfo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwUserEntries" EntityType="Self.vwUserEntries" store:Type="Views" store:Schema="dbo">
@@ -715,8 +727,7 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
             <End Role="Viruses" EntitySet="Viruses" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BBMSdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -744,8 +755,8 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
           <NavigationProperty Name="Donor" Relationship="Self.FK_Collected_Blood_Donors" FromRole="Collected_Blood" ToRole="Donors" />
           <NavigationProperty Name="User" Relationship="Self.FK_Collected_Blood_Users" FromRole="Collected_Blood" ToRole="Users" />
           <NavigationProperty Name="Incoming_Blood" Relationship="Self.FK_Incoming_Blood_Collected_Blood" FromRole="Collected_Blood" ToRole="Incoming_Blood" />
-          <NavigationProperty Name="Outgoing_Blood" Relationship="Self.FK_Outgoing_Blood_Collected_Blood" FromRole="Collected_Blood" ToRole="Outgoing_Blood" />
           <NavigationProperty Name="Viruses" Relationship="Self.FK_Viruses_Collected_Blood" FromRole="Collected_Blood" ToRole="Viruses" />
+          <NavigationProperty Name="Outgoing_Blood" Relationship="BBMSdbModel.FK_Outgoing_Blood_Collected_Blood" FromRole="Collected_Blood" ToRole="Outgoing_Blood" />
         </EntityType>
         <EntityType Name="Donor_Information">
           <Key>
@@ -803,17 +814,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
           <Property Name="User_No" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Incoming_Blood_Collected_Blood" FromRole="Incoming_Blood" ToRole="Collected_Blood" />
         </EntityType>
-        <EntityType Name="Outgoing_Blood">
-          <Key>
-            <PropertyRef Name="Outgoing_Id" />
-          </Key>
-          <Property Name="Outgoing_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Collection_No" Type="Int32" Nullable="false" />
-          <Property Name="Patient_No" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Outgoing_Blood_Collected_Blood" FromRole="Outgoing_Blood" ToRole="Collected_Blood" />
-          <NavigationProperty Name="Patient" Relationship="Self.FK_Outgoing_Blood_Patients" FromRole="Outgoing_Blood" ToRole="Patients" />
-        </EntityType>
         <EntityType Name="Patient_Relation">
           <Key>
             <PropertyRef Name="Patient_Relation_Id" />
@@ -830,8 +830,8 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
           <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Patient_Relation_No" Type="Int32" />
           <NavigationProperty Name="Donors" Relationship="Self.FK_Donors_Patients" FromRole="Patients" ToRole="Donors" />
-          <NavigationProperty Name="Outgoing_Blood" Relationship="Self.FK_Outgoing_Blood_Patients" FromRole="Patients" ToRole="Outgoing_Blood" />
           <NavigationProperty Name="Patient_Relation" Relationship="Self.FK_Patients_Patient_Relation" FromRole="Patients" ToRole="Patient_Relation" />
+          <NavigationProperty Name="Outgoing_Blood" Relationship="BBMSdbModel.FK_Outgoing_Blood_Patients" FromRole="Patient" ToRole="Outgoing_Blood" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -988,49 +988,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
           <Property Name="Donar_Id" Type="Int32" Nullable="false" />
           <Property Name="User_No" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="vwStatusInfo">
-          <Key>
-            <PropertyRef Name="First_Name" />
-            <PropertyRef Name="Last_Name" />
-            <PropertyRef Name="Blood_Status_No" />
-            <PropertyRef Name="Type_Name" />
-            <PropertyRef Name="Username" />
-            <PropertyRef Name="Date_of_Birth" />
-            <PropertyRef Name="Gender" />
-            <PropertyRef Name="Telephone" />
-            <PropertyRef Name="National_ID" />
-            <PropertyRef Name="Donate_Type" />
-            <PropertyRef Name="Donar_Id" />
-            <PropertyRef Name="ColIection_Id" />
-            <PropertyRef Name="Blood_Type_Id" />
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Authority" />
-            <PropertyRef Name="Patient_Relation_Name" />
-            <PropertyRef Name="Patiant_Name" />
-          </Key>
-          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
-          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Telephone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Donar_Id" Type="Int32" Nullable="false" />
-          <Property Name="CanDonate" Type="Byte" />
-          <Property Name="ColIection_Id" Type="Int32" Nullable="false" />
-          <Property Name="Blood_Type_Id" Type="Int32" Nullable="false" />
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Authority" Type="Int32" Nullable="false" />
-          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="vwUserEntry">
           <Key>
             <PropertyRef Name="Username" />
@@ -1139,18 +1096,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Outgoing_Blood_Collected_Blood">
-          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="1" />
-          <End Role="Outgoing_Blood" Type="Self.Outgoing_Blood" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Collected_Blood">
-              <PropertyRef Name="ColIection_Id" />
-            </Principal>
-            <Dependent Role="Outgoing_Blood">
-              <PropertyRef Name="Collection_No" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Viruses_Collected_Blood">
           <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="1" />
           <End Role="Viruses" Type="Self.Virus" Multiplicity="*" />
@@ -1211,18 +1156,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Outgoing_Blood_Patients">
-          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
-          <End Role="Outgoing_Blood" Type="Self.Outgoing_Blood" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patients">
-              <PropertyRef Name="Patiant_Id" />
-            </Principal>
-            <Dependent Role="Outgoing_Blood">
-              <PropertyRef Name="Patient_No" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Patients_Patient_Relation">
           <End Role="Patient_Relation" Type="Self.Patient_Relation" Multiplicity="0..1" />
           <End Role="Patients" Type="Self.Patient" Multiplicity="*" />
@@ -1253,7 +1186,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
           <EntitySet Name="Donor_Information" EntityType="Self.Donor_Information" />
           <EntitySet Name="Donors" EntityType="Self.Donor" />
           <EntitySet Name="Incoming_Blood" EntityType="Self.Incoming_Blood" />
-          <EntitySet Name="Outgoing_Blood" EntityType="Self.Outgoing_Blood" />
           <EntitySet Name="Patient_Relation" EntityType="Self.Patient_Relation" />
           <EntitySet Name="Patients" EntityType="Self.Patient" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -1263,7 +1195,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
           <EntitySet Name="vwIncomingInfoes" EntityType="Self.vwIncomingInfo" />
           <EntitySet Name="vwOutgoingInfoes" EntityType="Self.vwOutgoingInfo" />
           <EntitySet Name="vwRegisteredDonors" EntityType="Self.vwRegisteredDonor" />
-          <EntitySet Name="vwStatusInfoes" EntityType="Self.vwStatusInfo" />
           <EntitySet Name="vwUserEntries" EntityType="Self.vwUserEntry" />
           <EntitySet Name="vwVisursInfoes" EntityType="Self.vwVisursInfo" />
           <AssociationSet Name="FK_Collected_Blood_Blood_Type" Association="Self.FK_Collected_Blood_Blood_Type">
@@ -1281,10 +1212,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
           <AssociationSet Name="FK_Incoming_Blood_Collected_Blood" Association="Self.FK_Incoming_Blood_Collected_Blood">
             <End Role="Collected_Blood" EntitySet="Collected_Blood" />
             <End Role="Incoming_Blood" EntitySet="Incoming_Blood" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Outgoing_Blood_Collected_Blood" Association="Self.FK_Outgoing_Blood_Collected_Blood">
-            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
-            <End Role="Outgoing_Blood" EntitySet="Outgoing_Blood" />
           </AssociationSet>
           <AssociationSet Name="FK_Viruses_Collected_Blood" Association="Self.FK_Viruses_Collected_Blood">
             <End Role="Collected_Blood" EntitySet="Collected_Blood" />
@@ -1306,10 +1233,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
             <End Role="Users" EntitySet="Users" />
             <End Role="Donors" EntitySet="Donors" />
           </AssociationSet>
-          <AssociationSet Name="FK_Outgoing_Blood_Patients" Association="Self.FK_Outgoing_Blood_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="Outgoing_Blood" EntitySet="Outgoing_Blood" />
-          </AssociationSet>
           <AssociationSet Name="FK_Patients_Patient_Relation" Association="Self.FK_Patients_Patient_Relation">
             <End Role="Patient_Relation" EntitySet="Patient_Relation" />
             <End Role="Patients" EntitySet="Patients" />
@@ -1318,7 +1241,102 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
             <End Role="User_Type" EntitySet="User_Type" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="vwStatusInfoes" EntityType="BBMSdbModel.vwStatusInfo" />
+          <EntitySet Name="Outgoing_Blood" EntityType="BBMSdbModel.Outgoing_Blood" />
+          <AssociationSet Name="FK_Outgoing_Blood_Collected_Blood" Association="BBMSdbModel.FK_Outgoing_Blood_Collected_Blood">
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+            <End Role="Outgoing_Blood" EntitySet="Outgoing_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Outgoing_Blood_Patients" Association="BBMSdbModel.FK_Outgoing_Blood_Patients">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Outgoing_Blood" EntitySet="Outgoing_Blood" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="vwStatusInfo">
+          <Key>
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="Blood_Type_Id" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Authority" />
+            <PropertyRef Name="IsUsed" />
+            <PropertyRef Name="Incoming_Id" />
+            <PropertyRef Name="IncDate" />
+            <PropertyRef Name="Hemo" />
+          </Key>
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="National_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Donate_Type" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" />
+          <Property Name="CanDonate" Type="Byte" />
+          <Property Name="ColIection_Id" Type="Int32" Nullable="false" />
+          <Property Name="Blood_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Authority" Type="Int32" Nullable="false" />
+          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <Property Name="Incoming_Id" Type="Int32" Nullable="false" />
+          <Property Name="IncDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hemo" Type="Double" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Outgoing_Blood">
+          <Key>
+            <PropertyRef Name="Outgoing_Id" />
+          </Key>
+          <Property Name="Outgoing_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Collection_No" Type="Int32" Nullable="false" />
+          <Property Name="Patient_No" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Collected_Blood" Relationship="BBMSdbModel.FK_Outgoing_Blood_Collected_Blood" FromRole="Outgoing_Blood" ToRole="Collected_Blood" />
+          <NavigationProperty Name="Patient" Relationship="BBMSdbModel.FK_Outgoing_Blood_Patients" FromRole="Outgoing_Blood" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_Outgoing_Blood_Collected_Blood">
+          <End Type="BBMSdbModel.Collected_Blood" Role="Collected_Blood" Multiplicity="1" />
+          <End Type="BBMSdbModel.Outgoing_Blood" Role="Outgoing_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collected_Blood">
+              <PropertyRef Name="ColIection_Id" />
+            </Principal>
+            <Dependent Role="Outgoing_Blood">
+              <PropertyRef Name="Collection_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Outgoing_Blood_Patients">
+          <End Type="BBMSdbModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="BBMSdbModel.Outgoing_Blood" Role="Outgoing_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patiant_Id" />
+            </Principal>
+            <Dependent Role="Outgoing_Blood">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1396,16 +1414,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
                 <ScalarProperty Name="User_No" ColumnName="User_No" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Outgoing_Blood">
-            <EntityTypeMapping TypeName="BBMSdbModel.Outgoing_Blood">
-              <MappingFragment StoreEntitySet="Outgoing_Blood">
-                <ScalarProperty Name="Outgoing_Id" ColumnName="Outgoing_Id" />
-                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
-                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1541,34 +1549,6 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwStatusInfoes">
-            <EntityTypeMapping TypeName="BBMSdbModel.vwStatusInfo">
-              <MappingFragment StoreEntitySet="vwStatusInfo">
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
-                <ScalarProperty Name="Reason" ColumnName="Reason" />
-                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
-                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
-                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
-                <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
-                <ScalarProperty Name="Blood_Type_Id" ColumnName="Blood_Type_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Authority" ColumnName="Authority" />
-                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
-                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwUserEntries">
             <EntityTypeMapping TypeName="BBMSdbModel.vwUserEntry">
               <MappingFragment StoreEntitySet="vwUserEntries">
@@ -1609,6 +1589,49 @@ warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary k
                 <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
                 <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
                 <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStatusInfoes">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwStatusInfo">
+              <MappingFragment StoreEntitySet="vwStatusInfo">
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Hemo" ColumnName="Hemo" />
+                <ScalarProperty Name="IncDate" ColumnName="IncDate" />
+                <ScalarProperty Name="Incoming_Id" ColumnName="Incoming_Id" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
+                <ScalarProperty Name="Authority" ColumnName="Authority" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Blood_Type_Id" ColumnName="Blood_Type_Id" />
+                <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
+                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outgoing_Blood">
+            <EntityTypeMapping TypeName="BBMSdbModel.Outgoing_Blood">
+              <MappingFragment StoreEntitySet="Outgoing_Blood">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
+                <ScalarProperty Name="Outgoing_Id" ColumnName="Outgoing_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

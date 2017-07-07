@@ -25,7 +25,17 @@
                     <td>@x.Donor.First_Name</td>
                     <td>@x.Donor.Last_Name</td>
                     <td>@x.Donor.National_ID</td>
-                    <td>@x.Donor.Donate_Type</td>
+                    <td>
+                        @if (x.Donor.Donate_Type == "V")
+                        {
+                            <span>Volunteer</span>
+                        }
+                        else
+                        {
+                            <span>For Patient</span>
+                        }
+                    </td>
+
                     <td>
                         <a href="@Url.Action("CollectBlood",new { id = x.Donor_No })" class="btn btn-sm btn-success">Enter Blood Info <i class="glyphicon glyphicon-tint" style="color:#b22e2e"></i></a>                 
                     </td>

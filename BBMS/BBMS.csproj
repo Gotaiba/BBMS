@@ -288,6 +288,7 @@
     <Content Include="Views\Donor\DonorStatus.cshtml" />
     <Content Include="Views\Report\Donors.cshtml" />
     <Content Include="Views\Donor\Withdrawal.cshtml" />
+    <Content Include="Views\Donor\Outgoing.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
