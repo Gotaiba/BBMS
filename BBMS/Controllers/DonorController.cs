@@ -240,7 +240,7 @@ namespace BBMS.Controllers
             outg.Date = DateTime.Now;
             db.Outgoing_Blood.Add(outg);
             db.SaveChanges();
-            TempData["msg"] = "Checkout Successdfully";
+            TempData["msg"] = "Checkout Successfully";
             return View();
         }
         public ActionResult Outgoing()
@@ -249,7 +249,7 @@ namespace BBMS.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Outgoing(string Checkout,string Search,int? BloodTypeNo, int? DonorNo,int? CollectionId)
+        public ActionResult Outgoing(string Checkout,string Search,int? BloodTypeNo, int? DonorNo, int? CollectionId)
         {
             ViewBag.BloodTypeNo = new SelectList(db.Blood_Type, "Blood_Type_Id", "Type_Name");
             if (!string.IsNullOrEmpty(Search))
@@ -285,7 +285,7 @@ namespace BBMS.Controllers
                 outg.Date = DateTime.Now;
                 db.Outgoing_Blood.Add(outg);
                 db.SaveChanges();
-                ViewBag.msg = "Checkout Blood Completed Successfully";
+                ViewBag.msg = "Checkout Successfully";
                 return View();
             }
         }

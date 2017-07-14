@@ -19,7 +19,6 @@ namespace BBMS.Models
         public bool Blood_Status_No { get; set; }
         public string Reason { get; set; }
         public string Type_Name { get; set; }
-        public string Username { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public System.DateTime Date_of_Birth { get; set; }
         public string Gender { get; set; }
@@ -32,8 +31,6 @@ namespace BBMS.Models
         public Nullable<byte> CanDonate { get; set; }
         public int ColIection_Id { get; set; }
         public int Blood_Type_Id { get; set; }
-        public int Id { get; set; }
-        public int Authority { get; set; }
         public string Patient_Relation_Name { get; set; }
         public string Patiant_Name { get; set; }
         public bool IsUsed { get; set; }
