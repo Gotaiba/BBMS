@@ -103,3 +103,7 @@ footer{
     border-radius: 5px;
     color: #fff;
 }
+.export-btn{
+        float: right;
+    margin-bottom: 10px;
+}

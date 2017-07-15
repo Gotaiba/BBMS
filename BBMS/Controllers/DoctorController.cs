@@ -12,7 +12,7 @@ namespace BBMS.Controllers
         // GET: Doctor
         BBMSdbEntities db = new BBMSdbEntities();
         public ActionResult Index()
-        {                   
+        {                  
             return View(db.Donors.OrderByDescending(o => o.Donar_Id).Where(x=> x.CanDonate==1).ToList());
         }
         [HttpPost]
@@ -115,10 +115,10 @@ namespace BBMS.Controllers
             CheckSession();
             if (ModelState.IsValid)
             {               
-                v.Collection_No = GetUrlId();
-                UpdateBloodStatus(v.Collection_No);
+                v.Collection_No = GetUrlId();               
                 if(v.HBV==false && v.HCV==false && v.HIV==false && v.VDRL==false)
                 {
+                    UpdateBloodStatus(v.Collection_No);
                     Incoming_Blood inc = new Incoming_Blood();
                     inc.Collection_No = v.Collection_No;
                     inc.Date = DateTime.Now;

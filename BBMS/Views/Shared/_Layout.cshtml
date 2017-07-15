@@ -40,7 +40,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Withdrawal <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Transfer <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("For Patient", "Withdrawal", "Donor")</li>
                                 <li>@Html.ActionLink("From Stock", "Outgoing", "Donor")</li>
@@ -64,11 +64,10 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Reports <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Donors", "Donors", "Report")</li>
+                                <li>@Html.ActionLink("Registered", "Donors", "Report")</li>
                                 <li>@Html.ActionLink("Details Donors", "DetailedDonor", "Report")</li>
                                 <li>@Html.ActionLink("Blood Stock", "BloodStock", "Report")</li>
-                                <li>@Html.ActionLink("Infected Blood", "InfectedBlood", "Report")</li>
-                                <li>@Html.ActionLink("Outgoing Blood", "OutgoingBlood", "Report")</li>
+                                <li>@Html.ActionLink("Infected Blood", "InfectedBlood", "Report")</li>                         
                                 <li>@Html.ActionLink("User Entries", "UserEntries", "Report")</li>
                             </ul>
                         </li>
