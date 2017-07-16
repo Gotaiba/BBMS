@@ -302,7 +302,6 @@
     <Content Include="Views\Report\BloodStock.cshtml" />
     <Content Include="Views\Report\DetailedDonor.cshtml" />
     <Content Include="Views\Report\InfectedBlood.cshtml" />
-    <Content Include="Views\Report\UserEntries.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
