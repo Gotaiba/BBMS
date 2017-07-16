@@ -137,9 +137,15 @@ namespace BBMS.Controllers
         {
             return View();
         }
-        public ActionResult UserEntries()
+        [HttpPost]
+        public ActionResult InfectedBlood(string Virus)
         {
-            return View();
-        }
+            string sql = "Select * from vwVisursInfo Where 1=1";
+            if(Virus!=null)
+            {
+                sql += " And " + Virus;
+            }           
+            return View(db.Database.Connection.Query(sql));
+        }       
     }
 }
