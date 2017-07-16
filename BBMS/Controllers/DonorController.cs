@@ -221,7 +221,7 @@ namespace BBMS.Controllers
         public ActionResult Withdrawal()
         {
             List<vwStatusInfo> vw = new List<vwStatusInfo>();
-            vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true && x.IsUsed==false).ToList();
+            vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true && x.IsUsed==false && x.Donate_Type=="P").ToList();
             return View(vw);
         }
         [HttpPost]
