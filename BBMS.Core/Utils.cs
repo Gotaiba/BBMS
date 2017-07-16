@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using BBMS.Models;
+using System.Text;
+using System.Threading.Tasks;
+using BBMS.Data;
 
-namespace BBMS
+namespace BBMS.Core
 {
-    public class Util
+    public class Utils
     {
         BBMSdbEntities db = new BBMSdbEntities();
         public Boolean HasVirus(int collectionId)
@@ -23,5 +24,4 @@ namespace BBMS
             }
         }
     }
-
 }

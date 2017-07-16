@@ -1,0 +1,1636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BBMSdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Blood_Type">
+          <Key>
+            <PropertyRef Name="Blood_Type_Id" />
+          </Key>
+          <Property Name="Blood_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Collected_Blood">
+          <Key>
+            <PropertyRef Name="ColIection_Id" />
+          </Key>
+          <Property Name="ColIection_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Donor_No" Type="int" Nullable="false" />
+          <Property Name="Blood_Type_No" Type="int" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="bit" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Hemo" Type="float" Nullable="false" />
+          <Property Name="User_No" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Donor_Information">
+          <Key>
+            <PropertyRef Name="DonorInfo_Id" />
+          </Key>
+          <Property Name="DonorInfo_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Donor_No" Type="int" Nullable="false" />
+          <Property Name="Surgery" Type="bit" />
+          <Property Name="Blood_pressure" Type="bit" />
+          <Property Name="Blood_Diabetes" Type="bit" />
+          <Property Name="Heart_Disease" Type="bit" />
+          <Property Name="Medicine" Type="bit" />
+          <Property Name="Medicine_Text" Type="nvarchar" MaxLength="50" />
+          <Property Name="Smoker" Type="bit" />
+          <Property Name="Other_Problems" Type="bit" />
+          <Property Name="Other_Problems_Text" Type="nvarchar" MaxLength="50" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="User_No" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsDonate" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Donors">
+          <Key>
+            <PropertyRef Name="Donar_Id" />
+          </Key>
+          <Property Name="Donar_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="National_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Patient_No" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="User_No" Type="int" Nullable="false" />
+          <Property Name="CanDonate" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Incoming_Blood">
+          <Key>
+            <PropertyRef Name="Incoming_Id" />
+          </Key>
+          <Property Name="Incoming_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Collection_No" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
+          <Property Name="User_No" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Outgoing_Blood">
+          <Key>
+            <PropertyRef Name="Outgoing_Id" />
+          </Key>
+          <Property Name="Outgoing_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Collection_No" Type="int" Nullable="false" />
+          <Property Name="Patient_No" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient_Relation">
+          <Key>
+            <PropertyRef Name="Patient_Relation_Id" />
+          </Key>
+          <Property Name="Patient_Relation_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="Patiant_Id" />
+          </Key>
+          <Property Name="Patiant_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Patiant_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Relation_No" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Type_Name" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Authority" Type="int" Nullable="false" />
+          <Property Name="User_Type_No" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Viruses">
+          <Key>
+            <PropertyRef Name="Virus_Id" />
+          </Key>
+          <Property Name="Virus_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Collection_No" Type="int" Nullable="false" />
+          <Property Name="VDRL" Type="bit" />
+          <Property Name="HCV" Type="bit" />
+          <Property Name="HBV" Type="bit" />
+          <Property Name="HIV" Type="bit" />
+          <Property Name="User_No" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BBMSdb.dbo.vwIncomingInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwIncomingInfo">
+          <Key>
+            <PropertyRef Name="IncomingDate" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Hemo" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="IsUsed" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+          </Key>
+          <Property Name="IncomingDate" Type="date" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="National_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DonatingDate" Type="date" />
+          <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hemo" Type="float" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
+          <Property Name="Donar_Id" Type="int" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patiant_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BBMSdb.dbo.vwOutgoingInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwOutgoingInfo">
+          <Key>
+            <PropertyRef Name="Outgoing_Id" />
+            <PropertyRef Name="Patient_No" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="Hemo" />
+            <PropertyRef Name="Patiant_Name" />
+            <PropertyRef Name="Patient_Relation_Name" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="Blood_Type_No" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Expr3" />
+          </Key>
+          <Property Name="Outgoing_Id" Type="int" Nullable="false" />
+          <Property Name="Patient_No" Type="int" Nullable="false" />
+          <Property Name="Donar_Id" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="National_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="ColIection_Id" Type="int" Nullable="false" />
+          <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Expr1" Type="date" Nullable="false" />
+          <Property Name="Hemo" Type="float" Nullable="false" />
+          <Property Name="Patiant_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CanDonate" Type="tinyint" />
+          <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Blood_Type_No" Type="int" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="bit" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Expr2" Type="date" />
+          <Property Name="Expr3" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BBMSdb.dbo.vwRegisteredDonors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwRegisteredDonors">
+          <Key>
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="User_No" />
+            <PropertyRef Name="National_ID" />
+          </Key>
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="CanDonate" Type="tinyint" />
+          <Property Name="Patiant_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patiant_Id" Type="int" />
+          <Property Name="Date_of_Birth" Type="date" Nullable="false" />
+          <Property Name="Donar_Id" Type="int" Nullable="false" />
+          <Property Name="User_No" Type="int" Nullable="false" />
+          <Property Name="National_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BBMSdb.dbo.vwStatusInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStatusInfo">
+          <Key>
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="Blood_Type_Id" />
+            <PropertyRef Name="IsUsed" />
+            <PropertyRef Name="Incoming_Id" />
+            <PropertyRef Name="IncDate" />
+            <PropertyRef Name="Hemo" />
+          </Key>
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="bit" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Date_of_Birth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="National_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Donar_Id" Type="int" Nullable="false" />
+          <Property Name="CanDonate" Type="tinyint" />
+          <Property Name="ColIection_Id" Type="int" Nullable="false" />
+          <Property Name="Blood_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patiant_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
+          <Property Name="Incoming_Id" Type="int" Nullable="false" />
+          <Property Name="IncDate" Type="date" Nullable="false" />
+          <Property Name="Hemo" Type="float" Nullable="false" />
+          <Property Name="RegistrationDate" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BBMSdb.dbo.vwUserEntries' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwUserEntries">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Authority" />
+            <PropertyRef Name="User_Type_Name" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="DonorInfo_Id" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Authority" Type="int" Nullable="false" />
+          <Property Name="User_Type_Name" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Donar_Id" Type="int" Nullable="false" />
+          <Property Name="ColIection_Id" Type="int" Nullable="false" />
+          <Property Name="DonorInfo_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BBMSdb.dbo.vwVisursInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwVisursInfo">
+          <Key>
+            <PropertyRef Name="Virus_Id" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Hemo" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="Donate_Type" />
+          </Key>
+          <Property Name="VDRL" Type="bit" />
+          <Property Name="Virus_Id" Type="int" Nullable="false" />
+          <Property Name="HCV" Type="bit" />
+          <Property Name="HBV" Type="bit" />
+          <Property Name="HIV" Type="bit" />
+          <Property Name="ColIection_Id" Type="int" Nullable="false" />
+          <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="bit" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Hemo" Type="float" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Donar_Id" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="National_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Donate_Type" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Expr1" Type="date" />
+          <Property Name="CanDonate" Type="tinyint" />
+          <Property Name="Patient_Relation_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patiant_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Collected_Blood_Blood_Type">
+          <End Role="Blood_Type" Type="Self.Blood_Type" Multiplicity="1" />
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blood_Type">
+              <PropertyRef Name="Blood_Type_Id" />
+            </Principal>
+            <Dependent Role="Collected_Blood">
+              <PropertyRef Name="Blood_Type_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collected_Blood_Donors">
+          <End Role="Donors" Type="Self.Donors" Multiplicity="1" />
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donors">
+              <PropertyRef Name="Donar_Id" />
+            </Principal>
+            <Dependent Role="Collected_Blood">
+              <PropertyRef Name="Donor_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collected_Blood_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collected_Blood">
+              <PropertyRef Name="User_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_Information_Donors">
+          <End Role="Donors" Type="Self.Donors" Multiplicity="1" />
+          <End Role="Donor_Information" Type="Self.Donor_Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donors">
+              <PropertyRef Name="Donar_Id" />
+            </Principal>
+            <Dependent Role="Donor_Information">
+              <PropertyRef Name="Donor_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_Information_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Donor_Information" Type="Self.Donor_Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Donor_Information">
+              <PropertyRef Name="User_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donors_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Donors" Type="Self.Donors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="Patiant_Id" />
+            </Principal>
+            <Dependent Role="Donors">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donors_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Donors" Type="Self.Donors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Donors">
+              <PropertyRef Name="User_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Incoming_Blood_Collected_Blood">
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="1" />
+          <End Role="Incoming_Blood" Type="Self.Incoming_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collected_Blood">
+              <PropertyRef Name="ColIection_Id" />
+            </Principal>
+            <Dependent Role="Incoming_Blood">
+              <PropertyRef Name="Collection_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Outgoing_Blood_Collected_Blood">
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="1" />
+          <End Role="Outgoing_Blood" Type="Self.Outgoing_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collected_Blood">
+              <PropertyRef Name="ColIection_Id" />
+            </Principal>
+            <Dependent Role="Outgoing_Blood">
+              <PropertyRef Name="Collection_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Outgoing_Blood_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Outgoing_Blood" Type="Self.Outgoing_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="Patiant_Id" />
+            </Principal>
+            <Dependent Role="Outgoing_Blood">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Patient_Relation">
+          <End Role="Patient_Relation" Type="Self.Patient_Relation" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient_Relation">
+              <PropertyRef Name="Patient_Relation_Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="Patient_Relation_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_User_Type">
+          <End Role="User_Type" Type="Self.User_Type" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="User_Type_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Viruses_Collected_Blood">
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="1" />
+          <End Role="Viruses" Type="Self.Viruses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collected_Blood">
+              <PropertyRef Name="ColIection_Id" />
+            </Principal>
+            <Dependent Role="Viruses">
+              <PropertyRef Name="Collection_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BBMSdbModelStoreContainer">
+          <EntitySet Name="Blood_Type" EntityType="Self.Blood_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Collected_Blood" EntityType="Self.Collected_Blood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donor_Information" EntityType="Self.Donor_Information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donors" EntityType="Self.Donors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Incoming_Blood" EntityType="Self.Incoming_Blood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Outgoing_Blood" EntityType="Self.Outgoing_Blood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient_Relation" EntityType="Self.Patient_Relation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Type" EntityType="Self.User_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Viruses" EntityType="Self.Viruses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwIncomingInfo" EntityType="Self.vwIncomingInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwIncomingInfo].[IncomingDate] AS [IncomingDate], 
+    [vwIncomingInfo].[First_Name] AS [First_Name], 
+    [vwIncomingInfo].[Last_Name] AS [Last_Name], 
+    [vwIncomingInfo].[Donate_Type] AS [Donate_Type], 
+    [vwIncomingInfo].[National_ID] AS [National_ID], 
+    [vwIncomingInfo].[DonatingDate] AS [DonatingDate], 
+    [vwIncomingInfo].[Type_Name] AS [Type_Name], 
+    [vwIncomingInfo].[Hemo] AS [Hemo], 
+    [vwIncomingInfo].[Username] AS [Username], 
+    [vwIncomingInfo].[IsUsed] AS [IsUsed], 
+    [vwIncomingInfo].[Donar_Id] AS [Donar_Id], 
+    [vwIncomingInfo].[Date_of_Birth] AS [Date_of_Birth], 
+    [vwIncomingInfo].[Gender] AS [Gender], 
+    [vwIncomingInfo].[Address] AS [Address], 
+    [vwIncomingInfo].[Telephone] AS [Telephone], 
+    [vwIncomingInfo].[Email] AS [Email], 
+    [vwIncomingInfo].[Patiant_Name] AS [Patiant_Name], 
+    [vwIncomingInfo].[Patient_Relation_Name] AS [Patient_Relation_Name]
+    FROM [dbo].[vwIncomingInfo] AS [vwIncomingInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwOutgoingInfo" EntityType="Self.vwOutgoingInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwOutgoingInfo].[Outgoing_Id] AS [Outgoing_Id], 
+    [vwOutgoingInfo].[Patient_No] AS [Patient_No], 
+    [vwOutgoingInfo].[Donar_Id] AS [Donar_Id], 
+    [vwOutgoingInfo].[First_Name] AS [First_Name], 
+    [vwOutgoingInfo].[Last_Name] AS [Last_Name], 
+    [vwOutgoingInfo].[Date_of_Birth] AS [Date_of_Birth], 
+    [vwOutgoingInfo].[Gender] AS [Gender], 
+    [vwOutgoingInfo].[National_ID] AS [National_ID], 
+    [vwOutgoingInfo].[Date] AS [Date], 
+    [vwOutgoingInfo].[ColIection_Id] AS [ColIection_Id], 
+    [vwOutgoingInfo].[Type_Name] AS [Type_Name], 
+    [vwOutgoingInfo].[Expr1] AS [Expr1], 
+    [vwOutgoingInfo].[Hemo] AS [Hemo], 
+    [vwOutgoingInfo].[Patiant_Name] AS [Patiant_Name], 
+    [vwOutgoingInfo].[Patient_Relation_Name] AS [Patient_Relation_Name], 
+    [vwOutgoingInfo].[CanDonate] AS [CanDonate], 
+    [vwOutgoingInfo].[Donate_Type] AS [Donate_Type], 
+    [vwOutgoingInfo].[Email] AS [Email], 
+    [vwOutgoingInfo].[Blood_Type_No] AS [Blood_Type_No], 
+    [vwOutgoingInfo].[Blood_Status_No] AS [Blood_Status_No], 
+    [vwOutgoingInfo].[Reason] AS [Reason], 
+    [vwOutgoingInfo].[Expr2] AS [Expr2], 
+    [vwOutgoingInfo].[Expr3] AS [Expr3]
+    FROM [dbo].[vwOutgoingInfo] AS [vwOutgoingInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwRegisteredDonors" EntityType="Self.vwRegisteredDonors" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwRegisteredDonors].[First_Name] AS [First_Name], 
+    [vwRegisteredDonors].[Last_Name] AS [Last_Name], 
+    [vwRegisteredDonors].[Gender] AS [Gender], 
+    [vwRegisteredDonors].[Telephone] AS [Telephone], 
+    [vwRegisteredDonors].[Donate_Type] AS [Donate_Type], 
+    [vwRegisteredDonors].[Date] AS [Date], 
+    [vwRegisteredDonors].[CanDonate] AS [CanDonate], 
+    [vwRegisteredDonors].[Patiant_Name] AS [Patiant_Name], 
+    [vwRegisteredDonors].[Patient_Relation_Name] AS [Patient_Relation_Name], 
+    [vwRegisteredDonors].[Patiant_Id] AS [Patiant_Id], 
+    [vwRegisteredDonors].[Date_of_Birth] AS [Date_of_Birth], 
+    [vwRegisteredDonors].[Donar_Id] AS [Donar_Id], 
+    [vwRegisteredDonors].[User_No] AS [User_No], 
+    [vwRegisteredDonors].[National_ID] AS [National_ID]
+    FROM [dbo].[vwRegisteredDonors] AS [vwRegisteredDonors]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwStatusInfo" EntityType="Self.vwStatusInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStatusInfo].[First_Name] AS [First_Name], 
+    [vwStatusInfo].[Last_Name] AS [Last_Name], 
+    [vwStatusInfo].[Blood_Status_No] AS [Blood_Status_No], 
+    [vwStatusInfo].[Reason] AS [Reason], 
+    [vwStatusInfo].[Type_Name] AS [Type_Name], 
+    [vwStatusInfo].[Date] AS [Date], 
+    [vwStatusInfo].[Date_of_Birth] AS [Date_of_Birth], 
+    [vwStatusInfo].[Gender] AS [Gender], 
+    [vwStatusInfo].[Address] AS [Address], 
+    [vwStatusInfo].[Telephone] AS [Telephone], 
+    [vwStatusInfo].[National_ID] AS [National_ID], 
+    [vwStatusInfo].[Email] AS [Email], 
+    [vwStatusInfo].[Donate_Type] AS [Donate_Type], 
+    [vwStatusInfo].[Donar_Id] AS [Donar_Id], 
+    [vwStatusInfo].[CanDonate] AS [CanDonate], 
+    [vwStatusInfo].[ColIection_Id] AS [ColIection_Id], 
+    [vwStatusInfo].[Blood_Type_Id] AS [Blood_Type_Id], 
+    [vwStatusInfo].[Patient_Relation_Name] AS [Patient_Relation_Name], 
+    [vwStatusInfo].[Patiant_Name] AS [Patiant_Name], 
+    [vwStatusInfo].[IsUsed] AS [IsUsed], 
+    [vwStatusInfo].[Incoming_Id] AS [Incoming_Id], 
+    [vwStatusInfo].[IncDate] AS [IncDate], 
+    [vwStatusInfo].[Hemo] AS [Hemo], 
+    [vwStatusInfo].[RegistrationDate] AS [RegistrationDate]
+    FROM [dbo].[vwStatusInfo] AS [vwStatusInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwUserEntries" EntityType="Self.vwUserEntries" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwUserEntries].[Username] AS [Username], 
+    [vwUserEntries].[Authority] AS [Authority], 
+    [vwUserEntries].[User_Type_Name] AS [User_Type_Name], 
+    [vwUserEntries].[Donar_Id] AS [Donar_Id], 
+    [vwUserEntries].[ColIection_Id] AS [ColIection_Id], 
+    [vwUserEntries].[DonorInfo_Id] AS [DonorInfo_Id]
+    FROM [dbo].[vwUserEntries] AS [vwUserEntries]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwVisursInfo" EntityType="Self.vwVisursInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwVisursInfo].[VDRL] AS [VDRL], 
+    [vwVisursInfo].[Virus_Id] AS [Virus_Id], 
+    [vwVisursInfo].[HCV] AS [HCV], 
+    [vwVisursInfo].[HBV] AS [HBV], 
+    [vwVisursInfo].[HIV] AS [HIV], 
+    [vwVisursInfo].[ColIection_Id] AS [ColIection_Id], 
+    [vwVisursInfo].[Type_Name] AS [Type_Name], 
+    [vwVisursInfo].[Blood_Status_No] AS [Blood_Status_No], 
+    [vwVisursInfo].[Reason] AS [Reason], 
+    [vwVisursInfo].[Hemo] AS [Hemo], 
+    [vwVisursInfo].[Date] AS [Date], 
+    [vwVisursInfo].[Donar_Id] AS [Donar_Id], 
+    [vwVisursInfo].[First_Name] AS [First_Name], 
+    [vwVisursInfo].[Last_Name] AS [Last_Name], 
+    [vwVisursInfo].[Date_of_Birth] AS [Date_of_Birth], 
+    [vwVisursInfo].[Gender] AS [Gender], 
+    [vwVisursInfo].[Address] AS [Address], 
+    [vwVisursInfo].[Telephone] AS [Telephone], 
+    [vwVisursInfo].[National_ID] AS [National_ID], 
+    [vwVisursInfo].[Email] AS [Email], 
+    [vwVisursInfo].[Donate_Type] AS [Donate_Type], 
+    [vwVisursInfo].[Expr1] AS [Expr1], 
+    [vwVisursInfo].[CanDonate] AS [CanDonate], 
+    [vwVisursInfo].[Patient_Relation_Name] AS [Patient_Relation_Name], 
+    [vwVisursInfo].[Patiant_Name] AS [Patiant_Name]
+    FROM [dbo].[vwVisursInfo] AS [vwVisursInfo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Collected_Blood_Blood_Type" Association="Self.FK_Collected_Blood_Blood_Type">
+            <End Role="Blood_Type" EntitySet="Blood_Type" />
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collected_Blood_Donors" Association="Self.FK_Collected_Blood_Donors">
+            <End Role="Donors" EntitySet="Donors" />
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collected_Blood_Users" Association="Self.FK_Collected_Blood_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_Information_Donors" Association="Self.FK_Donor_Information_Donors">
+            <End Role="Donors" EntitySet="Donors" />
+            <End Role="Donor_Information" EntitySet="Donor_Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_Information_Users" Association="Self.FK_Donor_Information_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Donor_Information" EntitySet="Donor_Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donors_Patients" Association="Self.FK_Donors_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Donors" EntitySet="Donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donors_Users" Association="Self.FK_Donors_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Donors" EntitySet="Donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Incoming_Blood_Collected_Blood" Association="Self.FK_Incoming_Blood_Collected_Blood">
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+            <End Role="Incoming_Blood" EntitySet="Incoming_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Outgoing_Blood_Collected_Blood" Association="Self.FK_Outgoing_Blood_Collected_Blood">
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+            <End Role="Outgoing_Blood" EntitySet="Outgoing_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Outgoing_Blood_Patients" Association="Self.FK_Outgoing_Blood_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Outgoing_Blood" EntitySet="Outgoing_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Patient_Relation" Association="Self.FK_Patients_Patient_Relation">
+            <End Role="Patient_Relation" EntitySet="Patient_Relation" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_User_Type" Association="Self.FK_Users_User_Type">
+            <End Role="User_Type" EntitySet="User_Type" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Viruses_Collected_Blood" Association="Self.FK_Viruses_Collected_Blood">
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+            <End Role="Viruses" EntitySet="Viruses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BBMSdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Blood_Type">
+          <Key>
+            <PropertyRef Name="Blood_Type_Id" />
+          </Key>
+          <Property Name="Blood_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Collected_Blood_Blood_Type" FromRole="Blood_Type" ToRole="Collected_Blood" />
+        </EntityType>
+        <EntityType Name="Collected_Blood">
+          <Key>
+            <PropertyRef Name="ColIection_Id" />
+          </Key>
+          <Property Name="ColIection_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Donor_No" Type="Int32" Nullable="false" />
+          <Property Name="Blood_Type_No" Type="Int32" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hemo" Type="Double" Nullable="false" />
+          <Property Name="User_No" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Blood_Type" Relationship="Self.FK_Collected_Blood_Blood_Type" FromRole="Collected_Blood" ToRole="Blood_Type" />
+          <NavigationProperty Name="Donor" Relationship="Self.FK_Collected_Blood_Donors" FromRole="Collected_Blood" ToRole="Donors" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Collected_Blood_Users" FromRole="Collected_Blood" ToRole="Users" />
+          <NavigationProperty Name="Incoming_Blood" Relationship="Self.FK_Incoming_Blood_Collected_Blood" FromRole="Collected_Blood" ToRole="Incoming_Blood" />
+          <NavigationProperty Name="Outgoing_Blood" Relationship="Self.FK_Outgoing_Blood_Collected_Blood" FromRole="Collected_Blood" ToRole="Outgoing_Blood" />
+          <NavigationProperty Name="Viruses" Relationship="Self.FK_Viruses_Collected_Blood" FromRole="Collected_Blood" ToRole="Viruses" />
+        </EntityType>
+        <EntityType Name="Donor_Information">
+          <Key>
+            <PropertyRef Name="DonorInfo_Id" />
+          </Key>
+          <Property Name="DonorInfo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Donor_No" Type="Int32" Nullable="false" />
+          <Property Name="Surgery" Type="Boolean" />
+          <Property Name="Blood_pressure" Type="Boolean" />
+          <Property Name="Blood_Diabetes" Type="Boolean" />
+          <Property Name="Heart_Disease" Type="Boolean" />
+          <Property Name="Medicine" Type="Boolean" />
+          <Property Name="Medicine_Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Smoker" Type="Boolean" />
+          <Property Name="Other_Problems" Type="Boolean" />
+          <Property Name="Other_Problems_Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="User_No" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDonate" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Donor" Relationship="Self.FK_Donor_Information_Donors" FromRole="Donor_Information" ToRole="Donors" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Donor_Information_Users" FromRole="Donor_Information" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Donor">
+          <Key>
+            <PropertyRef Name="Donar_Id" />
+          </Key>
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Patient_No" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="User_No" Type="Int32" Nullable="false" />
+          <Property Name="CanDonate" Type="Byte" />
+          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Collected_Blood_Donors" FromRole="Donors" ToRole="Collected_Blood" />
+          <NavigationProperty Name="Donor_Information" Relationship="Self.FK_Donor_Information_Donors" FromRole="Donors" ToRole="Donor_Information" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Donors_Patients" FromRole="Donors" ToRole="Patients" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Donors_Users" FromRole="Donors" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Incoming_Blood">
+          <Key>
+            <PropertyRef Name="Incoming_Id" />
+          </Key>
+          <Property Name="Incoming_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Collection_No" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <Property Name="User_No" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Incoming_Blood_Collected_Blood" FromRole="Incoming_Blood" ToRole="Collected_Blood" />
+        </EntityType>
+        <EntityType Name="Outgoing_Blood">
+          <Key>
+            <PropertyRef Name="Outgoing_Id" />
+          </Key>
+          <Property Name="Outgoing_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Collection_No" Type="Int32" Nullable="false" />
+          <Property Name="Patient_No" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Outgoing_Blood_Collected_Blood" FromRole="Outgoing_Blood" ToRole="Collected_Blood" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Outgoing_Blood_Patients" FromRole="Outgoing_Blood" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Patient_Relation">
+          <Key>
+            <PropertyRef Name="Patient_Relation_Id" />
+          </Key>
+          <Property Name="Patient_Relation_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patients_Patient_Relation" FromRole="Patient_Relation" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Patiant_Id" />
+          </Key>
+          <Property Name="Patiant_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Relation_No" Type="Int32" />
+          <NavigationProperty Name="Donors" Relationship="Self.FK_Donors_Patients" FromRole="Patients" ToRole="Donors" />
+          <NavigationProperty Name="Outgoing_Blood" Relationship="Self.FK_Outgoing_Blood_Patients" FromRole="Patients" ToRole="Outgoing_Blood" />
+          <NavigationProperty Name="Patient_Relation" Relationship="Self.FK_Patients_Patient_Relation" FromRole="Patients" ToRole="Patient_Relation" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Type_Name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_User_Type" FromRole="User_Type" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Authority" Type="Int32" Nullable="false" />
+          <Property Name="User_Type_No" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Collected_Blood_Users" FromRole="Users" ToRole="Collected_Blood" />
+          <NavigationProperty Name="Donor_Information" Relationship="Self.FK_Donor_Information_Users" FromRole="Users" ToRole="Donor_Information" />
+          <NavigationProperty Name="Donors" Relationship="Self.FK_Donors_Users" FromRole="Users" ToRole="Donors" />
+          <NavigationProperty Name="User_Type" Relationship="Self.FK_Users_User_Type" FromRole="Users" ToRole="User_Type" />
+        </EntityType>
+        <EntityType Name="Virus">
+          <Key>
+            <PropertyRef Name="Virus_Id" />
+          </Key>
+          <Property Name="Virus_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Collection_No" Type="Int32" Nullable="false" />
+          <Property Name="VDRL" Type="Boolean" />
+          <Property Name="HCV" Type="Boolean" />
+          <Property Name="HBV" Type="Boolean" />
+          <Property Name="HIV" Type="Boolean" />
+          <Property Name="User_No" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Collected_Blood" Relationship="Self.FK_Viruses_Collected_Blood" FromRole="Viruses" ToRole="Collected_Blood" />
+        </EntityType>
+        <EntityType Name="vwIncomingInfo">
+          <Key>
+            <PropertyRef Name="IncomingDate" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Hemo" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="IsUsed" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+          </Key>
+          <Property Name="IncomingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DonatingDate" Type="DateTime" Precision="0" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Hemo" Type="Double" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwOutgoingInfo">
+          <Key>
+            <PropertyRef Name="Outgoing_Id" />
+            <PropertyRef Name="Patient_No" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="Hemo" />
+            <PropertyRef Name="Patiant_Name" />
+            <PropertyRef Name="Patient_Relation_Name" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="Blood_Type_No" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Expr3" />
+          </Key>
+          <Property Name="Outgoing_Id" Type="Int32" Nullable="false" />
+          <Property Name="Patient_No" Type="Int32" Nullable="false" />
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="ColIection_Id" Type="Int32" Nullable="false" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Expr1" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hemo" Type="Double" Nullable="false" />
+          <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CanDonate" Type="Byte" />
+          <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Blood_Type_No" Type="Int32" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Expr2" Type="DateTime" Precision="0" />
+          <Property Name="Expr3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwRegisteredDonor">
+          <Key>
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="User_No" />
+            <PropertyRef Name="National_ID" />
+          </Key>
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="CanDonate" Type="Byte" />
+          <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patiant_Id" Type="Int32" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" />
+          <Property Name="User_No" Type="Int32" Nullable="false" />
+          <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwStatusInfo">
+          <Key>
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="Donate_Type" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="Blood_Type_Id" />
+            <PropertyRef Name="IsUsed" />
+            <PropertyRef Name="Incoming_Id" />
+            <PropertyRef Name="IncDate" />
+            <PropertyRef Name="Hemo" />
+          </Key>
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" />
+          <Property Name="CanDonate" Type="Byte" />
+          <Property Name="ColIection_Id" Type="Int32" Nullable="false" />
+          <Property Name="Blood_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <Property Name="Incoming_Id" Type="Int32" Nullable="false" />
+          <Property Name="IncDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hemo" Type="Double" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="vwUserEntry">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Authority" />
+            <PropertyRef Name="User_Type_Name" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="DonorInfo_Id" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Authority" Type="Int32" Nullable="false" />
+          <Property Name="User_Type_Name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" />
+          <Property Name="ColIection_Id" Type="Int32" Nullable="false" />
+          <Property Name="DonorInfo_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwVisursInfo">
+          <Key>
+            <PropertyRef Name="Virus_Id" />
+            <PropertyRef Name="ColIection_Id" />
+            <PropertyRef Name="Type_Name" />
+            <PropertyRef Name="Blood_Status_No" />
+            <PropertyRef Name="Hemo" />
+            <PropertyRef Name="Donar_Id" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Date_of_Birth" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="National_ID" />
+            <PropertyRef Name="Donate_Type" />
+          </Key>
+          <Property Name="VDRL" Type="Boolean" />
+          <Property Name="Virus_Id" Type="Int32" Nullable="false" />
+          <Property Name="HCV" Type="Boolean" />
+          <Property Name="HBV" Type="Boolean" />
+          <Property Name="HIV" Type="Boolean" />
+          <Property Name="ColIection_Id" Type="Int32" Nullable="false" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Blood_Status_No" Type="Boolean" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hemo" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Donar_Id" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Donate_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Expr1" Type="DateTime" Precision="0" />
+          <Property Name="CanDonate" Type="Byte" />
+          <Property Name="Patient_Relation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patiant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Collected_Blood_Blood_Type">
+          <End Role="Blood_Type" Type="Self.Blood_Type" Multiplicity="1" />
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blood_Type">
+              <PropertyRef Name="Blood_Type_Id" />
+            </Principal>
+            <Dependent Role="Collected_Blood">
+              <PropertyRef Name="Blood_Type_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collected_Blood_Donors">
+          <End Role="Donors" Type="Self.Donor" Multiplicity="1" />
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donors">
+              <PropertyRef Name="Donar_Id" />
+            </Principal>
+            <Dependent Role="Collected_Blood">
+              <PropertyRef Name="Donor_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collected_Blood_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collected_Blood">
+              <PropertyRef Name="User_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Incoming_Blood_Collected_Blood">
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="1" />
+          <End Role="Incoming_Blood" Type="Self.Incoming_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collected_Blood">
+              <PropertyRef Name="ColIection_Id" />
+            </Principal>
+            <Dependent Role="Incoming_Blood">
+              <PropertyRef Name="Collection_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Outgoing_Blood_Collected_Blood">
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="1" />
+          <End Role="Outgoing_Blood" Type="Self.Outgoing_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collected_Blood">
+              <PropertyRef Name="ColIection_Id" />
+            </Principal>
+            <Dependent Role="Outgoing_Blood">
+              <PropertyRef Name="Collection_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Viruses_Collected_Blood">
+          <End Role="Collected_Blood" Type="Self.Collected_Blood" Multiplicity="1" />
+          <End Role="Viruses" Type="Self.Virus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collected_Blood">
+              <PropertyRef Name="ColIection_Id" />
+            </Principal>
+            <Dependent Role="Viruses">
+              <PropertyRef Name="Collection_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_Information_Donors">
+          <End Role="Donors" Type="Self.Donor" Multiplicity="1" />
+          <End Role="Donor_Information" Type="Self.Donor_Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donors">
+              <PropertyRef Name="Donar_Id" />
+            </Principal>
+            <Dependent Role="Donor_Information">
+              <PropertyRef Name="Donor_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_Information_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Donor_Information" Type="Self.Donor_Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Donor_Information">
+              <PropertyRef Name="User_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donors_Patients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="Donors" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="Patiant_Id" />
+            </Principal>
+            <Dependent Role="Donors">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donors_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Donors" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Donors">
+              <PropertyRef Name="User_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Outgoing_Blood_Patients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="Outgoing_Blood" Type="Self.Outgoing_Blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="Patiant_Id" />
+            </Principal>
+            <Dependent Role="Outgoing_Blood">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Patient_Relation">
+          <End Role="Patient_Relation" Type="Self.Patient_Relation" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient_Relation">
+              <PropertyRef Name="Patient_Relation_Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="Patient_Relation_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_User_Type">
+          <End Role="User_Type" Type="Self.User_Type" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="User_Type_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BBMSdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Blood_Type" EntityType="Self.Blood_Type" />
+          <EntitySet Name="Collected_Blood" EntityType="Self.Collected_Blood" />
+          <EntitySet Name="Donor_Information" EntityType="Self.Donor_Information" />
+          <EntitySet Name="Donors" EntityType="Self.Donor" />
+          <EntitySet Name="Incoming_Blood" EntityType="Self.Incoming_Blood" />
+          <EntitySet Name="Outgoing_Blood" EntityType="Self.Outgoing_Blood" />
+          <EntitySet Name="Patient_Relation" EntityType="Self.Patient_Relation" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="User_Type" EntityType="Self.User_Type" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Viruses" EntityType="Self.Virus" />
+          <EntitySet Name="vwIncomingInfoes" EntityType="Self.vwIncomingInfo" />
+          <EntitySet Name="vwOutgoingInfoes" EntityType="Self.vwOutgoingInfo" />
+          <EntitySet Name="vwRegisteredDonors" EntityType="Self.vwRegisteredDonor" />
+          <EntitySet Name="vwStatusInfoes" EntityType="Self.vwStatusInfo" />
+          <EntitySet Name="vwUserEntries" EntityType="Self.vwUserEntry" />
+          <EntitySet Name="vwVisursInfoes" EntityType="Self.vwVisursInfo" />
+          <AssociationSet Name="FK_Collected_Blood_Blood_Type" Association="Self.FK_Collected_Blood_Blood_Type">
+            <End Role="Blood_Type" EntitySet="Blood_Type" />
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collected_Blood_Donors" Association="Self.FK_Collected_Blood_Donors">
+            <End Role="Donors" EntitySet="Donors" />
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collected_Blood_Users" Association="Self.FK_Collected_Blood_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Incoming_Blood_Collected_Blood" Association="Self.FK_Incoming_Blood_Collected_Blood">
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+            <End Role="Incoming_Blood" EntitySet="Incoming_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Outgoing_Blood_Collected_Blood" Association="Self.FK_Outgoing_Blood_Collected_Blood">
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+            <End Role="Outgoing_Blood" EntitySet="Outgoing_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Viruses_Collected_Blood" Association="Self.FK_Viruses_Collected_Blood">
+            <End Role="Collected_Blood" EntitySet="Collected_Blood" />
+            <End Role="Viruses" EntitySet="Viruses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_Information_Donors" Association="Self.FK_Donor_Information_Donors">
+            <End Role="Donors" EntitySet="Donors" />
+            <End Role="Donor_Information" EntitySet="Donor_Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_Information_Users" Association="Self.FK_Donor_Information_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Donor_Information" EntitySet="Donor_Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donors_Patients" Association="Self.FK_Donors_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Donors" EntitySet="Donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donors_Users" Association="Self.FK_Donors_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Donors" EntitySet="Donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Outgoing_Blood_Patients" Association="Self.FK_Outgoing_Blood_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Outgoing_Blood" EntitySet="Outgoing_Blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Patient_Relation" Association="Self.FK_Patients_Patient_Relation">
+            <End Role="Patient_Relation" EntitySet="Patient_Relation" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_User_Type" Association="Self.FK_Users_User_Type">
+            <End Role="User_Type" EntitySet="User_Type" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BBMSdbModelStoreContainer" CdmEntityContainer="BBMSdbEntities">
+          <EntitySetMapping Name="Blood_Type">
+            <EntityTypeMapping TypeName="BBMSdbModel.Blood_Type">
+              <MappingFragment StoreEntitySet="Blood_Type">
+                <ScalarProperty Name="Blood_Type_Id" ColumnName="Blood_Type_Id" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collected_Blood">
+            <EntityTypeMapping TypeName="BBMSdbModel.Collected_Blood">
+              <MappingFragment StoreEntitySet="Collected_Blood">
+                <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
+                <ScalarProperty Name="Donor_No" ColumnName="Donor_No" />
+                <ScalarProperty Name="Blood_Type_No" ColumnName="Blood_Type_No" />
+                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Hemo" ColumnName="Hemo" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donor_Information">
+            <EntityTypeMapping TypeName="BBMSdbModel.Donor_Information">
+              <MappingFragment StoreEntitySet="Donor_Information">
+                <ScalarProperty Name="DonorInfo_Id" ColumnName="DonorInfo_Id" />
+                <ScalarProperty Name="Donor_No" ColumnName="Donor_No" />
+                <ScalarProperty Name="Surgery" ColumnName="Surgery" />
+                <ScalarProperty Name="Blood_pressure" ColumnName="Blood_pressure" />
+                <ScalarProperty Name="Blood_Diabetes" ColumnName="Blood_Diabetes" />
+                <ScalarProperty Name="Heart_Disease" ColumnName="Heart_Disease" />
+                <ScalarProperty Name="Medicine" ColumnName="Medicine" />
+                <ScalarProperty Name="Medicine_Text" ColumnName="Medicine_Text" />
+                <ScalarProperty Name="Smoker" ColumnName="Smoker" />
+                <ScalarProperty Name="Other_Problems" ColumnName="Other_Problems" />
+                <ScalarProperty Name="Other_Problems_Text" ColumnName="Other_Problems_Text" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsDonate" ColumnName="IsDonate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donors">
+            <EntityTypeMapping TypeName="BBMSdbModel.Donor">
+              <MappingFragment StoreEntitySet="Donors">
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incoming_Blood">
+            <EntityTypeMapping TypeName="BBMSdbModel.Incoming_Blood">
+              <MappingFragment StoreEntitySet="Incoming_Blood">
+                <ScalarProperty Name="Incoming_Id" ColumnName="Incoming_Id" />
+                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outgoing_Blood">
+            <EntityTypeMapping TypeName="BBMSdbModel.Outgoing_Blood">
+              <MappingFragment StoreEntitySet="Outgoing_Blood">
+                <ScalarProperty Name="Outgoing_Id" ColumnName="Outgoing_Id" />
+                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
+                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient_Relation">
+            <EntityTypeMapping TypeName="BBMSdbModel.Patient_Relation">
+              <MappingFragment StoreEntitySet="Patient_Relation">
+                <ScalarProperty Name="Patient_Relation_Id" ColumnName="Patient_Relation_Id" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="BBMSdbModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="Patiant_Id" ColumnName="Patiant_Id" />
+                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+                <ScalarProperty Name="Patient_Relation_No" ColumnName="Patient_Relation_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BBMSdbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Type">
+            <EntityTypeMapping TypeName="BBMSdbModel.User_Type">
+              <MappingFragment StoreEntitySet="User_Type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_Type_Name" ColumnName="User_Type_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BBMSdbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Authority" ColumnName="Authority" />
+                <ScalarProperty Name="User_Type_No" ColumnName="User_Type_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Viruses">
+            <EntityTypeMapping TypeName="BBMSdbModel.Virus">
+              <MappingFragment StoreEntitySet="Viruses">
+                <ScalarProperty Name="Virus_Id" ColumnName="Virus_Id" />
+                <ScalarProperty Name="Collection_No" ColumnName="Collection_No" />
+                <ScalarProperty Name="VDRL" ColumnName="VDRL" />
+                <ScalarProperty Name="HCV" ColumnName="HCV" />
+                <ScalarProperty Name="HBV" ColumnName="HBV" />
+                <ScalarProperty Name="HIV" ColumnName="HIV" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwIncomingInfoes">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwIncomingInfo">
+              <MappingFragment StoreEntitySet="vwIncomingInfo">
+                <ScalarProperty Name="IncomingDate" ColumnName="IncomingDate" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="DonatingDate" ColumnName="DonatingDate" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Hemo" ColumnName="Hemo" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwOutgoingInfoes">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwOutgoingInfo">
+              <MappingFragment StoreEntitySet="vwOutgoingInfo">
+                <ScalarProperty Name="Outgoing_Id" ColumnName="Outgoing_Id" />
+                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Hemo" ColumnName="Hemo" />
+                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
+                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
+                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Blood_Type_No" ColumnName="Blood_Type_No" />
+                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+                <ScalarProperty Name="Expr3" ColumnName="Expr3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwRegisteredDonors">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwRegisteredDonor">
+              <MappingFragment StoreEntitySet="vwRegisteredDonors">
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
+                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
+                <ScalarProperty Name="Patiant_Id" ColumnName="Patiant_Id" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="User_No" ColumnName="User_No" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStatusInfoes">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwStatusInfo">
+              <MappingFragment StoreEntitySet="vwStatusInfo">
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
+                <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
+                <ScalarProperty Name="Blood_Type_Id" ColumnName="Blood_Type_Id" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
+                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="Incoming_Id" ColumnName="Incoming_Id" />
+                <ScalarProperty Name="IncDate" ColumnName="IncDate" />
+                <ScalarProperty Name="Hemo" ColumnName="Hemo" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwUserEntries">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwUserEntry">
+              <MappingFragment StoreEntitySet="vwUserEntries">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Authority" ColumnName="Authority" />
+                <ScalarProperty Name="User_Type_Name" ColumnName="User_Type_Name" />
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
+                <ScalarProperty Name="DonorInfo_Id" ColumnName="DonorInfo_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwVisursInfoes">
+            <EntityTypeMapping TypeName="BBMSdbModel.vwVisursInfo">
+              <MappingFragment StoreEntitySet="vwVisursInfo">
+                <ScalarProperty Name="VDRL" ColumnName="VDRL" />
+                <ScalarProperty Name="Virus_Id" ColumnName="Virus_Id" />
+                <ScalarProperty Name="HCV" ColumnName="HCV" />
+                <ScalarProperty Name="HBV" ColumnName="HBV" />
+                <ScalarProperty Name="HIV" ColumnName="HIV" />
+                <ScalarProperty Name="ColIection_Id" ColumnName="ColIection_Id" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Blood_Status_No" ColumnName="Blood_Status_No" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Hemo" ColumnName="Hemo" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Donar_Id" ColumnName="Donar_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Donate_Type" ColumnName="Donate_Type" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="CanDonate" ColumnName="CanDonate" />
+                <ScalarProperty Name="Patient_Relation_Name" ColumnName="Patient_Relation_Name" />
+                <ScalarProperty Name="Patiant_Name" ColumnName="Patiant_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

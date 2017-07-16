@@ -6,14 +6,16 @@ using System.Web.Mvc;
 using Dapper;
 using BBMS.Models;
 
+
+
 namespace BBMS.Controllers
 {
     public class ReportController : Controller
-    {
-        // GET: Report
+    {       
+        // GET: Report        
         BBMSdbEntities db = new BBMSdbEntities();
         public ActionResult Donors()
-        {
+        {                          
             return View();
         }
         [HttpPost]
