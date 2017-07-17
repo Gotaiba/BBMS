@@ -32,5 +32,6 @@ namespace BBMS.Models
         public string Email { get; set; }
         public string Patiant_Name { get; set; }
         public string Patient_Relation_Name { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     }
 }

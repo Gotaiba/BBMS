@@ -13,16 +13,16 @@ namespace BBMS.Controllers
         BBMSdbEntities db = new BBMSdbEntities();
         public ActionResult Index()
         {                  
-            return View(db.Donors.OrderByDescending(o => o.Donar_Id).Where(x=> x.CanDonate==1).ToList());
+            return View(db.Donors.OrderByDescending(o => o.Donar_Id).Where(x=> x.CanDonate==1 && x.IsDelete!=true).ToList());
         }
         [HttpPost]
         public ActionResult Index(string NationalId)
         {
             List<Donor> d = new List<Donor>();
-            d = db.Donors.OrderByDescending(o => o.Donar_Id).Where(x => x.National_ID.Contains(NationalId) && x.CanDonate == 1).ToList();
+            d = db.Donors.OrderByDescending(o => o.Donar_Id).Where(x => x.National_ID.Contains(NationalId) && x.CanDonate == 1 && x.IsDelete != true).ToList();
             if(string.IsNullOrEmpty(NationalId))
             {
-                d = db.Donors.OrderByDescending(o => o.Donar_Id).Where(x=> x.CanDonate == 1).ToList();
+                d = db.Donors.OrderByDescending(o => o.Donar_Id).Where(x=> x.CanDonate == 1 && x.IsDelete != true).ToList();
             }
             return View(d);
         }

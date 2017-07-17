@@ -38,5 +38,6 @@ namespace BBMS.Models
         public System.DateTime IncDate { get; set; }
         public double Hemo { get; set; }
         public Nullable<System.DateTime> RegistrationDate { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     }
 }

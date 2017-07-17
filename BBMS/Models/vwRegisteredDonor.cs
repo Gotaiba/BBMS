@@ -23,9 +23,11 @@ namespace BBMS.Models
         public Nullable<byte> CanDonate { get; set; }
         public string Patiant_Name { get; set; }
         public string Patient_Relation_Name { get; set; }
-        public int Patiant_Id { get; set; }
+        public Nullable<int> Patiant_Id { get; set; }
         public System.DateTime Date_of_Birth { get; set; }
         public int Donar_Id { get; set; }
         public int User_No { get; set; }
+        public string National_ID { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     }
 }

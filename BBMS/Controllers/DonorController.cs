@@ -20,7 +20,7 @@ namespace BBMS.Controllers
         }
         public ActionResult EditDonor()
         {
-            return View(db.Donors.ToList());
+            return View(db.Donors.Where(x=> x.IsDelete!=true).ToList());
         }
         public ActionResult Create(int? id)
         {
@@ -184,14 +184,18 @@ namespace BBMS.Controllers
             {
                 if (obj.Donate_Type == "P")
                 {
-                    Patient p = new Patient();
+                    Patient p = new Patient();                    
                     p.Patiant_Name = obj.Patient.Patiant_Name;
                     p.Patient_Relation_No = int.Parse(Patient_Relation_No);
                     db.Patients.Add(p);
                     db.SaveChanges();
                     obj.Patient_No = p.Patiant_Id;
                 }
-                obj.User_No = int.Parse(Session["UserId"].ToString());
+                else
+                {
+                    obj.Patient = null;                  
+                }
+                obj.User_No = int.Parse(Session["UserId"].ToString());               
                 db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("EditDonor");
@@ -207,7 +211,7 @@ namespace BBMS.Controllers
         [AllowAnonymous]
         public JsonResult SearchNId(string NatId)
         {
-            var data = db.Donors.Where(x => x.National_ID.Contains(NatId) && x.CanDonate==0).Select(x => new
+            var data = db.Donors.Where(x => x.National_ID.Contains(NatId) && x.CanDonate==0 && x.IsDelete!=true).Select(x => new
             {
                 x.Donar_Id,
                 x.National_ID,
@@ -221,7 +225,7 @@ namespace BBMS.Controllers
         public ActionResult Withdrawal()
         {
             List<vwStatusInfo> vw = new List<vwStatusInfo>();
-            vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true && x.IsUsed==false && x.Donate_Type=="P").ToList();
+            vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true && x.IsUsed==false && x.Donate_Type=="P" && x.IsDelete!=true).ToList();
             return View(vw);
         }
         [HttpPost]
@@ -257,10 +261,10 @@ namespace BBMS.Controllers
                 List<vwStatusInfo> vw = new List<vwStatusInfo>();
                 if(BloodTypeNo==null)
                 {
-                    vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true && x.IsUsed == false && x.Donate_Type=="V").ToList();
+                    vw = db.vwStatusInfoes.Where(x => x.Blood_Status_No == true && x.IsUsed == false && x.Donate_Type=="V" && x.IsDelete!=true).ToList();
                 }
                 else
-                    vw =db.vwStatusInfoes.Where(x => x.Blood_Type_Id == BloodTypeNo && x.Blood_Status_No == true && x.IsUsed == false && x.Donate_Type == "V").ToList();
+                    vw =db.vwStatusInfoes.Where(x => x.Blood_Type_Id == BloodTypeNo && x.Blood_Status_No == true && x.IsUsed == false && x.Donate_Type == "V" && x.IsDelete!=true).ToList();
                 if(vw.Count()<1)
                 {
                     ViewBag.msg = "No Available Blood for this Type !";
@@ -296,9 +300,11 @@ namespace BBMS.Controllers
         [HttpPost,ActionName("Delete")]
         public ActionResult DeleteConfirm(int? id)
         {
-            db.Donors.Remove(db.Donors.Find(id));
+            Donor d= db.Donors.Find(id);
+            d.IsDelete = true;
+            db.Entry(d).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("AllDonors");
+            return RedirectToAction("EditDonor");
         }
         [NonAction]
         public int GetUrlId()
