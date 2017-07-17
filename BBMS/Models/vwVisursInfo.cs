@@ -39,5 +39,6 @@ namespace BBMS.Models
         public Nullable<byte> CanDonate { get; set; }
         public string Patient_Relation_Name { get; set; }
         public string Patiant_Name { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     }
 }

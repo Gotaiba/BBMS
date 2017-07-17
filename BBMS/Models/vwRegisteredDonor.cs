@@ -28,5 +28,6 @@ namespace BBMS.Models
         public int Donar_Id { get; set; }
         public int User_No { get; set; }
         public string National_ID { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     }
 }

@@ -51,9 +51,13 @@
                         }
                     </td>
                     <td>
-                        <a class="btn btn-sm btn-warning" href="@Url.Action("Edit",new { id = item.Donar_Id })"><i class="glyphicon glyphicon-edit"></i></a>     
-                        <a class="btn btn-sm btn-primary" href="@Url.Action("Details",new { id = item.Donar_Id })"><i class="glyphicon glyphicon-book"></i></a>  
-                        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete",new { id = item.Donar_Id })"><i class="glyphicon glyphicon-remove"></i></a>           
+                        <a class="btn btn-sm btn-warning" href="@Url.Action("Edit",new { id = item.Donar_Id })">Edit <i class="glyphicon glyphicon-edit"></i></a>     
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("Details",new { id = item.Donar_Id })">Details <i class="glyphicon glyphicon-book"></i></a>  
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a class="btn btn-sm btn-danger" href="@Url.Action("Delete",new { id = item.Donar_Id })">Delete <i class="glyphicon glyphicon-remove"></i></a>
+                        }
+                        
                     </td>
                 </tr>
             }

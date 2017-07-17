@@ -15,7 +15,7 @@ namespace BBMS.Models
     public partial class vwOutgoingInfo
     {
         public int Outgoing_Id { get; set; }
-        public int Patient_No { get; set; }
+        public Nullable<int> Patient_No { get; set; }
         public int Donar_Id { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
@@ -37,5 +37,6 @@ namespace BBMS.Models
         public string Reason { get; set; }
         public Nullable<System.DateTime> Expr2 { get; set; }
         public string Expr3 { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     }
 }
